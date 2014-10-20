@@ -21,19 +21,27 @@ import android.widget.Toast;
 public class ColorViewGroup extends RelativeLayout {
 
 	/**
+	 * 每个边上的GestureLockView的个数
+	 */
+	private int count = 4;
+	/**
+	 * GestureLockView无手指触摸的状态下内圆的颜色
+	 */
+	private String color = "#ffffff";
+	
+	
+	/**
 	 * 保存所有的GestureLockView
 	 */
 	private ColorView[] mColorViews;
-	/**
-	 * 每个边上的GestureLockView的个数
-	 */
-	private int mCount = 4;
+	
+	
+	
 	/**
 	 * 保存用户选中的GestureLockView的id
 	 */
 	private int mChoose = 1;
-
-	// private Paint mPaint;
+	
 	/**
 	 * 每个GestureLockView中间的间距 设置为：mGestureLockViewWidth * 25%
 	 */
@@ -43,10 +51,7 @@ public class ColorViewGroup extends RelativeLayout {
 	 */
 	private int mColorViewWidth;
 
-	/**
-	 * GestureLockView无手指触摸的状态下内圆的颜色
-	 */
-	private String mColor = "#ffffff";
+	
 
 	/**
 	 * 宽度
@@ -56,6 +61,8 @@ public class ColorViewGroup extends RelativeLayout {
 	 * 高度
 	 */
 	private int mHeight;
+	
+	
 	public ColorViewGroup(Context context) {
 		super(context);
 		mChoose = getRandom();
@@ -80,18 +87,18 @@ public class ColorViewGroup extends RelativeLayout {
 
 		// 初始化mGestureLockViews
 		if (mColorViews == null) {
-			mColorViews = new ColorView[mCount * mCount];
+			mColorViews = new ColorView[count * count];
 			// 计算每个GestureLockView的宽度
-			mColorViewWidth = (int) (4 * mWidth * 1.0f / (5 * mCount + 1));
+			mColorViewWidth = (int) (4 * mWidth * 1.0f / (5 * count + 1));
 			// 计算每个GestureLockView的间距
 			mMarginBetweenLockView = (int) (mColorViewWidth * 0.25);
 
 			for (int i = 0; i < mColorViews.length; i++) {
 				// 初始化每个GestureLockView
 				if (mChoose == i) {
-					mColorViews[i] = new ColorView(getContext(),Color.parseColor(mColor)+10);
+					mColorViews[i] = new ColorView(getContext(),Color.parseColor(color)+10);
 				} else {
-					mColorViews[i] = new ColorView(getContext(), Color.parseColor(mColor));
+					mColorViews[i] = new ColorView(getContext(), Color.parseColor(color));
 				}
 				mColorViews[i].setId(i + 1);
 				// 设置参数，主要是定位GestureLockView间的位置
@@ -99,14 +106,14 @@ public class ColorViewGroup extends RelativeLayout {
 						mColorViewWidth, mColorViewWidth);
 
 				// 不是每行的第一个，则设置位置为前一个的右边
-				if (i % mCount != 0) {
+				if (i % count != 0) {
 					colorParams.addRule(RelativeLayout.RIGHT_OF,
 							mColorViews[i - 1].getId());
 				}
 				// 从第二行开始，设置为上一行同一位置View的下面
-				if (i > mCount - 1) {
+				if (i > count - 1) {
 					colorParams.addRule(RelativeLayout.BELOW, mColorViews[i
-							- mCount].getId());
+							- count].getId());
 				}
 				// 设置右下左上的边距
 				int rightMargin = mMarginBetweenLockView;
@@ -116,11 +123,11 @@ public class ColorViewGroup extends RelativeLayout {
 				/**
 				 * 每个View都有右外边距和底外边距 第一行的有上外边距 第一列的有左外边距
 				 */
-				if (i >= 0 && i < mCount)// 第一行
+				if (i >= 0 && i < count)// 第一行
 				{
 					topMargin = mMarginBetweenLockView;
 				}
-				if (i % mCount == 0)// 第一列
+				if (i % count == 0)// 第一列
 				{
 					leftMagin = mMarginBetweenLockView;
 				}
@@ -182,24 +189,22 @@ public class ColorViewGroup extends RelativeLayout {
 		return null;
 	}
 
-	public void setmCount(int mCount) {
-		this.mCount = mCount;
+	public void setCount(int mCount) {
+		this.count = mCount;
 	}
 
-	public void setmColor(String mColor) {
-		this.mColor = mColor;
+	public void setColor(String mColor) {
+		this.color = mColor;
 	}
 
 	public int getRandom() {
 		Random random = new Random();
-		int i = random.nextInt(mCount * mCount);
+		int i = random.nextInt(count * count);
 		return i;
-
 	}
-
+	
 	public void refresh() {
 		this.postInvalidate();
-
 	}
 
 }

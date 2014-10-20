@@ -15,6 +15,10 @@ public class GameScore extends DataSupport {
 	 */
 	private int score = 0;
 	/**
+	 * 游戏关卡
+	 */
+	private int pass = 1;
+	/**
 	 * 游戏玩的时间戳（日期）
 	 */
 	private long gameTs = 0;
@@ -101,6 +105,12 @@ public class GameScore extends DataSupport {
 	public void setGameVersion(String gameVersion) {
 		this.gameVersion = gameVersion;
 	}
-	
-	
+
+	public int getPass() {
+		return pass;
+	}
+
+	public void setPass(int pass) {
+		this.pass = pass;
+	}
 }

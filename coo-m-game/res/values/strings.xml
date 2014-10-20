@@ -12,5 +12,8 @@
     <string name="app_submit">提交</string>
     <string name="app_blank"></string>
     <string name="app_blank2">  |  </string>
-
+	
+    
+    <string name="item_play_text">开始</string>
+    <string name="item_score_text">成绩</string>
 </resources>

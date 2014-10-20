@@ -1,8 +1,6 @@
 package com.coo.m.game.color;
 
-import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.coo.m.game.GameProperty;
@@ -12,21 +10,8 @@ import com.coo.m.game.R;
 
 public class ColorActivity extends GplusActivity {
 
-	private Button btnColor;
-	private ColorViewGroup cg;
 	private RelativeLayout container;
-	private int k = 0;
-
-	// @Override
-	// protected void onCreate(Bundle savedInstanceState) {
-	// super.onCreate(savedInstanceState);
-	// setContentView(R.layout.color_activity);
-	//
-	// btnColor = (Button) findViewById(R.id.btn_color_start);
-	//
-	// container = (RelativeLayout) findViewById(R.id.rl_color_container);
-	// btnColor.setOnClickListener(this);
-	// }
+	private ColorViewGroup2 cvg;
 
 	@Override
 	public GameProperty getGameProperty() {
@@ -40,39 +25,62 @@ public class ColorActivity extends GplusActivity {
 
 	@Override
 	public void loadContent() {
-		btnColor = (Button) findViewById(R.id.btn_color_start);
-
 		container = (RelativeLayout) findViewById(R.id.rl_color_container);
-		btnColor.setOnClickListener(this);
+		// 设置Policy
+		this.setPolicy(new ColorPolicy());
+		// 加载即启动游戏
+		onMissionInit();
 	}
 
 	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_color_start:
-			showcg();
-			k++;
-			break;
-		}
+	public void onMissionInit() {
+		toast("onMissionInit...");
+		getState().init();
+		refreshUI();
 	}
 
-	private void showcg() {
-		if (k >= 19) {
-			k = 0;
-		}
+	@Override
+	public void onMissionSuccess() {
+		toast("onMissionSuccess");
+		getState().next();
+		refreshUI();
+	}
+
+	@Override
+	public void onMissionFail() {
+		// 计分
+		// 弹出对话框（提示失败）,确定不玩,跳回主界面
+		// 弹出对话框（提示失败）,确定重新玩,重新执行
+		toast("onMissionFail");
+		this.state.init();
+		refreshUI();
+	}
+
+	@Override
+	public void onMissionGiveup() {
+		// 计分
+		// 弹出对话框（确定放弃）,确定不玩,跳回主界面
+		// 弹出对话框（确定放弃）,确定重新玩,重新执行
+		// this.state.finish();
+		toast("onMissionGiveup");
+	}
+
+	/**
+	 * 根据当前的state的关卡状态,进行游戏界面的刷新
+	 */
+	private void refreshUI() {
+		// NOTE:RelativeLayout支持Remove之后在添加,LinearLayout不支持这样....
 		container.removeAllViews();
-		cg = new ColorViewGroup(this);
-		cg.setmCount(8);
-		cg.setmColor(COLORS[k]);
-		container.addView(cg, new LayoutParams(
+		
+		toast("第" + getState().getPass() + "关,当前得分:"
+				+ getState().getScore());
+		// 获得关卡参数,参见ColorPolicy
+		int params[] = getCurrentPolicyParams();
+		toast("当前参数:" + params[0] + "-" + params[1] + "-" + params[2]);
+		cvg = new ColorViewGroup2(this, params[0], params[2]);
+		
+		container.addView(cvg, new LayoutParams(
 				LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
 	}
-
-	public static final String[] COLORS = { "#FFFFB3", "#94FF85",
-			"#75FFC2", "#8FDEFF", "#B3B3FF", "#042D42", "#0B84C2",
-			"#075075", "#57BEF2", "#326E8C", "#CFF8F6", "#94D4D4",
-			"#88B4BB", "#76AEAF", "#2A6D82", "#C12552", "#FF6600",
-			"#F5C700", "#6A961F", "#008885" };
-
 }
