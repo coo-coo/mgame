@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.kingstar.ngbf</groupId>
+		<artifactId>ngbf-dev-m</artifactId>
+		<version>2.3.0.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.coo</groupId>
+	<artifactId>coo-m-game</artifactId>
+	<version>${app.version.name}</version>
+	<packaging>apk</packaging>
+
+	<properties>
+		<app.version.name>0.1.0.0</app.version.name>
+		<ngbf-ms-util.version>2.4.8.0</ngbf-ms-util.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.kingstar.ngbf</groupId>
+			<artifactId>ngbf-ms-util</artifactId>
+			<version>${ngbf-ms-util.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+			<!-- -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.xerial</groupId>
+					<artifactId>sqlite-jdbc</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>litepal</groupId>
+			<artifactId>litepal</artifactId>
+			<version>1.1.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android-support</artifactId>
+			<version>v4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+	</dependencies>
+
+
+</project>
