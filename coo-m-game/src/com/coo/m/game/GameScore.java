@@ -36,8 +36,6 @@ public class GameScore extends DataSupport {
 	private String gameVersion = "";
 
 	public GameScore(GameProperty gp, int score) {
-		// TODO 获得当前手机号
-		this.player = "13917081673";	
 		this.gameKey = gp.getKey();
 		this.gameLabel = gp.getLabel();
 		this.gameVersion = gp.getVersion();

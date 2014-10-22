@@ -8,11 +8,6 @@ package com.coo.m.game;
  */
 public final class GameState {
 	
-	public final static int PASS_INIT = 0;		// 初始化
-	public final static int PASS_SUCCESS = 1;	// 过关
-	public final static int PASS_FAIL = 2;		// 失败
-	public final static int PASS_GIVEUP = 9;	// 放弃、不玩了
-	
 	private IGamePolicy policy;
 
 	public GameState(IGamePolicy policy) {
@@ -28,13 +23,21 @@ public final class GameState {
 	}
 
 	/**
-	 * 下一关，成功会跳转到下一关
+	 * 多关模式: 下一关，成功会跳转到下一关
 	 */
 	public void next() {
 		// 计分
 		score = score + policy.score(pass);
 		// 关卡下一步
 		pass = pass + 1;
+	}
+	
+	/**
+	 * 单关模式: pass==1, 自定义加分机制
+	 */
+	public void addScore(int i) {
+		score = score + i;
+		pass=1;
 	}
 
 	/**

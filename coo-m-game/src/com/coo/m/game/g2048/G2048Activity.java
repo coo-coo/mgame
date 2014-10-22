@@ -1,33 +1,31 @@
 package com.coo.m.game.g2048;
 
-import android.content.SharedPreferences.Editor;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
 import com.coo.m.game.GplusManager;
+import com.coo.m.game.IGame;
+import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
+import com.kingstar.ngbf.ms.util.Reference;
 
 /**
- * 2048
+ * 2048的activityaaaa  111222333
  * 
  */
 public class G2048Activity extends GplusActivity {
 
-	private TextView scoreTextView;
-	private TextView bestScoreTextView;
-	private Button buttoNewGame;
 	private G2048View gameView = null;
 
-	// 获得的分数
-	public Score score;
-
 	@Override
+	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
 		return GplusManager.G_G2048;
+	}
+
+	@Override
+	@Reference(override = GplusActivity.class)
+	public IGamePolicy getGamePolicy() {
+		return new G2048Policy();
 	}
 
 	@Override
@@ -37,78 +35,19 @@ public class G2048Activity extends GplusActivity {
 
 	@Override
 	public void loadContent() {
-		buttoNewGame = (Button) findViewById(R.id.btn_2048_newgame);
-		scoreTextView = (TextView) findViewById(R.id.tv_2048_score);
-		bestScoreTextView = (TextView) findViewById(R.id.tv_2048_bestScore);
-
+		// 初始化gameView
 		gameView = (G2048View) findViewById(R.id.gv_2048_gameView);
+//		gameView = new G2048View(this);
+		gameView.setG2048(this);
 
-		score = new Score();
-		gameView.setScore(score);
-
-		buttoNewGame.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				startNewGame();
-			}
-		});
+		// 游戏启动
+		notify(IGame.GAME_INIT);
 	}
 
-	// @Override
-	// protected void onCreate(Bundle savedInstanceState) {
-	// super.onCreate(savedInstanceState);
-	// setContentView(R.layout.g2048_activity);
-	//
-	//
-	// }
-
-	private void startNewGame() {
-		score.clearScore();
-		showScore();
-		showBestScore();
-		gameView.startGame();
-	}
-
-	private void showBestScore() {
-		bestScoreTextView.setText(String.valueOf(score.getBestScore()));
-	}
-
-	private void showScore() {
-		scoreTextView.setText(String.valueOf(score.getScore()));
-	}
-
-	public class Score {
-		private int score = 0;
-		private static final String SP_KEY_BEST_SCORE = "bestScore";
-
-		public void clearScore() {
-			score = 0;
-		}
-
-		public int getScore() {
-			return score;
-		}
-
-		public void addScore(int s) {
-			score += s;
-			showScore();
-
-			saveBestScore(Math.max(score, getBestScore()));
-			showBestScore();
-		}
-
-		public void saveBestScore(int s) {
-			Editor e = getPreferences(MODE_PRIVATE).edit();
-			e.putInt(SP_KEY_BEST_SCORE, s);
-			e.commit();
-		}
-
-		public int getBestScore() {
-			return getPreferences(MODE_PRIVATE).getInt(
-					SP_KEY_BEST_SCORE, 0);
-		}
-
+	@Override
+	@Reference(override = GplusActivity.class)
+	public void refreshUI() {
+		gameView.initGameView();
 	}
 
 }

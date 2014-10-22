@@ -11,10 +11,10 @@ public class ColorPolicy implements IGamePolicy {
 	 */
 	@Override
 	public int[] params(int pass) {
+		int num = pass + 1;
+		int time = pass + 5; // 单位秒
 		int color = getColor(pass);
-		int count = pass + 5;
-		int second = pass + 5;
-		return new int[] { count, second, color };
+		return new int[] { num, time, color };
 		// if (0 < pass && pass < 5) {
 		// return new int[] { 2, 5, color };
 		// } else if (5 <= pass && pass < 10) {

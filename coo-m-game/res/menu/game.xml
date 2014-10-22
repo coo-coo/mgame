@@ -1,17 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/item_play"
-        android:icon="@drawable/ico_play"
+        android:id="@+id/item_game_init"
+        android:icon="@drawable/ico_cirle"
         android:orderInCategory="10"
         android:showAsAction="ifRoom"
-        android:title="@string/item_play_text">
+        android:title="@string/item_game_init_text">
     </item>
     <item
-        android:id="@+id/item_score"
+        android:id="@+id/item_game_over"
+        android:icon="@drawable/ico_ban_circle"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom"
+        android:title="@string/item_game_over_text">
+    </item>
+    <item
+        android:id="@+id/item_game_score"
         android:icon="@drawable/ico_tasks"
         android:orderInCategory="10"
         android:showAsAction="ifRoom"
-        android:title="@string/item_score_text">
+        android:title="@string/item_game_score_text">
     </item>
+
 </menu>

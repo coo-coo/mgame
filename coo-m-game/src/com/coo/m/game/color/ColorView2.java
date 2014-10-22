@@ -33,20 +33,13 @@ public class ColorView2 extends View {
 		this.sequecne = sequence;
 	}
 
-	
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		
+
 		size = MeasureSpec.getSize(widthMeasureSpec);
-		setMeasuredDimension(size,size);
-//		toast("grid size==" + size);
+		setMeasuredDimension(size, size);
 	}
-	
-//	private void toast(String message) {
-//		Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT)
-//				.show();
-//	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {

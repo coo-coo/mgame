@@ -12,7 +12,11 @@ import android.widget.Toast;
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
 import com.coo.m.game.GplusManager;
+import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
+import com.coo.m.game.SimpleGamePolicy;
+import com.kingstar.ngbf.ms.util.Reference;
+import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
 /**
  * The Class CircularProgressBarSample.
@@ -30,6 +34,7 @@ public class CircularActivity extends GplusActivity {
 	private int times = 0;
 
 	@Override
+	@Reference(override = CommonBizActivity.class)
 	public void loadContent() {
 		pb = (HoloCircularProgressBar) findViewById(R.id.holoCircularProgressBar);
 		pb.setProgress(ap);
@@ -145,14 +150,23 @@ public class CircularActivity extends GplusActivity {
 		mProgressBarAnimator.start();
 	}
 
+	
+
 	@Override
+	@Reference(override = CommonBizActivity.class)
+	public int getResViewLayoutId() {
+		return R.layout.circular_activity;
+	}
+	
+	@Override
+	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
 		return GplusManager.G_CIRCULAR;
 	}
 
 	@Override
-	public int getResViewLayoutId() {
-		return R.layout.circular_activity;
+	@Reference(override = GplusActivity.class)
+	public IGamePolicy getGamePolicy() {
+		return new SimpleGamePolicy();
 	}
-
 }

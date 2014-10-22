@@ -10,7 +10,11 @@ import android.widget.Toast;
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
 import com.coo.m.game.GplusManager;
+import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
+import com.coo.m.game.SimpleGamePolicy;
+import com.kingstar.ngbf.ms.util.Reference;
+import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
 public class GuessActivity extends GplusActivity {
 
@@ -60,16 +64,25 @@ public class GuessActivity extends GplusActivity {
 	}
 
 	@Override
+	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
 		return GplusManager.G_GUESS;
 	}
 
 	@Override
+	@Reference(override = GplusActivity.class)
+	public IGamePolicy getGamePolicy() {
+		return new SimpleGamePolicy();
+	}
+
+	@Override
+	@Reference(override = CommonBizActivity.class)
 	public int getResViewLayoutId() {
 		return R.layout.guess_activity;
 	}
 
 	@Override
+	@Reference(override = CommonBizActivity.class)
 	public void loadContent() {
 		btnGuess = (Button) findViewById(R.id.btn_guess_start);
 		btnresult = (Button) findViewById(R.id.btn_guess_result);
