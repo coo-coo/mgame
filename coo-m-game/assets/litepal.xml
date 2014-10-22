@@ -3,7 +3,7 @@
 
     <dbname value="gplus" />
 
-    <version value="1" />
+    <version value="2" />
 
     <list>
         <mapping class="com.coo.m.game.GameScore" />

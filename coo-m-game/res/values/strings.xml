@@ -14,6 +14,7 @@
     <string name="app_blank2">  |  </string>
 	
     
-    <string name="item_play_text">开始</string>
-    <string name="item_score_text">成绩</string>
+    <string name="item_game_init_text">开始</string>
+    <string name="item_game_over_text">结束</string>
+    <string name="item_game_score_text">成绩</string>
 </resources>

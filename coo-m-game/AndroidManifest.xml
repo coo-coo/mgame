@@ -25,6 +25,8 @@
         </activity>
         <activity android:name="com.coo.m.game.SysMainActivity" >
         </activity>
+        <activity android:name="com.coo.m.game.SysScoreActivity" >
+        </activity>
         <activity android:name="com.coo.m.game.guess.GuessActivity" >
         </activity>
         <activity android:name="com.coo.m.game.g2048.G2048Activity" >

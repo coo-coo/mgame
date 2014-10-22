@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.coo.m.game.GplusActivity;
+import com.coo.m.game.IGame;
 
 /**
  * /** 手势自定义布局
@@ -35,9 +36,9 @@ public class ColorViewGroup2 extends RelativeLayout implements OnClickListener {
 	private ColorView2[] views;
 	// 指定那个不一样的序号
 	private int random = 0;
-	
+
 	private GplusActivity activity = null;
-	
+
 	public ColorViewGroup2(Context context) {
 		super(context);
 	}
@@ -128,13 +129,12 @@ public class ColorViewGroup2 extends RelativeLayout implements OnClickListener {
 	public void onClick(View view) {
 		if (view instanceof ColorView2) {
 			ColorView2 cv = (ColorView2) view;
-//			toast("次序="+cv.getSequecne());
-			if(cv.getSequecne()==this.random){
+			// toast("次序="+cv.getSequecne());
+			if (cv.getSequecne() == this.random) {
 				// 发送成功
-				activity.getGameHandler().notifySuccess();
-			}
-			else{
-				activity.getGameHandler().notifyFail();;
+				activity.notify(IGame.MISSION_SUCCESS);
+			} else {
+				activity.notify(IGame.MISSION_FAIL);
 			}
 		}
 	}

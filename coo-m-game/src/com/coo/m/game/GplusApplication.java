@@ -15,10 +15,11 @@ public class GplusApplication extends LitePalApplication {
 	public void onCreate() {
 		super.onCreate();
 		Log.i(TAG, "App on created..");
-
+		
+		// 初始化Model
 		initCommonModel();
 		
-		GplusManager.score(GplusManager.G_CIRCULAR,220);
+//		GplusManager.score(GplusManager.G_CIRCULAR,220);
 	}
 
 	private void initCommonModel() {

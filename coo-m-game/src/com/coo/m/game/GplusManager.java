@@ -1,6 +1,7 @@
 package com.coo.m.game;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.litepal.crud.DataSupport;
@@ -9,10 +10,11 @@ import com.coo.m.game.circular.CircularActivity;
 import com.coo.m.game.color.ColorActivity;
 import com.coo.m.game.g2048.G2048Activity;
 import com.coo.m.game.guess.GuessActivity;
+import com.kingstar.ngbf.ms.util.DateUtil;
 
 /**
  * 游戏管理器
- *
+ * 
  */
 public final class GplusManager {
 
@@ -36,6 +38,27 @@ public final class GplusManager {
 	}
 
 	/**
+	 * 获得当前游戏玩家,即手机号
+	 * 
+	 * @return
+	 */
+	public static String getCurrentPlayer() {
+		// TODO
+		return "13X12345678";
+	}
+
+	public static String getTsDateText(long ts) {
+		return DateUtil.format(new Date(ts), "yyyy-MM-dd");
+	}
+
+	/**
+	 * 返回TS的时间表达式
+	 */
+	public static String getTsText(long ts) {
+		return DateUtil.format(new Date(ts), "yyyy-MM-dd HH:mm:ss");
+	}
+
+	/**
 	 * 获得所有的支持的游戏
 	 * 
 	 * @return
@@ -46,11 +69,11 @@ public final class GplusManager {
 
 	/**
 	 * 记录当前玩家的游戏记录
-	 * 
-	 * @param gp
 	 */
-	public static void score(GameProperty gp, int score) {
-		GameScore gs = new GameScore(gp, score);
+	public static void score(GameProperty gp, GameState state) {
+		GameScore gs = new GameScore(gp, state.getScore());
+		gs.setPlayer(GplusManager.getCurrentPlayer());
+		gs.setPass(state.getPass());
 		gs.save();
 	}
 
@@ -62,11 +85,11 @@ public final class GplusManager {
 	}
 
 	/**
-	 * 获得指定GameKey的游戏成绩
+	 * 获得指定GameKey的游戏成绩，按时间倒序排序
 	 */
 	public static List<GameScore> getScores(String gameKey) {
-		return DataSupport.where("gameKey = ?", gameKey).find(
-				GameScore.class);
+		return DataSupport.where("gameKey = ?", gameKey)
+				.order("gamets desc").find(GameScore.class);
 	}
 
 }

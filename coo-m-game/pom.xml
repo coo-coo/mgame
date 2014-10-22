@@ -33,8 +33,6 @@
 			</exclusions>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>litepal</groupId>
 			<artifactId>litepal</artifactId>

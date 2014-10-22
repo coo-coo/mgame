@@ -1,45 +1,67 @@
 package com.coo.m.game.g2048;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.coo.m.game.IGame;
 
 public class G2048View extends LinearLayout {
 
 	private final int LINES = 4;
 	private Card2048[][] cardsMap = new Card2048[LINES][LINES];
 	private List<Point> emptyPoints = new ArrayList<Point>();
-	private G2048Activity.Score score;
 
-	
+	// private G2048Activity.Score score;
+
+	/**
+	 * 添加分数,通知GameState进行记录
+	 * 
+	 * @param score
+	 */
+	private void addScore(int score) {
+		int currentScore = g2048.getState().getScore() + score;
+		g2048.toast("当前得分:" + currentScore);
+
+		Message msg = new Message();
+		msg.what = IGame.MISSION_SCORE_ADD;
+		msg.obj = score;
+		g2048.notify(msg);
+	}
+
+	private G2048Activity g2048;
+
+	public G2048Activity getG2048() {
+		return g2048;
+	}
+
+	public void setG2048(G2048Activity g2048) {
+		this.g2048 = g2048;
+	}
+
 	public G2048View(Context context) {
 		super(context);
-		initGameView();
 	}
 
 	public G2048View(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		initGameView();
 	}
-	
-	
-	private void initGameView(){
+
+	public void initGameView() {
 		setOrientation(LinearLayout.VERTICAL);
 		setBackgroundColor(Color.GRAY);
 
 		setOnTouchListener(new View.OnTouchListener() {
 
-			private float startX,startY,offsetX,offsetY;
+			private float startX, startY, offsetX, offsetY;
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -50,20 +72,20 @@ public class G2048View extends LinearLayout {
 					startY = event.getY();
 					break;
 				case MotionEvent.ACTION_UP:
-					offsetX = event.getX()-startX;
-					offsetY = event.getY()-startY;
+					offsetX = event.getX() - startX;
+					offsetY = event.getY() - startY;
 
-
-					if (Math.abs(offsetX)>Math.abs(offsetY)) {
-						if (offsetX<-5) {
+					if (Math.abs(offsetX) > Math
+							.abs(offsetY)) {
+						if (offsetX < -5) {
 							swipeLeft();
-						}else if (offsetX>5) {
+						} else if (offsetX > 5) {
 							swipeRight();
 						}
-					}else{
-						if (offsetY<-5) {
+					} else {
+						if (offsetY < -5) {
 							swipeUp();
-						}else if (offsetY>5) {
+						} else if (offsetY > 5) {
 							swipeDown();
 						}
 					}
@@ -76,27 +98,29 @@ public class G2048View extends LinearLayout {
 	}
 
 	@Override
-	protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+	protected void onSizeChanged(int width, int height, int oldWidth,
+			int oldHeight) {
 		super.onSizeChanged(width, height, oldWidth, oldHeight);
 
-		Card2048.width = (Math.min(width, height)-10)/LINES;
+		Card2048.width = (Math.min(width, height) - 10) / LINES;
 
 		addCards();
 		startGame();
 	}
 
-	private void addCards(){
+	private void addCards() {
 
 		Card2048 c;
 
 		LinearLayout line;
 		LinearLayout.LayoutParams lineLp;
-		
+
 		for (int y = 0; y < LINES; y++) {
 			line = new LinearLayout(getContext());
-			lineLp = new LinearLayout.LayoutParams(-1, Card2048.width);
+			lineLp = new LinearLayout.LayoutParams(-1,
+					Card2048.width);
 			addView(line, lineLp);
-			
+
 			for (int x = 0; x < LINES; x++) {
 				c = new Card2048(getContext());
 				line.addView(c, Card2048.width, Card2048.width);
@@ -106,8 +130,8 @@ public class G2048View extends LinearLayout {
 		}
 	}
 
-	public void startGame(){
-	for (int y = 0; y < LINES; y++) {
+	public void startGame() {
+		for (int y = 0; y < LINES; y++) {
 			for (int x = 0; x < LINES; x++) {
 				cardsMap[x][y].setNum(0);
 			}
@@ -117,52 +141,56 @@ public class G2048View extends LinearLayout {
 		addRandomNum();
 	}
 
-	private void addRandomNum(){
+	private void addRandomNum() {
 
 		emptyPoints.clear();
 
-		//calculate how many empty points
+		// calculate how many empty points
 		for (int y = 0; y < LINES; y++) {
 			for (int x = 0; x < LINES; x++) {
-				if (cardsMap[x][y].getNum()<=0) {
+				if (cardsMap[x][y].getNum() <= 0) {
 					emptyPoints.add(new Point(x, y));
 				}
 			}
 		}
 
-		if (emptyPoints.size()>0) {
+		if (emptyPoints.size() > 0) {
 
-			Point p = emptyPoints.remove((int)(Math.random()*emptyPoints.size()));
-			cardsMap[p.x][p.y].setNum(Math.random()>0.1?2:4);
+			Point p = emptyPoints
+					.remove((int) (Math.random() * emptyPoints
+							.size()));
+			cardsMap[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
 			cardsMap[p.x][p.y].addScaleAnimation();
 		}
 	}
 
-	
-
-	private void swipeLeft(){
+	private void swipeLeft() {
 
 		boolean merge = false;
 
 		for (int y = 0; y < LINES; y++) {
 			for (int x = 0; x < LINES; x++) {
 
-				for (int x1 = x+1; x1 < LINES; x1++) {
-					if (cardsMap[x1][y].getNum()>0) {
+				for (int x1 = x + 1; x1 < LINES; x1++) {
+					if (cardsMap[x1][y].getNum() > 0) {
 
-						if (cardsMap[x][y].getNum()<=0) {
-		                    cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
+						if (cardsMap[x][y].getNum() <= 0) {
+							cardsMap[x][y].setNum(cardsMap[x1][y]
+									.getNum());
 							cardsMap[x1][y].setNum(0);
 
 							x--;
 							merge = true;
 
-						}else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
-							
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+						} else if (cardsMap[x][y]
+								.equals(cardsMap[x1][y])) {
+
+							cardsMap[x][y].setNum(cardsMap[x][y]
+									.getNum() * 2);
 							cardsMap[x1][y].setNum(0);
 
-							score.addScore(cardsMap[x][y].getNum());
+							addScore(cardsMap[x][y]
+									.getNum());
 							merge = true;
 						}
 
@@ -177,28 +205,33 @@ public class G2048View extends LinearLayout {
 			checkComplete();
 		}
 	}
-	private void swipeRight(){
+
+	private void swipeRight() {
 
 		boolean merge = false;
 
 		for (int y = 0; y < LINES; y++) {
-			for (int x = LINES-1; x >=0; x--) {
+			for (int x = LINES - 1; x >= 0; x--) {
 
-				for (int x1 = x-1; x1 >=0; x1--) {
-					if (cardsMap[x1][y].getNum()>0) {
+				for (int x1 = x - 1; x1 >= 0; x1--) {
+					if (cardsMap[x1][y].getNum() > 0) {
 
-						if (cardsMap[x][y].getNum()<=0) {
-							
-							cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
+						if (cardsMap[x][y].getNum() <= 0) {
+
+							cardsMap[x][y].setNum(cardsMap[x1][y]
+									.getNum());
 							cardsMap[x1][y].setNum(0);
 
 							x++;
 							merge = true;
-						}else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
-							
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+						} else if (cardsMap[x][y]
+								.equals(cardsMap[x1][y])) {
+
+							cardsMap[x][y].setNum(cardsMap[x][y]
+									.getNum() * 2);
 							cardsMap[x1][y].setNum(0);
-							score.addScore(cardsMap[x][y].getNum());
+							addScore(cardsMap[x][y]
+									.getNum());
 							merge = true;
 						}
 
@@ -213,29 +246,34 @@ public class G2048View extends LinearLayout {
 			checkComplete();
 		}
 	}
-	private void swipeUp(){
+
+	private void swipeUp() {
 
 		boolean merge = false;
 
 		for (int x = 0; x < LINES; x++) {
 			for (int y = 0; y < LINES; y++) {
 
-				for (int y1 = y+1; y1 < LINES; y1++) {
-					if (cardsMap[x][y1].getNum()>0) {
+				for (int y1 = y + 1; y1 < LINES; y1++) {
+					if (cardsMap[x][y1].getNum() > 0) {
 
-						if (cardsMap[x][y].getNum()<=0) {
-							
-							cardsMap[x][y].setNum(cardsMap[x][y1].getNum());
+						if (cardsMap[x][y].getNum() <= 0) {
+
+							cardsMap[x][y].setNum(cardsMap[x][y1]
+									.getNum());
 							cardsMap[x][y1].setNum(0);
 
 							y--;
 
 							merge = true;
-						}else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
-							
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+						} else if (cardsMap[x][y]
+								.equals(cardsMap[x][y1])) {
+
+							cardsMap[x][y].setNum(cardsMap[x][y]
+									.getNum() * 2);
 							cardsMap[x][y1].setNum(0);
-							score.addScore(cardsMap[x][y].getNum());
+							addScore(cardsMap[x][y]
+									.getNum());
 							merge = true;
 						}
 
@@ -251,28 +289,33 @@ public class G2048View extends LinearLayout {
 			checkComplete();
 		}
 	}
-	private void swipeDown(){
+
+	private void swipeDown() {
 
 		boolean merge = false;
 
 		for (int x = 0; x < LINES; x++) {
-			for (int y = LINES-1; y >=0; y--) {
+			for (int y = LINES - 1; y >= 0; y--) {
 
-				for (int y1 = y-1; y1 >=0; y1--) {
-					if (cardsMap[x][y1].getNum()>0) {
+				for (int y1 = y - 1; y1 >= 0; y1--) {
+					if (cardsMap[x][y1].getNum() > 0) {
 
-						if (cardsMap[x][y].getNum()<=0) {
-							
-							cardsMap[x][y].setNum(cardsMap[x][y1].getNum());
+						if (cardsMap[x][y].getNum() <= 0) {
+
+							cardsMap[x][y].setNum(cardsMap[x][y1]
+									.getNum());
 							cardsMap[x][y1].setNum(0);
 
 							y++;
 							merge = true;
-						}else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
-							
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+						} else if (cardsMap[x][y]
+								.equals(cardsMap[x][y1])) {
+
+							cardsMap[x][y].setNum(cardsMap[x][y]
+									.getNum() * 2);
 							cardsMap[x][y1].setNum(0);
-							score.addScore(cardsMap[x][y].getNum());
+							addScore(cardsMap[x][y]
+									.getNum());
 							merge = true;
 						}
 
@@ -288,42 +331,50 @@ public class G2048View extends LinearLayout {
 		}
 	}
 
-	private void checkComplete(){
+	private void checkComplete() {
 
 		boolean complete = true;
 
-		ALL:
-			for (int y = 0; y < LINES; y++) {
-				for (int x = 0; x < LINES; x++) {
-					if (cardsMap[x][y].getNum()==0||
-							(x>0&&cardsMap[x][y].equals(cardsMap[x-1][y]))||
-							(x<LINES-1&&cardsMap[x][y].equals(cardsMap[x+1][y]))||
-							(y>0&&cardsMap[x][y].equals(cardsMap[x][y-1]))||
-							(y<LINES-1&&cardsMap[x][y].equals(cardsMap[x][y+1]))) {
+		ALL: for (int y = 0; y < LINES; y++) {
+			for (int x = 0; x < LINES; x++) {
+				if (cardsMap[x][y].getNum() == 0
+						|| (x > 0 && cardsMap[x][y]
+								.equals(cardsMap[x - 1][y]))
+						|| (x < LINES - 1 && cardsMap[x][y]
+								.equals(cardsMap[x + 1][y]))
+						|| (y > 0 && cardsMap[x][y]
+								.equals(cardsMap[x][y - 1]))
+						|| (y < LINES - 1 && cardsMap[x][y]
+								.equals(cardsMap[x][y + 1]))) {
 
-						complete = false;
-						break ALL;
-					}
+					complete = false;
+					break ALL;
 				}
 			}
+		}
 
 		if (complete) {
-			new AlertDialog.Builder(getContext()).setTitle("Finished").setMessage("Game Over").setPositiveButton("start again?", new DialogInterface.OnClickListener() {
+			g2048.notify(IGame.MISSION_FAIL);
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					startGame();
-				}
-			}).show();
+			// new AlertDialog.Builder(getContext())
+			// .setTitle("Finished")
+			// .setMessage("Game Over")
+			// .setPositiveButton(
+			// "start again?",
+			// new DialogInterface.OnClickListener() {
+			//
+			// @Override
+			// public void onClick(
+			// DialogInterface dialog,
+			// int which) {
+			// startGame();
+			// }
+			// }).show();
 		}
-		
+
 	}
 
-	public void setScore(G2048Activity.Score score) {
-		this.score = score;
-		
-	}
-
-	
-
+	// public void setScore(G2048Activity.Score score) {
+	// this.score = score;
+	// }
 }
