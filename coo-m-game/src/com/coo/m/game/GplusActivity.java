@@ -142,9 +142,10 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 		invokeDialog("任务完成!");
 	}
 
+	@Override
+	@Reference(override = IGame.class, note = "任务完成:单关模式,分值添加")
 	public void onMissionScoreAdd(int score) {
 		state.addScore(score);
-
 	}
 
 	@Override
@@ -181,14 +182,15 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	}
 
 	/**
-	 * 当游戏失败、放弃等，触发交互Dialog 参见:http://www.shyond.com/index.php/kaifa/456.html
+	 * 当游戏失败、放弃等，触发交互Dialog
+	 * 参见:http://www.shyond.com/index.php/kaifa/456.html
 	 */
 	private void invokeDialog(String title) {
-		new AlertDialog.Builder(this).setTitle(title)
-				.setIcon(R.drawable.ico_cirle)
+		new AlertDialog.Builder(this).setCancelable(false)
+				.setTitle(title).setIcon(R.drawable.ico_cirle)
 				.setMessage("此次得分:" + state.getScore())
-				.setPositiveButton("再玩一次", this).setNegativeButton("不玩了", this)
-				.show();
+				.setPositiveButton("再玩一次", this)
+				.setNegativeButton("不玩了", this).show();
 	}
 
 	@Override
@@ -218,7 +220,8 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 			notify(IGame.GAME_SCORE);
 			break;
 		case R.id.item_game_over:
-			new ConfirmDialog(this, "确定离开游戏么?", IGame.MISSION_GIVEUP);
+			new ConfirmDialog(this, "确定离开游戏么?",
+					IGame.MISSION_GIVEUP);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -245,9 +248,9 @@ class ConfirmDialog implements DialogInterface.OnClickListener {
 	}
 
 	private void invokeComfirmDialog(String title) {
-		new AlertDialog.Builder(gplus).setTitle(title)
-				.setPositiveButton("确定", this).setNegativeButton("取消", this)
-				.show();
+		new AlertDialog.Builder(gplus).setCancelable(false)
+				.setTitle(title).setPositiveButton("确定", this)
+				.setNegativeButton("取消", this).show();
 	}
 
 	@Override

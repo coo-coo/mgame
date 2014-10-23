@@ -1,6 +1,5 @@
 package com.coo.m.game.g2048;
 
-
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -12,11 +11,10 @@ import android.widget.TextView;
 
 public class Card2048 extends FrameLayout {
 
-	
-	public static int width;
-	
+//	public static int width = 100;
+
 	private TextView label;
-	
+
 	public Card2048(Context context) {
 		super(context);
 
@@ -40,7 +38,6 @@ public class Card2048 extends FrameLayout {
 		setNum(0);
 	}
 
-
 	private int num = 0;
 
 	public int getNum() {
@@ -50,11 +47,11 @@ public class Card2048 extends FrameLayout {
 	public void setNum(int num) {
 		this.num = num;
 
-		if (num<=0) {
+		if (num <= 0) {
 			label.setText("");
-		}else{
+		} else {
 			label.setText(String.valueOf(num));
-			
+
 		}
 
 		switch (num) {
@@ -101,15 +98,17 @@ public class Card2048 extends FrameLayout {
 	}
 
 	public boolean equals(Card2048 another) {
-		return getNum()==another.getNum();
+		return getNum() == another.getNum();
 	}
-	
+
 	public TextView getLabel() {
 		return label;
 	}
-	
-	public void addScaleAnimation(){
-		ScaleAnimation sa = new ScaleAnimation(0.1f, 1, 0.1f, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+	public void addScaleAnimation() {
+		ScaleAnimation sa = new ScaleAnimation(0.1f, 1, 0.1f, 1,
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f);
 		sa.setDuration(1000);
 		setAnimation(null);
 		getLabel().startAnimation(sa);

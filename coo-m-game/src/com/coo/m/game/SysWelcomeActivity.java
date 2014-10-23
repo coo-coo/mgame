@@ -14,6 +14,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.coo.m.game.g2048.G2048Activity;
+
 /**
  * 欢迎界面
  * 
@@ -71,10 +73,9 @@ public class SysWelcomeActivity extends Activity implements AnimationListener {
 
 	@Override
 	public void onAnimationEnd(Animation arg0) {
-		Intent intent = new Intent(SysWelcomeActivity.this,
-				SysMainActivity.class);
 		// Intent intent = new Intent(SysWelcomeActivity.this,
-		// G2048Activity.class);
+		// SysMainActivity.class);
+		Intent intent = new Intent(SysWelcomeActivity.this, G2048Activity.class);
 		startActivity(intent);
 		this.finish();
 	}
