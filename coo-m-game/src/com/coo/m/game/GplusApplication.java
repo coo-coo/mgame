@@ -4,7 +4,7 @@ import org.litepal.LitePalApplication;
 
 import android.util.Log;
 
-import com.kingstar.ngbf.ms.util.android.CommonItemConfig;
+import com.kingstar.ngbf.ms.util.android.CommonConfig;
 
 public class GplusApplication extends LitePalApplication {
 
@@ -23,9 +23,9 @@ public class GplusApplication extends LitePalApplication {
 	}
 
 	private void initCommonModel() {
-		CommonItemConfig.clearParams();
-		CommonItemConfig.initParam(
-				CommonItemConfig.KEY_CLASS_HOME_ACTIVITY,
+		CommonConfig.clearParams();
+		CommonConfig.initParam(
+				CommonConfig.KEY_CLASS_HOME_ACTIVITY,
 				SysMainActivity.class);
 		// CommonItemConfig.initParam(
 		// CommonItemConfig.KEY_INT_DIALOG_VIEW_ID,
