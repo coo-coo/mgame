@@ -79,8 +79,8 @@ public class ColorViewGroup2 extends RelativeLayout implements OnClickListener {
 			// + viewSize);
 			int iColor = color;
 			if (i == random) {
-				// TODO 颜色算法
-				iColor = Color.RED;
+				// Todo
+				iColor = getColor(color, count);
 			}
 			ColorView2 cv = new ColorView2(getContext(), iColor, i);
 			// 设置ID
@@ -95,8 +95,7 @@ public class ColorViewGroup2 extends RelativeLayout implements OnClickListener {
 			// 设置相对位置
 			// 不是每行的第一个，则设置位置为前一个的右边
 			if (i % count != 0) {
-				viewLayoutParams.addRule(
-						RelativeLayout.RIGHT_OF,
+				viewLayoutParams.addRule(RelativeLayout.RIGHT_OF,
 						views[i - 1].getId());
 			}
 			// 从第二行开始，设置为上一行同一位置View的下面
@@ -119,10 +118,35 @@ public class ColorViewGroup2 extends RelativeLayout implements OnClickListener {
 				leftMargin = 0;
 			}
 
-			viewLayoutParams.setMargins(leftMargin, topMargin,
-					rightMargin, bottomMargin);
+			viewLayoutParams.setMargins(leftMargin, topMargin, rightMargin,
+					bottomMargin);
 			addView(cv, viewLayoutParams);
 		}
+	}
+
+	public int getColor(int color, int count) {
+		int red = (color & 0xff0000) >> 16;
+		int green = (color & 0x00ff00) >> 8;
+		int blue = (color & 0x0000ff);
+		int diff = 40 - count;
+//		int diff1 = count-40;
+
+		red = red + diff;
+		if (red > 255) {
+			red =  255;
+		}
+
+		green = green + diff;
+		if (green > 255) {
+			green = 255;
+		}
+
+		blue = blue + diff;
+		if (blue >255) {
+			blue = 255;
+		}
+
+		return Color.rgb(red, green, blue);
 	}
 
 	@Override
@@ -146,8 +170,7 @@ public class ColorViewGroup2 extends RelativeLayout implements OnClickListener {
 
 	@SuppressWarnings("unused")
 	private void toast(String message) {
-		Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT)
-				.show();
+		Toast.makeText(this.getContext(), message, Toast.LENGTH_SHORT).show();
 	}
 
 }

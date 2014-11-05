@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -20,7 +19,7 @@ public class G2048View extends LinearLayout {
 	private Card2048[][] cardsMap = new Card2048[LINES][LINES];
 	private List<Point> emptyPoints = new ArrayList<Point>();
 
-	// private G2048Activity.Score score;
+	private int gridWidth = 118;
 
 	/**
 	 * 添加分数,通知GameState进行记录
@@ -39,16 +38,11 @@ public class G2048View extends LinearLayout {
 
 	private G2048Activity g2048;
 
-	public G2048Activity getG2048() {
-		return g2048;
-	}
-
-	public void setG2048(G2048Activity g2048) {
+	public G2048View(G2048Activity g2048) {
+		super(g2048);
 		this.g2048 = g2048;
-	}
-
-	public G2048View(Context context) {
-		super(context);
+		initGameView();
+		initCards();
 	}
 
 	public G2048View(Context context, AttributeSet attrs) {
@@ -57,10 +51,9 @@ public class G2048View extends LinearLayout {
 
 	public void initGameView() {
 		setOrientation(LinearLayout.VERTICAL);
-		setBackgroundColor(Color.GRAY);
+		// setBackgroundColor(Color.GRAY);
 
 		setOnTouchListener(new View.OnTouchListener() {
-
 			private float startX, startY, offsetX, offsetY;
 
 			@Override
@@ -75,8 +68,7 @@ public class G2048View extends LinearLayout {
 					offsetX = event.getX() - startX;
 					offsetY = event.getY() - startY;
 
-					if (Math.abs(offsetX) > Math
-							.abs(offsetY)) {
+					if (Math.abs(offsetX) > Math.abs(offsetY)) {
 						if (offsetX < -5) {
 							swipeLeft();
 						} else if (offsetX > 5) {
@@ -95,48 +87,62 @@ public class G2048View extends LinearLayout {
 				return true;
 			}
 		});
+
 	}
 
-	@Override
-	protected void onSizeChanged(int width, int height, int oldWidth,
-			int oldHeight) {
-		super.onSizeChanged(width, height, oldWidth, oldHeight);
+	// @Override
+	// protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+	// super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	//
+	// int size = MeasureSpec.getSize(widthMeasureSpec);
+	// gridWidth = (size - 10) / LINES;
+	// g2048.toast("size=" + size + "-" + gridWidth);
+	//
+	// initCards();
+	// //
+	// // // 初始化所有的的Card
+	// // initCards();
+	// // setMeasuredDimension(size, size);
+	// }
 
-		Card2048.width = (Math.min(width, height) - 10) / LINES;
+	// @Override
+	// protected void onSizeChanged(int width, int height, int oldWidth,
+	// int oldHeight) {
+	// super.onSizeChanged(width, height, oldWidth, oldHeight);
+	//
+	// Card2048.width = (Math.min(width, height) - 10) / LINES;
+	// g2048.toast("onSizeChanged...");
+	// // 初始化所有的的Card
+	// initCards();
+	// }
 
-		addCards();
-		startGame();
-	}
-
-	private void addCards() {
-
+	public void initCards() {
 		Card2048 c;
-
 		LinearLayout line;
 		LinearLayout.LayoutParams lineLp;
 
 		for (int y = 0; y < LINES; y++) {
 			line = new LinearLayout(getContext());
-			lineLp = new LinearLayout.LayoutParams(-1,
-					Card2048.width);
+			lineLp = new LinearLayout.LayoutParams(-1, gridWidth);
 			addView(line, lineLp);
 
 			for (int x = 0; x < LINES; x++) {
 				c = new Card2048(getContext());
-				line.addView(c, Card2048.width, Card2048.width);
-
+				line.addView(c, gridWidth, gridWidth);
 				cardsMap[x][y] = c;
 			}
 		}
 	}
 
+	/**
+	 * 重新开始一个游戏....
+	 */
 	public void startGame() {
 		for (int y = 0; y < LINES; y++) {
 			for (int x = 0; x < LINES; x++) {
 				cardsMap[x][y].setNum(0);
 			}
 		}
-
 		addRandomNum();
 		addRandomNum();
 	}
@@ -155,10 +161,8 @@ public class G2048View extends LinearLayout {
 		}
 
 		if (emptyPoints.size() > 0) {
-
-			Point p = emptyPoints
-					.remove((int) (Math.random() * emptyPoints
-							.size()));
+			Point p = emptyPoints.remove((int) (Math.random() * emptyPoints
+					.size()));
 			cardsMap[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
 			cardsMap[p.x][p.y].addScaleAnimation();
 		}
@@ -175,22 +179,18 @@ public class G2048View extends LinearLayout {
 					if (cardsMap[x1][y].getNum() > 0) {
 
 						if (cardsMap[x][y].getNum() <= 0) {
-							cardsMap[x][y].setNum(cardsMap[x1][y]
-									.getNum());
+							cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
 							cardsMap[x1][y].setNum(0);
 
 							x--;
 							merge = true;
 
-						} else if (cardsMap[x][y]
-								.equals(cardsMap[x1][y])) {
+						} else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
 
-							cardsMap[x][y].setNum(cardsMap[x][y]
-									.getNum() * 2);
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x1][y].setNum(0);
 
-							addScore(cardsMap[x][y]
-									.getNum());
+							addScore(cardsMap[x][y].getNum());
 							merge = true;
 						}
 
@@ -218,20 +218,16 @@ public class G2048View extends LinearLayout {
 
 						if (cardsMap[x][y].getNum() <= 0) {
 
-							cardsMap[x][y].setNum(cardsMap[x1][y]
-									.getNum());
+							cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
 							cardsMap[x1][y].setNum(0);
 
 							x++;
 							merge = true;
-						} else if (cardsMap[x][y]
-								.equals(cardsMap[x1][y])) {
+						} else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
 
-							cardsMap[x][y].setNum(cardsMap[x][y]
-									.getNum() * 2);
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x1][y].setNum(0);
-							addScore(cardsMap[x][y]
-									.getNum());
+							addScore(cardsMap[x][y].getNum());
 							merge = true;
 						}
 
@@ -259,21 +255,17 @@ public class G2048View extends LinearLayout {
 
 						if (cardsMap[x][y].getNum() <= 0) {
 
-							cardsMap[x][y].setNum(cardsMap[x][y1]
-									.getNum());
+							cardsMap[x][y].setNum(cardsMap[x][y1].getNum());
 							cardsMap[x][y1].setNum(0);
 
 							y--;
 
 							merge = true;
-						} else if (cardsMap[x][y]
-								.equals(cardsMap[x][y1])) {
+						} else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
 
-							cardsMap[x][y].setNum(cardsMap[x][y]
-									.getNum() * 2);
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x][y1].setNum(0);
-							addScore(cardsMap[x][y]
-									.getNum());
+							addScore(cardsMap[x][y].getNum());
 							merge = true;
 						}
 
@@ -302,20 +294,16 @@ public class G2048View extends LinearLayout {
 
 						if (cardsMap[x][y].getNum() <= 0) {
 
-							cardsMap[x][y].setNum(cardsMap[x][y1]
-									.getNum());
+							cardsMap[x][y].setNum(cardsMap[x][y1].getNum());
 							cardsMap[x][y1].setNum(0);
 
 							y++;
 							merge = true;
-						} else if (cardsMap[x][y]
-								.equals(cardsMap[x][y1])) {
+						} else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
 
-							cardsMap[x][y].setNum(cardsMap[x][y]
-									.getNum() * 2);
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x][y1].setNum(0);
-							addScore(cardsMap[x][y]
-									.getNum());
+							addScore(cardsMap[x][y].getNum());
 							merge = true;
 						}
 
@@ -338,12 +326,10 @@ public class G2048View extends LinearLayout {
 		ALL: for (int y = 0; y < LINES; y++) {
 			for (int x = 0; x < LINES; x++) {
 				if (cardsMap[x][y].getNum() == 0
-						|| (x > 0 && cardsMap[x][y]
-								.equals(cardsMap[x - 1][y]))
+						|| (x > 0 && cardsMap[x][y].equals(cardsMap[x - 1][y]))
 						|| (x < LINES - 1 && cardsMap[x][y]
 								.equals(cardsMap[x + 1][y]))
-						|| (y > 0 && cardsMap[x][y]
-								.equals(cardsMap[x][y - 1]))
+						|| (y > 0 && cardsMap[x][y].equals(cardsMap[x][y - 1]))
 						|| (y < LINES - 1 && cardsMap[x][y]
 								.equals(cardsMap[x][y + 1]))) {
 
