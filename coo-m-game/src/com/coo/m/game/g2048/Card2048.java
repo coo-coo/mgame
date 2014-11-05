@@ -9,6 +9,8 @@ import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.coo.m.game.R;
+
 public class Card2048 extends FrameLayout {
 
 //	public static int width = 100;
@@ -23,12 +25,13 @@ public class Card2048 extends FrameLayout {
 		View background = new View(getContext());
 		lp = new LayoutParams(-1, -1);
 		lp.setMargins(10, 10, 0, 0);
-		background.setBackgroundColor(Color.BLUE);
+		int bgColor = this.getResources().getColor(R.color.blue);
+		background.setBackgroundColor(bgColor);
 		addView(background, lp);
 
 		label = new TextView(getContext());
 		label.setTextSize(28);
-		label.setTextColor(Color.RED);
+		label.setTextColor(Color.BLACK);
 		label.setGravity(Gravity.CENTER);
 
 		lp = new LayoutParams(-1, -1);
@@ -46,14 +49,11 @@ public class Card2048 extends FrameLayout {
 
 	public void setNum(int num) {
 		this.num = num;
-
 		if (num <= 0) {
 			label.setText("");
 		} else {
 			label.setText(String.valueOf(num));
-
 		}
-
 		switch (num) {
 		case 0:
 			label.setBackgroundColor(0x00000000);

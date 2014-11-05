@@ -186,9 +186,11 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	 * 参见:http://www.shyond.com/index.php/kaifa/456.html
 	 */
 	private void invokeDialog(String title) {
+		int pass = state.getPass()-1;
+		String msg = "通过" + pass + "关,得分:"+ state.getScore();
 		new AlertDialog.Builder(this).setCancelable(false)
-				.setTitle(title).setIcon(R.drawable.ico_cirle)
-				.setMessage("此次得分:" + state.getScore())
+				.setTitle(title).setIcon(R.drawable.icon)
+				.setMessage(msg)
 				.setPositiveButton("再玩一次", this)
 				.setNegativeButton("不玩了", this).show();
 	}

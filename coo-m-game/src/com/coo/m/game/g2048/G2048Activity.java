@@ -19,9 +19,7 @@ public class G2048Activity extends GplusActivity {
 
 	private G2048View gameView = null;
 	private RelativeLayout container;
-	
-	
-	
+
 	@Override
 	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
@@ -45,7 +43,8 @@ public class G2048Activity extends GplusActivity {
 		// gameView = (G2048View) findViewById(R.id.gv_2048_gameView);
 		container = (RelativeLayout) findViewById(R.id.rl_2048_container);
 		gameView = new G2048View(this);
-		container.addView(gameView, new LayoutParams(LayoutParams.MATCH_PARENT,
+		container.addView(gameView, new LayoutParams(
+				LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT));
 		toast("loadContent..");
 		// 游戏启动
@@ -56,9 +55,7 @@ public class G2048Activity extends GplusActivity {
 	@Reference(override = GplusActivity.class)
 	public void refreshUI() {
 		// container.removeAllViews();
-
 		gameView.startGame();
-
 	}
 
 }

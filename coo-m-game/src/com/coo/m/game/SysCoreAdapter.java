@@ -2,18 +2,19 @@ package com.coo.m.game;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
-public class SysCoreAdapter extends CommonItemAdapter<GameScore> {
+public class SysCoreAdapter extends CommonAdapter<GameScore> {
 
-	public SysCoreAdapter(List<GameScore> items,
+	public SysCoreAdapter(Activity parent, List<GameScore> items,
 			ListView composite) {
-		super(items, composite);
+		super(parent, items, composite);
 	}
 
 	/**
@@ -41,7 +42,7 @@ public class SysCoreAdapter extends CommonItemAdapter<GameScore> {
 		holder.tv_label.setText(item.getGameLabel());
 		String ts = GplusManager.getTsText(item.getGameTs());
 		holder.tv_ts.setText(ts);
-		holder.tv_score.setText(item.getScore()+"分");
+		holder.tv_score.setText(item.getScore() + "分");
 	}
 }
 

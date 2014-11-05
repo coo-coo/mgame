@@ -4,13 +4,15 @@
 
     <ImageView
         android:id="@+id/iv_sysmain_game_icon"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
         android:contentDescription="@string/app_blank" />
 
     <TextView
         android:id="@+id/iv_sysmain_game_label"
         style="@style/tv_common"
+        android:layout_width="100dp"
         android:layout_below="@+id/iv_sysmain_game_icon"
         android:layout_centerHorizontal="true" />
 

@@ -20,18 +20,21 @@ public final class GplusManager {
 
 	private static List<GameProperty> GAMES = new ArrayList<GameProperty>();
 
+//	public static Class<?> MAIN_CLASS = CircularActivity.class;
+	 public static Class<?> MAIN_CLASS = SysMainActivity.class;
+
 	public static GameProperty G_GUESS = new GameProperty(
-			GuessActivity.class, "猜猜看", R.drawable.g_001);
+			GuessActivity.class, "猜猜看", R.drawable.gguess);
 	public static GameProperty G_G2048 = new GameProperty(
-			G2048Activity.class, "2048", R.drawable.g_002);
+			G2048Activity.class, "2048", R.drawable.g2048);
 	public static GameProperty G_COLOR = new GameProperty(
-			ColorActivity.class, "找颜色", R.drawable.g_003);
+			ColorActivity.class, "找颜色", R.drawable.gcolor);
 	public static GameProperty G_CIRCULAR = new GameProperty(
-			CircularActivity.class, "点点看", R.drawable.g_004);
+			CircularActivity.class, "点4下", R.drawable.gplus);
 
 	static {
 		// 增加支持的游戏
-		GAMES.add(G_GUESS);
+		// GAMES.add(G_GUESS); // 暂时不上架....
 		GAMES.add(G_G2048);
 		GAMES.add(G_COLOR);
 		GAMES.add(G_CIRCULAR);

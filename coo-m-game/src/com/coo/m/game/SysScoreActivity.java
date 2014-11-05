@@ -1,5 +1,7 @@
 package com.coo.m.game;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.widget.ListView;
 
@@ -16,16 +18,16 @@ public class SysScoreActivity extends CommonBizActivity {
 	public int getResViewLayoutId() {
 		return R.layout.sys_score_activity;
 	}
-	
-	
+
+	// SysCoreAdapter adapter
 	@Override
 	public void loadContent() {
 		// 获得传递过来的信息,参见GplusActivity.onGameScore()
 		Intent intent = getIntent();
 		String gameKey = intent.getStringExtra("GAME_KEY");
-		ListView listView = (ListView) findViewById(R.id.lv_sys_core);
-		SysCoreAdapter adapter = new SysCoreAdapter(
-				GplusManager.getScores(gameKey), listView);
-		adapter.initContext(this);
+		ListView composite = (ListView) findViewById(R.id.lv_sys_core);
+
+		List<GameScore> list = GplusManager.getScores(gameKey);
+		adapter = new SysCoreAdapter(this, list, composite);
 	}
 }

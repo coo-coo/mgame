@@ -2,6 +2,7 @@ package com.coo.m.game;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,16 +10,17 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kingstar.ngbf.ms.util.android.CommonItemAdapter;
+import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
-public class SysMainGridItemAdapter extends CommonItemAdapter<GameProperty> {
+public class SysMainAdapter extends CommonAdapter<GameProperty> {
 
 	/**
 	 * 构造函数
 	 */
-	public SysMainGridItemAdapter(List<GameProperty> items, GridView composite) {
-		super(items, composite);
+	public SysMainAdapter(Activity parent, List<GameProperty> items,
+			GridView composite) {
+		super(parent, items, composite);
 	}
 
 	/**
@@ -56,17 +58,9 @@ public class SysMainGridItemAdapter extends CommonItemAdapter<GameProperty> {
 	public void onItemClick(AdapterView<?> parentView, View view,
 			int position, long rowId) {
 		GameProperty item = getItem(position);
-
 		// 跳转到指定的Game中去
-		startGame(item);
-		// toast(item.getLabel() + "-" +
-		// item.getActivityClass().getName());
-	}
-
-	private void startGame(GameProperty item) {
-		Intent intent = new Intent(this.getActivity(),
-				item.getActivityClass());
-		getActivity().startActivity(intent);
+		Intent intent = new Intent(parent, item.getActivityClass());
+		parent.startActivity(intent);
 	}
 }
 
