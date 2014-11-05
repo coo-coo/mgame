@@ -30,7 +30,7 @@ public final class GplusManager {
 	public static GameProperty G_COLOR = new GameProperty(
 			ColorActivity.class, "找颜色", R.drawable.gcolor);
 	public static GameProperty G_CIRCULAR = new GameProperty(
-			CircularActivity.class, "点4下", R.drawable.gplus);
+			CircularActivity.class, "点4下", R.drawable.gcircle);
 
 	static {
 		// 增加支持的游戏
