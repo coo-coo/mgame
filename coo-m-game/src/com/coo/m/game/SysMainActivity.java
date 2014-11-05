@@ -11,7 +11,7 @@ import com.kingstar.ngbf.ms.util.android.GenericActivity;
  * 
  *
  */
-public class SysMainActivity extends GenericActivity{
+public class SysMainActivity extends GenericActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,17 +20,12 @@ public class SysMainActivity extends GenericActivity{
 		loadContent();
 	}
 
+	@SuppressWarnings("unused")
+	private SysMainAdapter adapter;
+
 	public void loadContent() {
 		List<GameProperty> list = GplusManager.getGames();
-		GridView girdView = (GridView) findViewById(R.id.gv_game);
-		SysMainGridItemAdapter adapter = new SysMainGridItemAdapter(list,
-				girdView);
-		adapter.initContext(this);
+		GridView composite = (GridView) findViewById(R.id.gv_game);
+		adapter = new SysMainAdapter(this, list, composite);
 	}
-
-	
-//	public void startGame(Activity a) {
-//		Intent intent = new Intent(SysMainActivity.this, a.getClass());
-//		startActivity(intent);
-//	}
 }

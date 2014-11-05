@@ -14,8 +14,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.coo.m.game.g2048.G2048Activity;
-
 /**
  * 欢迎界面
  * 
@@ -39,7 +37,8 @@ public class SysWelcomeActivity extends Activity implements AnimationListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// 全屏
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		getWindow().setFlags(
+				WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		// title不显示
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -60,8 +59,8 @@ public class SysWelcomeActivity extends Activity implements AnimationListener {
 		imageView.setMaxHeight(size.x);
 		imageView.setMaxWidth(size.y);
 
-		alphaAnimation = AnimationUtils
-				.loadAnimation(this, R.anim.welcome_anim);
+		alphaAnimation = AnimationUtils.loadAnimation(this,
+				R.anim.welcome_anim);
 		alphaAnimation.setFillEnabled(true);
 		alphaAnimation.setFillAfter(true);
 		imageView.setAnimation(alphaAnimation);
@@ -73,9 +72,8 @@ public class SysWelcomeActivity extends Activity implements AnimationListener {
 
 	@Override
 	public void onAnimationEnd(Animation arg0) {
-		// Intent intent = new Intent(SysWelcomeActivity.this,
-		// SysMainActivity.class);
-		Intent intent = new Intent(SysWelcomeActivity.this, G2048Activity.class);
+		Intent intent = new Intent(SysWelcomeActivity.this,
+				GplusManager.MAIN_CLASS);
 		startActivity(intent);
 		this.finish();
 	}

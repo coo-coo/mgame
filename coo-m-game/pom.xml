@@ -13,8 +13,9 @@
 	<packaging>apk</packaging>
 
 	<properties>
-		<app.version.name>0.1.0.0</app.version.name>
-		<ngbf-ms-util.version>2.4.8.0</ngbf-ms-util.version>
+		<app.version.name>0.2.0.0</app.version.name>
+		<ngbf-ms-util.version>2.4.9.0</ngbf-ms-util.version>
+		<ngbf-s-ntp.version>2.4.1.0</ngbf-s-ntp.version>
 	</properties>
 
 	<dependencies>
@@ -31,6 +32,14 @@
 					<artifactId>sqlite-jdbc</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.kingstar.ngbf</groupId>
+			<artifactId>ngbf-s-ntp</artifactId>
+			<version>${ngbf-s-ntp.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>

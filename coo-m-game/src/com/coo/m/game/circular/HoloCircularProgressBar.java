@@ -1,5 +1,6 @@
 package com.coo.m.game.circular;
 
+//import android.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -14,24 +15,17 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.coo.m.game.R;
+
 /**
  * HoloCircularProgressBar custom view.
  * 
  * https://github.com/passsy/android-HoloCircularProgressBar
- * 
- * @author Pascal.Welsch
- * @version 1.3 (03.10.2014)
- * @since 05.03.2013
  */
 public class HoloCircularProgressBar extends View {
-	private int tap = 0;
 
-	/**
-	 * TAG constant for logging
-	 * 
-	 */
-	// private static final String TAG = HoloCircularProgressBar.class
-	// .getSimpleName();
+	// click...
+	private int tap = 0;
 
 	/**
 	 * used to save the super state on configuration change
@@ -245,16 +239,16 @@ public class HoloCircularProgressBar extends View {
 		super(context, attrs, defStyle);
 
 		// load the styled attributes and set their properties
-
 		try {
-			setProgressColor(Color.BLUE);
+			// 设置颜色
+			setProgressColor(this.getResources().getColor(
+					R.color.orange));
 			setProgressBackgroundColor(Color.GRAY);
 			setProgress(0.0f);
 			setMarkerProgress(0.0f);
-			setWheelSize(10);
-			setThumbEnabled(true);
-			setMarkerEnabled(true);
-
+			setWheelSize(15);
+			setThumbEnabled(false);
+			setMarkerEnabled(false);
 			mGravity = Gravity.CENTER;
 		} finally {
 
@@ -593,8 +587,9 @@ public class HoloCircularProgressBar extends View {
 	private void computeInsets(final int dx, final int dy) {
 		int absoluteGravity = mGravity;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//			absoluteGravity = Gravity.getAbsoluteGravity(mGravity,
-//					this.getLayoutDirection());
+			// absoluteGravity =
+			// Gravity.getAbsoluteGravity(mGravity,
+			// this.getLayoutDirection());
 		}
 
 		switch (absoluteGravity & Gravity.HORIZONTAL_GRAVITY_MASK) {
@@ -697,8 +692,7 @@ public class HoloCircularProgressBar extends View {
 		return tap;
 	}
 
-	public void setTap(int tap) {
-		this.tap = tap;
+	public void reset() {
+		this.tap = 0;
 	}
-
 }

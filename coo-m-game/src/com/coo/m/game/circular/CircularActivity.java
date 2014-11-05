@@ -5,159 +5,102 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
 import com.coo.m.game.GplusManager;
+import com.coo.m.game.IGame;
 import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
-import com.coo.m.game.SimpleGamePolicy;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
 /**
- * The Class CircularProgressBarSample.
+ * 点几下...
  */
 public class CircularActivity extends GplusActivity {
 
-	private Button btnstart;
-	private Button btnnum;
+	private HoloCircularProgressBar progressBar;
+	private ObjectAnimator progressAnimator;
 
-	private HoloCircularProgressBar pb;
+	// 定义点击次数
+	private final static int TIMES = 4;
 
-	private ObjectAnimator mProgressBarAnimator;
-
-	private float ap = 0.7f;
-	private int times = 0;
+	private AnimatorListener listener;
 
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public void loadContent() {
-		pb = (HoloCircularProgressBar) findViewById(R.id.holoCircularProgressBar);
-		pb.setProgress(ap);
-		pb.setMarkerProgress(0.3f);
-		btnstart = (Button) findViewById(R.id.btn_circular_start);
-		btnnum = (Button) findViewById(R.id.btn_circular_num);
-		btnstart.setOnClickListener(this);
+		progressBar = (HoloCircularProgressBar) findViewById(R.id.holoCircularProgressBar);
+		progressBar.setProgress(0.7f);
+		progressBar.setMarkerProgress(0.3f);
+		
+		// 定义监听器
+		listener = new CircularAnimatorListener(this);
+		// 加载即启动游戏
+		notify(IGame.GAME_INIT);
 	}
-
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see android.app.Activity#onCreate(android.os.Bundle)
-	// */
-	// @Override
-	// protected void onCreate(final Bundle savedInstanceState) {
-	//
-	// super.onCreate(savedInstanceState);
-	// setContentView(R.layout.circular_activity);
-	//
-	// pb = (HoloCircularProgressBar)
-	// findViewById(R.id.holoCircularProgressBar);
-	// pb.setProgress(ap);
-	// pb.setMarkerProgress(0.3f);
-	// btnstart = (Button) findViewById(R.id.btn_circular_start);
-	// btnnum = (Button) findViewById(R.id.btn_circular_num);
-	// btnstart.setOnClickListener(this);
-	// }
 
 	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_circular_start:
-			start();
-			break;
+	@Reference(override = GplusActivity.class)
+	public void refreshUI() {
+		if (progressAnimator != null) {
+			progressAnimator.cancel();
+		}
+
+		// 获得随机位置
+		float targetProgress = (float) (Math.random() * 1);
+		progressBar.reset();
+
+		// 时间间隔 随关卡降低,参见CircularPolicy
+		int params[] = getCurrentPolicyParams();
+		int duration = params[0];
+		// int duration = 2000;
+		animate(progressBar, listener, targetProgress, duration);
+	}
+	
+	/**
+	 * 动画结束之后进行判定...
+	 */
+	public void onAnimationEnd() {
+		if (progressBar.getTap() == TIMES) {
+			toast("恭喜过关!");
+			notify(IGame.MISSION_SUCCESS);
+		} else {
+			notify(IGame.MISSION_FAIL);
 		}
 	}
 
-	private void start() {
-		if (mProgressBarAnimator != null) {
-			mProgressBarAnimator.cancel();
-		}
-
-		final float progress = (float) (Math.random() * 1);
-		Toast.makeText(this, progress + "//" + ap, Toast.LENGTH_SHORT)
-				.show();
-
-		times = (int) (Math.abs(progress * 10 - ap * 10));
-		Toast.makeText(this, times + "", Toast.LENGTH_SHORT).show();
-		if (times >= 10) {
-			times = 10;
-		}
-		if (times <= 2) {
-			times = 2;
-		}
-		btnnum.setText(times + "");
-
-		int duration = 2000;
-		pb.setTap(0);
-		animate(pb, null, progress, duration);
-	}
-
+	/**
+	 * 动画执行...
+	 */
 	private void animate(final HoloCircularProgressBar progressBar,
-			final AnimatorListener listener, final float progress,
-			final int duration) {
-
-		mProgressBarAnimator = ObjectAnimator.ofFloat(progressBar,
+			AnimatorListener listener, float progress, int duration) {
+		progressAnimator = ObjectAnimator.ofFloat(progressBar,
 				"progress", progress);
-		mProgressBarAnimator.setDuration(duration);
-
-		mProgressBarAnimator.addListener(new AnimatorListener() {
-
+		progressAnimator.setDuration(duration);
+		if (listener != null) {
+			progressAnimator.addListener(listener);
+		}
+		progressAnimator.reverse();
+		progressAnimator.addUpdateListener(new AnimatorUpdateListener() {
 			@Override
-			public void onAnimationCancel(final Animator animation) {
-				animation.end();
-			}
-
-			@Override
-			public void onAnimationEnd(final Animator animation) {
-				progressBar.setProgress(progress);
-				ap = progress;
-				if (times == pb.getTap()) {
-					btnnum.setText("正确");
-				} else {
-					btnnum.setText("错误，输入了" + pb.getTap());
-				}
-				pb.setTap(0);
-			}
-
-			@Override
-			public void onAnimationRepeat(final Animator animation) {
-			}
-
-			@Override
-			public void onAnimationStart(final Animator animation) {
+			public void onAnimationUpdate(
+					final ValueAnimator animation) {
+				progressBar.setProgress((Float) animation
+						.getAnimatedValue());
 			}
 		});
-		if (listener != null) {
-			mProgressBarAnimator.addListener(listener);
-		}
-		mProgressBarAnimator.reverse();
-		mProgressBarAnimator
-				.addUpdateListener(new AnimatorUpdateListener() {
-
-					@Override
-					public void onAnimationUpdate(
-							final ValueAnimator animation) {
-						progressBar.setProgress((Float) animation
-								.getAnimatedValue());
-					}
-				});
 		progressBar.setMarkerProgress(progress);
-		mProgressBarAnimator.start();
+		progressAnimator.start();
 	}
-
-	
 
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public int getResViewLayoutId() {
 		return R.layout.circular_activity;
 	}
-	
+
 	@Override
 	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
@@ -167,6 +110,38 @@ public class CircularActivity extends GplusActivity {
 	@Override
 	@Reference(override = GplusActivity.class)
 	public IGamePolicy getGamePolicy() {
-		return new SimpleGamePolicy();
+		return new CircularPolicy();
+	}
+}
+
+/**
+ * 动画监听器...
+ * @author boqing.shen
+ *
+ */
+class CircularAnimatorListener implements AnimatorListener {
+
+	private CircularActivity activity;
+
+	public CircularAnimatorListener(CircularActivity activity) {
+		this.activity = activity;
+	}
+
+	@Override
+	public void onAnimationCancel(Animator animation) {
+		animation.end();
+	}
+
+	@Override
+	public void onAnimationEnd(Animator animation) {
+		activity.onAnimationEnd();
+	}
+
+	@Override
+	public void onAnimationRepeat(Animator animation) {
+	}
+
+	@Override
+	public void onAnimationStart(Animator animation) {
 	}
 }

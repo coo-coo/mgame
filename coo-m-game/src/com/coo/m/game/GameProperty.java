@@ -2,11 +2,12 @@ package com.coo.m.game;
 
 /**
  * Game 的属性对象
+ * 
  * @author boqing.shen
- *
+ * 
  */
 public final class GameProperty {
-	
+
 	/**
 	 * 构造函数
 	 */
