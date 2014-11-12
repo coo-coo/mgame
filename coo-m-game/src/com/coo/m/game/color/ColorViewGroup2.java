@@ -66,7 +66,6 @@ public class ColorViewGroup2 extends RelativeLayout implements OnClickListener {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-		// width ==500dp
 		int width = MeasureSpec.getSize(widthMeasureSpec);
 		setMeasuredDimension(width, width);
 

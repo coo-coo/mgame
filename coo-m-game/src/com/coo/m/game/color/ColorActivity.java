@@ -54,9 +54,11 @@ public class ColorActivity extends GplusActivity {
 		// toast("当前参数:" + params[0] + "-" + params[1] + "-" +
 		// params[2]);
 		cvg = new ColorViewGroup2(this, params[0], params[2]);
+		
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 
-		container.addView(cvg, new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.MATCH_PARENT));
+		container.addView(cvg, lp);
 	}
 }
