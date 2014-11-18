@@ -186,10 +186,10 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	 * 参见:http://www.shyond.com/index.php/kaifa/456.html
 	 */
 	private void invokeDialog(String title) {
-		int pass = state.getPass()-1;
-		String msg = "通过" + pass + "关,得分:"+ state.getScore();
+		int pass = state.getPass() - 1;
+		String msg = "通过" + pass + "关,得分:" + state.getScore();
 		new AlertDialog.Builder(this).setCancelable(false)
-				.setTitle(title).setIcon(R.drawable.icon)
+				.setTitle(title).setIcon(R.drawable.gplus_32)
 				.setMessage(msg)
 				.setPositiveButton("再玩一次", this)
 				.setNegativeButton("不玩了", this).show();
@@ -252,6 +252,7 @@ class ConfirmDialog implements DialogInterface.OnClickListener {
 	private void invokeComfirmDialog(String title) {
 		new AlertDialog.Builder(gplus).setCancelable(false)
 				.setTitle(title).setPositiveButton("确定", this)
+				.setIcon(R.drawable.gplus_32)
 				.setNegativeButton("取消", this).show();
 	}
 
