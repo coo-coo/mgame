@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.coo.m.game.IGame;
-import com.coo.m.game.PhoneUtil;
+import com.coo.m.game.DeviceUtil;
 
 public class G2048View extends LinearLayout {
 
@@ -43,7 +43,7 @@ public class G2048View extends LinearLayout {
 	public G2048View(G2048Activity g2048) {
 		super(g2048);
 		this.g2048 = g2048;
-		int[] resolution = PhoneUtil.getResolution(g2048);
+		int[] resolution = DeviceUtil.getResolution(g2048);
 		gridWidth=(resolution[0])/4-5;
 		initGameView();
 		initCards();
