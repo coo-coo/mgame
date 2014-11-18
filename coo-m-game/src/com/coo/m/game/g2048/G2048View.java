@@ -12,14 +12,16 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.coo.m.game.IGame;
+import com.coo.m.game.PhoneUtil;
 
 public class G2048View extends LinearLayout {
 
 	private final int LINES = 4;
 	private Card2048[][] cardsMap = new Card2048[LINES][LINES];
 	private List<Point> emptyPoints = new ArrayList<Point>();
+	
 
-	private int gridWidth = 118;
+	private int gridWidth ;
 
 	/**
 	 * 添加分数,通知GameState进行记录
@@ -41,6 +43,8 @@ public class G2048View extends LinearLayout {
 	public G2048View(G2048Activity g2048) {
 		super(g2048);
 		this.g2048 = g2048;
+		int[] resolution = PhoneUtil.getResolution(g2048);
+		gridWidth=(resolution[0])/4-5;
 		initGameView();
 		initCards();
 	}

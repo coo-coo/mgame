@@ -5,7 +5,11 @@
 
     <com.coo.m.game.circular.HoloCircularProgressBar
         android:id="@+id/holoCircularProgressBar"
-        android:layout_width="360dp"
-        android:layout_height="360dp" />
+        android:layout_width="320dp"
+        android:layout_height="320dp" 
+        android:layout_centerInParent="true"/>
+    
+    
+ 
 
 </RelativeLayout>

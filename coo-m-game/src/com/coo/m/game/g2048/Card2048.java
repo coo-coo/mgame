@@ -24,7 +24,7 @@ public class Card2048 extends FrameLayout {
 
 		View background = new View(getContext());
 		lp = new LayoutParams(-1, -1);
-		lp.setMargins(10, 10, 0, 0);
+		lp.setMargins(5, 10, 5, 0);
 		int bgColor = this.getResources().getColor(R.color.blue);
 		background.setBackgroundColor(bgColor);
 		addView(background, lp);
@@ -35,7 +35,7 @@ public class Card2048 extends FrameLayout {
 		label.setGravity(Gravity.CENTER);
 
 		lp = new LayoutParams(-1, -1);
-		lp.setMargins(10, 10, 0, 0);
+		lp.setMargins(5, 10,5, 0);
 		addView(label, lp);
 
 		setNum(0);

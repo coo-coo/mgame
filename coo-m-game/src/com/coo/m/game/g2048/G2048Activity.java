@@ -43,10 +43,12 @@ public class G2048Activity extends GplusActivity {
 		// gameView = (G2048View) findViewById(R.id.gv_2048_gameView);
 		container = (RelativeLayout) findViewById(R.id.rl_2048_container);
 		gameView = new G2048View(this);
-		container.addView(gameView, new LayoutParams(
-				LayoutParams.MATCH_PARENT,
-				LayoutParams.MATCH_PARENT));
-		toast("loadContent..");
+
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+
+		container.addView(gameView, lp);
 		// 游戏启动
 		notify(IGame.GAME_INIT);
 	}
