@@ -18,7 +18,7 @@ import android.view.WindowManager;
  * @author liu
  *
  */
-public class PhoneManager {
+public class DeviceManager {
 	
 	
 	/**
@@ -113,6 +113,7 @@ public class PhoneManager {
 				.getSystemService(Context.NOTIFICATION_SERVICE);
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static WakeLock getWakeLock(Context context){
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 		WakeLock mWakeLock=pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");

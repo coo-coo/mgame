@@ -5,8 +5,6 @@ import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.RelativeLayout;
 
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
@@ -14,7 +12,6 @@ import com.coo.m.game.GplusManager;
 import com.coo.m.game.IGame;
 import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
-import com.coo.m.game.g2048.G2048View;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
@@ -25,7 +22,7 @@ public class CircularActivity extends GplusActivity {
 
 	private HoloCircularProgressBar progressBar;
 	private ObjectAnimator progressAnimator;
-	private RelativeLayout container;
+	// private RelativeLayout container;
 
 	// 定义点击次数
 	private final static int TIMES = 4;
@@ -38,11 +35,9 @@ public class CircularActivity extends GplusActivity {
 		progressBar = (HoloCircularProgressBar) findViewById(R.id.holoCircularProgressBar);
 		progressBar.setProgress(0.7f);
 		progressBar.setMarkerProgress(0.3f);
-		
-	// 定义监听器
+
+		// 定义监听器
 		listener = new CircularAnimatorListener(this);
-		
-		
 
 		// 加载即启动游戏
 		notify(IGame.GAME_INIT);
@@ -65,7 +60,7 @@ public class CircularActivity extends GplusActivity {
 		// int duration = 2000;
 		animate(progressBar, listener, targetProgress, duration);
 	}
-	
+
 	/**
 	 * 动画结束之后进行判定...
 	 */
@@ -123,8 +118,9 @@ public class CircularActivity extends GplusActivity {
 
 /**
  * 动画监听器...
+ * 
  * @author boqing.shen
- *
+ * 
  */
 class CircularAnimatorListener implements AnimatorListener {
 
