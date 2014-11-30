@@ -19,9 +19,8 @@ public class G2048View extends LinearLayout {
 	private final int LINES = 4;
 	private Card2048[][] cardsMap = new Card2048[LINES][LINES];
 	private List<Point> emptyPoints = new ArrayList<Point>();
-	
 
-	private int gridWidth ;
+	private int gridWidth;
 
 	/**
 	 * 添加分数,通知GameState进行记录
@@ -30,7 +29,11 @@ public class G2048View extends LinearLayout {
 	 */
 	private void addScore(int score) {
 		int currentScore = g2048.getState().getScore() + score;
-		g2048.toast("当前得分:" + currentScore);
+
+		Message cs = new Message();
+		cs.what = 1;
+		cs.obj = currentScore;
+		g2048.handler.sendMessage(cs);
 
 		Message msg = new Message();
 		msg.what = IGame.MISSION_SCORE_ADD;
@@ -44,7 +47,7 @@ public class G2048View extends LinearLayout {
 		super(g2048);
 		this.g2048 = g2048;
 		int[] resolution = DeviceUtil.getResolution(g2048);
-		gridWidth=(resolution[0])/4-5;
+		gridWidth = (resolution[0]) / 4 - 5;
 		initGameView();
 		initCards();
 	}

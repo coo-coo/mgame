@@ -58,8 +58,7 @@ public class HoloCircularProgressBar extends View {
 	private static final String INSTANCE_STATE_THUMB_VISIBLE = "thumb_visible";
 
 	/**
-	 * used to save and restore the visibility of the marker in this
-	 * instance
+	 * used to save and restore the visibility of the marker in this instance
 	 */
 	private static final String INSTANCE_STATE_MARKER_VISIBLE = "marker_visible";
 
@@ -98,8 +97,8 @@ public class HoloCircularProgressBar extends View {
 	private int mHorizontalInset = 0;
 
 	/**
-	 * true if not all properties are set. then the view isn't drawn and
-	 * there are no errors in the LayoutEditor
+	 * true if not all properties are set. then the view isn't drawn and there
+	 * are no errors in the LayoutEditor
 	 */
 	private boolean mIsInitializing = true;
 
@@ -133,6 +132,8 @@ public class HoloCircularProgressBar extends View {
 	 */
 	private float mProgress = 0.3f;
 
+	private float mOldProgress = 0.3f;
+
 	/**
 	 * The color of the progress background.
 	 */
@@ -165,16 +166,16 @@ public class HoloCircularProgressBar extends View {
 	/**
 	 * The Thumb pos x.
 	 * 
-	 * Care. the position is not the position of the rotated thumb. The
-	 * position is only calculated in {@link #onMeasure(int, int)}
+	 * Care. the position is not the position of the rotated thumb. The position
+	 * is only calculated in {@link #onMeasure(int, int)}
 	 */
 	private float mThumbPosX;
 
 	/**
 	 * The Thumb pos y.
 	 * 
-	 * Care. the position is not the position of the rotated thumb. The
-	 * position is only calculated in {@link #onMeasure(int, int)}
+	 * Care. the position is not the position of the rotated thumb. The position
+	 * is only calculated in {@link #onMeasure(int, int)}
 	 */
 	private float mThumbPosY;
 
@@ -196,8 +197,8 @@ public class HoloCircularProgressBar extends View {
 	private float mTranslationOffsetY;
 
 	/**
-	 * The Vertical inset calcualted in {@link #computeInsets(int, int)}
-	 * depends on {@link #mGravity}..
+	 * The Vertical inset calcualted in {@link #computeInsets(int, int)} depends
+	 * on {@link #mGravity}..
 	 */
 	private int mVerticalInset = 0;
 
@@ -205,7 +206,7 @@ public class HoloCircularProgressBar extends View {
 	 * Instantiates a new holo circular progress bar.
 	 * 
 	 * @param context
-	 *                the context
+	 *            the context
 	 */
 	public HoloCircularProgressBar(final Context context) {
 		this(context, null);
@@ -215,9 +216,9 @@ public class HoloCircularProgressBar extends View {
 	 * Instantiates a new holo circular progress bar.
 	 * 
 	 * @param context
-	 *                the context
+	 *            the context
 	 * @param attrs
-	 *                the attrs
+	 *            the attrs
 	 */
 	public HoloCircularProgressBar(final Context context,
 			final AttributeSet attrs) {
@@ -228,11 +229,11 @@ public class HoloCircularProgressBar extends View {
 	 * Instantiates a new holo circular progress bar.
 	 * 
 	 * @param context
-	 *                the context
+	 *            the context
 	 * @param attrs
-	 *                the attrs
+	 *            the attrs
 	 * @param defStyle
-	 *                the def style
+	 *            the def style
 	 */
 	public HoloCircularProgressBar(final Context context,
 			final AttributeSet attrs, final int defStyle) {
@@ -241,8 +242,7 @@ public class HoloCircularProgressBar extends View {
 		// load the styled attributes and set their properties
 		try {
 			// 设置颜色
-			setProgressColor(this.getResources().getColor(
-					R.color.orange));
+			setProgressColor(this.getResources().getColor(R.color.orange));
 			setProgressBackgroundColor(Color.GRAY);
 			setProgress(0.0f);
 			setMarkerProgress(0.0f);
@@ -278,15 +278,16 @@ public class HoloCircularProgressBar extends View {
 
 		final float progressRotation = getCurrentRotation();
 
+		final float progressOldRotation = getOldRotation();
+
 		// draw the background
 		if (!mOverrdraw) {
 			canvas.drawArc(mCircleBounds, 270,
-					-(360 - progressRotation), false,
-					mBackgroundColorPaint);
+					-(360 - progressRotation), false, mBackgroundColorPaint);
 		}
 
 		// draw the progress or a full circle if overdraw is true
-		canvas.drawArc(mCircleBounds, 270, mOverrdraw ? 360
+		canvas.drawArc(mCircleBounds, 0, mOverrdraw ? 360
 				: progressRotation, false, mProgressColorPaint);
 
 		// draw the marker at the correct rotated position
@@ -296,8 +297,7 @@ public class HoloCircularProgressBar extends View {
 			canvas.save();
 			canvas.rotate(markerRotation - 90);
 			canvas.drawLine((float) (mThumbPosX + mThumbRadius / 2 * 1.4),
-					mThumbPosY,
-					(float) (mThumbPosX - mThumbRadius / 2 * 1.4),
+					mThumbPosY, (float) (mThumbPosX - mThumbRadius / 2 * 1.4),
 					mThumbPosY, mMarkerColorPaint);
 			canvas.restore();
 		}
@@ -321,11 +321,9 @@ public class HoloCircularProgressBar extends View {
 	protected void onMeasure(final int widthMeasureSpec,
 			final int heightMeasureSpec) {
 		final int height = getDefaultSize(getSuggestedMinimumHeight()
-				+ getPaddingTop() + getPaddingBottom(),
-				heightMeasureSpec);
+				+ getPaddingTop() + getPaddingBottom(), heightMeasureSpec);
 		final int width = getDefaultSize(getSuggestedMinimumWidth()
-				+ getPaddingLeft() + getPaddingRight(),
-				widthMeasureSpec);
+				+ getPaddingLeft() + getPaddingRight(), widthMeasureSpec);
 
 		final int diameter;
 		if (heightMeasureSpec == MeasureSpec.UNSPECIFIED) {
@@ -374,8 +372,7 @@ public class HoloCircularProgressBar extends View {
 		if (state instanceof Bundle) {
 			final Bundle bundle = (Bundle) state;
 			setProgress(bundle.getFloat(INSTANCE_STATE_PROGRESS));
-			setMarkerProgress(bundle
-					.getFloat(INSTANCE_STATE_MARKER_PROGRESS));
+			setMarkerProgress(bundle.getFloat(INSTANCE_STATE_MARKER_PROGRESS));
 
 			final int progressColor = bundle
 					.getInt(INSTANCE_STATE_PROGRESS_COLOR);
@@ -391,11 +388,9 @@ public class HoloCircularProgressBar extends View {
 				updateBackgroundColor();
 			}
 
-			mIsThumbEnabled = bundle
-					.getBoolean(INSTANCE_STATE_THUMB_VISIBLE);
+			mIsThumbEnabled = bundle.getBoolean(INSTANCE_STATE_THUMB_VISIBLE);
 
-			mIsMarkerEnabled = bundle
-					.getBoolean(INSTANCE_STATE_MARKER_VISIBLE);
+			mIsMarkerEnabled = bundle.getBoolean(INSTANCE_STATE_MARKER_VISIBLE);
 
 			super.onRestoreInstanceState(bundle
 					.getParcelable(INSTANCE_STATE_SAVEDSTATE));
@@ -416,8 +411,7 @@ public class HoloCircularProgressBar extends View {
 		bundle.putInt(INSTANCE_STATE_PROGRESS_BACKGROUND_COLOR,
 				mProgressBackgroundColor);
 		bundle.putBoolean(INSTANCE_STATE_THUMB_VISIBLE, mIsThumbEnabled);
-		bundle.putBoolean(INSTANCE_STATE_MARKER_VISIBLE,
-				mIsMarkerEnabled);
+		bundle.putBoolean(INSTANCE_STATE_MARKER_VISIBLE, mIsMarkerEnabled);
 		return bundle;
 	}
 
@@ -433,13 +427,17 @@ public class HoloCircularProgressBar extends View {
 	}
 
 	/**
-	 * gives the current progress of the ProgressBar. Value between 0..1 if
-	 * you set the progress to >1 you'll get progress % 1 as return value
+	 * gives the current progress of the ProgressBar. Value between 0..1 if you
+	 * set the progress to >1 you'll get progress % 1 as return value
 	 * 
 	 * @return the progress
 	 */
 	public float getProgress() {
 		return mProgress;
+	}
+
+	public float getOldProgress() {
+		return mOldProgress;
 	}
 
 	/**
@@ -469,7 +467,7 @@ public class HoloCircularProgressBar extends View {
 	 * Sets the marker enabled.
 	 * 
 	 * @param enabled
-	 *                the new marker enabled
+	 *            the new marker enabled
 	 */
 	public void setMarkerEnabled(final boolean enabled) {
 		mIsMarkerEnabled = enabled;
@@ -479,7 +477,7 @@ public class HoloCircularProgressBar extends View {
 	 * Sets the marker progress.
 	 * 
 	 * @param progress
-	 *                the new marker progress
+	 *            the new marker progress
 	 */
 	public void setMarkerProgress(final float progress) {
 		mIsMarkerEnabled = true;
@@ -490,7 +488,7 @@ public class HoloCircularProgressBar extends View {
 	 * Sets the progress.
 	 * 
 	 * @param progress
-	 *                the new progress
+	 *            the new progress
 	 */
 	public void setProgress(final float progress) {
 		if (progress == mProgress) {
@@ -516,11 +514,16 @@ public class HoloCircularProgressBar extends View {
 		}
 	}
 
+	public void setOldProgress(final float oldprogress) {
+
+		mOldProgress = oldprogress % 1.0f;
+	}
+
 	/**
 	 * Sets the progress background color.
 	 * 
 	 * @param color
-	 *                the new progress background color
+	 *            the new progress background color
 	 */
 	public void setProgressBackgroundColor(final int color) {
 		mProgressBackgroundColor = color;
@@ -533,7 +536,7 @@ public class HoloCircularProgressBar extends View {
 	 * Sets the progress color.
 	 * 
 	 * @param color
-	 *                the new progress color
+	 *            the new progress color
 	 */
 	public void setProgressColor(final int color) {
 		mProgressColor = color;
@@ -545,7 +548,7 @@ public class HoloCircularProgressBar extends View {
 	 * shows or hides the thumb of the progress bar
 	 * 
 	 * @param enabled
-	 *                true to show the thumb
+	 *            true to show the thumb
 	 */
 	public void setThumbEnabled(final boolean enabled) {
 		mIsThumbEnabled = enabled;
@@ -555,7 +558,7 @@ public class HoloCircularProgressBar extends View {
 	 * Sets the wheel size.
 	 * 
 	 * @param dimension
-	 *                the new wheel size
+	 *            the new wheel size
 	 */
 	public void setWheelSize(final int dimension) {
 		mCircleStrokeWidth = dimension;
@@ -579,9 +582,9 @@ public class HoloCircularProgressBar extends View {
 	 * </pre>
 	 * 
 	 * @param dx
-	 *                the dx the horizontal unfilled space
+	 *            the dx the horizontal unfilled space
 	 * @param dy
-	 *                the dy the horizontal unfilled space
+	 *            the dy the horizontal unfilled space
 	 */
 	@SuppressLint("NewApi")
 	private void computeInsets(final int dx, final int dy) {
@@ -627,6 +630,10 @@ public class HoloCircularProgressBar extends View {
 		return 360 * mProgress;
 	}
 
+	private float getOldRotation() {
+		return 360 * mOldProgress;
+	}
+
 	/**
 	 * Gets the marker rotation.
 	 * 
@@ -661,8 +668,8 @@ public class HoloCircularProgressBar extends View {
 	}
 
 	/**
-	 * updates the paint of the progress and the thumb to give them a new
-	 * visual style
+	 * updates the paint of the progress and the thumb to give them a new visual
+	 * style
 	 */
 	private void updateProgressColor() {
 		mProgressColorPaint = new Paint(Paint.ANTI_ALIAS_FLAG);

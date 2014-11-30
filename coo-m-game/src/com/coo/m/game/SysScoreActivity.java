@@ -28,6 +28,6 @@ public class SysScoreActivity extends CommonBizActivity {
 		ListView composite = (ListView) findViewById(R.id.lv_sys_core);
 
 		List<GameScore> list = GplusManager.getScores(gameKey);
-		adapter = new SysCoreAdapter(this, list, composite);
+		adapter = new SysScoreAdapter(this, list, composite);
 	}
 }

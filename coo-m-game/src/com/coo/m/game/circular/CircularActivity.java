@@ -33,8 +33,9 @@ public class CircularActivity extends GplusActivity {
 	@Reference(override = CommonBizActivity.class)
 	public void loadContent() {
 		progressBar = (HoloCircularProgressBar) findViewById(R.id.holoCircularProgressBar);
-		progressBar.setProgress(0.7f);
+		// progressBar.setProgress(0.7f);
 		progressBar.setMarkerProgress(0.3f);
+		progressBar.setThumbEnabled(true);
 
 		// 定义监听器
 		listener = new CircularAnimatorListener(this);
@@ -73,26 +74,26 @@ public class CircularActivity extends GplusActivity {
 		}
 	}
 
+
+
 	/**
 	 * 动画执行...
 	 */
 	private void animate(final HoloCircularProgressBar progressBar,
 			AnimatorListener listener, float progress, int duration) {
-		progressAnimator = ObjectAnimator.ofFloat(progressBar,
-				"progress", progress);
+		progressAnimator = ObjectAnimator.ofFloat(progressBar, "progress",
+				progress);
 		progressAnimator.setDuration(duration);
 		if (listener != null) {
 			progressAnimator.addListener(listener);
 		}
 		progressAnimator.reverse();
-		progressAnimator.addUpdateListener(new AnimatorUpdateListener() {
-			@Override
-			public void onAnimationUpdate(
-					final ValueAnimator animation) {
-				progressBar.setProgress((Float) animation
-						.getAnimatedValue());
-			}
-		});
+//		progressAnimator.addUpdateListener(new AnimatorUpdateListener() {
+//			@Override
+//			public void onAnimationUpdate(final ValueAnimator animation) {
+//				progressBar.setProgress((Float) animation.getAnimatedValue());
+//			}
+//		});
 		progressBar.setMarkerProgress(progress);
 		progressAnimator.start();
 	}
@@ -146,5 +147,6 @@ class CircularAnimatorListener implements AnimatorListener {
 
 	@Override
 	public void onAnimationStart(Animator animation) {
+//		activity.onAnimationStart();
 	}
 }

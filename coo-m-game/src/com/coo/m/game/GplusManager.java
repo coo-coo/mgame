@@ -10,6 +10,7 @@ import com.coo.m.game.circular.CircularActivity;
 import com.coo.m.game.color.ColorActivity;
 import com.coo.m.game.g2048.G2048Activity;
 import com.coo.m.game.guess.GuessActivity;
+import com.coo.m.game.robot.RobotActivity;
 import com.kingstar.ngbf.ms.util.DateUtil;
 
 /**
@@ -31,6 +32,8 @@ public final class GplusManager {
 			ColorActivity.class, "找颜色", R.drawable.gcolor);
 	public static GameProperty G_CIRCULAR = new GameProperty(
 			CircularActivity.class, "点4下", R.drawable.gcircle);
+	public static GameProperty G_ROBOT = new GameProperty(
+			RobotActivity.class, "对话机器人", R.drawable.gcircle);
 
 	static {
 		// 增加支持的游戏
@@ -38,6 +41,7 @@ public final class GplusManager {
 		GAMES.add(G_G2048);
 		GAMES.add(G_COLOR);
 		GAMES.add(G_CIRCULAR);
+		GAMES.add(G_ROBOT);
 	}
 
 	/**

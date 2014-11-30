@@ -1,7 +1,10 @@
 package com.coo.m.game.g2048;
 
+import android.os.Handler;
+import android.os.Message;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
@@ -18,6 +21,7 @@ import com.kingstar.ngbf.ms.util.Reference;
 public class G2048Activity extends GplusActivity {
 
 	private G2048View gameView = null;
+	private TextView score = null;
 	private RelativeLayout container;
 
 	@Override
@@ -42,13 +46,19 @@ public class G2048Activity extends GplusActivity {
 		// 初始化gameView
 		// gameView = (G2048View) findViewById(R.id.gv_2048_gameView);
 		container = (RelativeLayout) findViewById(R.id.rl_2048_container);
+		score = (TextView) findViewById(R.id.tv_2048_game_score);
 		gameView = new G2048View(this);
 
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-
+		gameView.setId(10);
 		container.addView(gameView, lp);
+
+		// RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
+		// LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		// lp1.addRule(RelativeLayout.ABOVE,gameView.getId());
+
 		// 游戏启动
 		notify(IGame.GAME_INIT);
 	}
@@ -59,5 +69,17 @@ public class G2048Activity extends GplusActivity {
 		// container.removeAllViews();
 		gameView.startGame();
 	}
+
+
+	Handler handler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case 1:
+				score.setText(msg.obj.toString());
+				break;
+			}
+			super.handleMessage(msg);
+		}
+	};
 
 }
