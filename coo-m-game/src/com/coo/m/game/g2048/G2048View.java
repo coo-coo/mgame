@@ -31,7 +31,7 @@ public class G2048View extends LinearLayout {
 		int currentScore = g2048.getState().getScore() + score;
 
 		Message cs = new Message();
-		cs.what = 1;
+		cs.what = 100;
 		cs.obj = currentScore;
 		g2048.handler.sendMessage(cs);
 

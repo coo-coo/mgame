@@ -24,6 +24,7 @@ public class G2048Activity extends GplusActivity {
 	private TextView score = null;
 	private RelativeLayout container;
 
+
 	@Override
 	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
@@ -49,16 +50,17 @@ public class G2048Activity extends GplusActivity {
 		score = (TextView) findViewById(R.id.tv_2048_game_score);
 		gameView = new G2048View(this);
 
+		score.setText(getString(R.string.text_current_score)+"0");
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 		gameView.setId(10);
 		container.addView(gameView, lp);
 
-		// RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
-		// LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		// lp1.addRule(RelativeLayout.ABOVE,gameView.getId());
-
+//		 RelativeLayout.LayoutParams lp1 = new RelativeLayout.LayoutParams(
+//		 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+//		 lp1.addRule(RelativeLayout.ABOVE,gameView.getId());
+//		 ll.setLayoutParams(lp1);
 		// 游戏启动
 		notify(IGame.GAME_INIT);
 	}
@@ -74,8 +76,8 @@ public class G2048Activity extends GplusActivity {
 	Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case 1:
-				score.setText(msg.obj.toString());
+			case 100:
+				score.setText(getString(R.string.text_current_score)+msg.obj.toString());
 				break;
 			}
 			super.handleMessage(msg);

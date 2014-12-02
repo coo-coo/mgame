@@ -36,6 +36,7 @@ public class HoloCircularProgressBar extends View {
 	 * used to save the progress on configuration changes
 	 */
 	private static final String INSTANCE_STATE_PROGRESS = "progress";
+	private static final String INSTANCE_STATE_OLDPROGRESS = "oldprogress";
 
 	/**
 	 * used to save the marker progress on configuration changes
@@ -282,13 +283,16 @@ public class HoloCircularProgressBar extends View {
 
 		// draw the background
 		if (!mOverrdraw) {
+			
 			canvas.drawArc(mCircleBounds, 270,
-					-(360 - progressRotation), false, mBackgroundColorPaint);
+					360, false, mBackgroundColorPaint);
+//			canvas.drawArc(mCircleBounds, 270,
+//					-(360 - progressRotation), false, mBackgroundColorPaint);
 		}
 
 		// draw the progress or a full circle if overdraw is true
-		canvas.drawArc(mCircleBounds, 0, mOverrdraw ? 360
-				: progressRotation, false, mProgressColorPaint);
+		canvas.drawArc(mCircleBounds, progressOldRotation-90, mOverrdraw ? 360
+				: -(progressOldRotation-progressRotation), false, mProgressColorPaint);
 
 		// draw the marker at the correct rotated position
 		if (mIsMarkerEnabled) {
@@ -372,6 +376,7 @@ public class HoloCircularProgressBar extends View {
 		if (state instanceof Bundle) {
 			final Bundle bundle = (Bundle) state;
 			setProgress(bundle.getFloat(INSTANCE_STATE_PROGRESS));
+			setOldProgress(bundle.getFloat(INSTANCE_STATE_OLDPROGRESS));
 			setMarkerProgress(bundle.getFloat(INSTANCE_STATE_MARKER_PROGRESS));
 
 			final int progressColor = bundle
@@ -406,6 +411,7 @@ public class HoloCircularProgressBar extends View {
 		bundle.putParcelable(INSTANCE_STATE_SAVEDSTATE,
 				super.onSaveInstanceState());
 		bundle.putFloat(INSTANCE_STATE_PROGRESS, mProgress);
+		bundle.putFloat(INSTANCE_STATE_OLDPROGRESS, mOldProgress);
 		bundle.putFloat(INSTANCE_STATE_MARKER_PROGRESS, mMarkerProgress);
 		bundle.putInt(INSTANCE_STATE_PROGRESS_COLOR, mProgressColor);
 		bundle.putInt(INSTANCE_STATE_PROGRESS_BACKGROUND_COLOR,

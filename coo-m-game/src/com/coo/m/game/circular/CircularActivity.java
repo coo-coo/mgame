@@ -36,6 +36,7 @@ public class CircularActivity extends GplusActivity {
 		// progressBar.setProgress(0.7f);
 		progressBar.setMarkerProgress(0.3f);
 		progressBar.setThumbEnabled(true);
+		progressBar.setWheelSize(25);
 
 		// 定义监听器
 		listener = new CircularAnimatorListener(this);
@@ -74,8 +75,6 @@ public class CircularActivity extends GplusActivity {
 		}
 	}
 
-
-
 	/**
 	 * 动画执行...
 	 */
@@ -88,14 +87,15 @@ public class CircularActivity extends GplusActivity {
 			progressAnimator.addListener(listener);
 		}
 		progressAnimator.reverse();
-//		progressAnimator.addUpdateListener(new AnimatorUpdateListener() {
-//			@Override
-//			public void onAnimationUpdate(final ValueAnimator animation) {
-//				progressBar.setProgress((Float) animation.getAnimatedValue());
-//			}
-//		});
+		progressAnimator.addUpdateListener(new AnimatorUpdateListener() {
+			@Override
+			public void onAnimationUpdate(final ValueAnimator animation) {
+				progressBar.setProgress((Float) animation.getAnimatedValue());
+			}
+		});
 		progressBar.setMarkerProgress(progress);
 		progressAnimator.start();
+		progressBar.setOldProgress(progress);
 	}
 
 	@Override
@@ -115,6 +115,27 @@ public class CircularActivity extends GplusActivity {
 	public IGamePolicy getGamePolicy() {
 		return new CircularPolicy();
 	}
+
+	@Override
+	public void onStop() {
+		// 取消注册
+		progressAnimator.removeListener(listener);
+		super.onStop();
+	}
+
+	@Override
+	protected void onPause() {
+		progressAnimator.removeListener(listener);
+		super.onPause();
+	}
+	
+//	@Override
+//	protected void onResume() {
+//		if (listener != null) {
+//			progressAnimator.addListener(listener);
+//		}
+//		super.onPause();
+//	}
 }
 
 /**
@@ -147,6 +168,7 @@ class CircularAnimatorListener implements AnimatorListener {
 
 	@Override
 	public void onAnimationStart(Animator animation) {
-//		activity.onAnimationStart();
+		// activity.onAnimationStart();
 	}
+
 }

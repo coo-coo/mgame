@@ -123,6 +123,7 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	public void onGameScore() {
 		Intent intent = new Intent(this, SysScoreActivity.class);
 		intent.putExtra("GAME_KEY", getGameProperty().getKey());
+		intent.putExtra("GAME_LABEL", getGameProperty().getLabel());
 		startActivity(intent);
 		this.finish();
 	}

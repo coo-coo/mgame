@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/item_main_version"
+        android:orderInCategory="10"
+        android:icon="@drawable/ico_th_large"
+        android:showAsAction="withText"
+        android:title="@string/item_main_version_text">
+    </item>
+    <item
+        android:id="@+id/item_main_share"
+        android:icon="@drawable/ico_heart"
+        android:orderInCategory="10"
+        android:showAsAction="withText"
+        android:title="@string/item_main_share_text">
+    </item>
+
+</menu>

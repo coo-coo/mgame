@@ -15,7 +15,7 @@
     <string name="item_game_init_text">开始</string>
     <string name="item_game_over_text">结束</string>
     <string name="item_game_score_text">成绩</string>
-    <string name="item_main_version_text">版本</string>
+    <string name="item_main_version_text">关于</string>
     <string name="item_main_author_text">作者</string>
     <string name="item_main_illustrate_text">说明</string>
     <string name="item_main_share_text">分享</string>

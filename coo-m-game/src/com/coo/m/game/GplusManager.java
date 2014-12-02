@@ -33,7 +33,7 @@ public final class GplusManager {
 	public static GameProperty G_CIRCULAR = new GameProperty(
 			CircularActivity.class, "点4下", R.drawable.gcircle);
 	public static GameProperty G_ROBOT = new GameProperty(
-			RobotActivity.class, "对话机器人", R.drawable.gcircle);
+			RobotActivity.class, "对话机器人", R.drawable.robot);
 
 	static {
 		// 增加支持的游戏

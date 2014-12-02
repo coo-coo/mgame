@@ -1,12 +1,20 @@
 package com.coo.m.game;
 
+import java.io.File;
+import java.lang.reflect.Field;
 import java.util.List;
 
+import org.apache.log4j.lf5.util.Resource;
+
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewConfiguration;
 import android.widget.GridView;
 
 import com.kingstar.ngbf.ms.util.Reference;
@@ -22,6 +30,7 @@ public class SysMainActivity extends GenericActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sys_main_activity);
+		getOverflowMenu();
 		loadContent();
 	}
 
@@ -49,18 +58,29 @@ public class SysMainActivity extends GenericActivity {
 					SysVersionActivity.class);
 			startActivity(intent1);
 			break;
-		case R.id.item_main_author:
-			Intent intent2 = new Intent(SysMainActivity.this,
-					SysAuthorActivity.class);
-			startActivity(intent2);
-			break;
-		case R.id.item_main_illustrate:
-
-			break;
 		case R.id.item_main_share:
-			Uri uri = Uri
-					.parse("http://gdown.baidu.com/data/wisegame/07995b1aad7046f4/xiaomo_1.apk");
-			share("分享游戏", uri);
+			Resources res=getResources();
+//			Bitmap bt=BitmapFactory.decodeResource(res, R.drawable.gplus);
+//			File f=getFilesDir();
+//			FileOutputStream outStream;
+//			try {
+//				outStream = new FileOutputStream(f);
+//				bm.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+//				try {
+//					outStream.flush();
+//					outStream.close();
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
+//			} catch (FileNotFoundException e) {
+//				e.printStackTrace();
+//			}
+
+			Uri uri = Uri.fromFile(new File("android.resource://" + getPackageName()
+					+ "/drawable/" + "gplus.png"));
+//			Uri uri = Uri.fromFile(new File("android.resource://" + getPackageName()
+//					+ "/drawable/" + "gplus.png"));
+			share("http://gdown.baidu.com/data/wisegame/07995b1aad7046f4/xiaomo_1.apk", uri);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
@@ -68,17 +88,37 @@ public class SysMainActivity extends GenericActivity {
 
 	private void share(String content, Uri uri) {
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
-		if (uri != null) {
+//		if (uri != null) {
+			if (true) {
 			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 			shareIntent.setType("image/*");
 			shareIntent.putExtra("sms_body", content);
+			shareIntent.putExtra(Intent.EXTRA_TEXT, content);
+			
 		} else {
 			shareIntent.setType("text/plain");
+			shareIntent.putExtra(Intent.EXTRA_SUBJECT, "分享");
+			shareIntent.putExtra(Intent.EXTRA_TEXT, content);
 		}
+		shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		shareIntent.putExtra(Intent.EXTRA_TEXT, content);
-		startActivity(Intent.createChooser(shareIntent, "分享游戏"));
+		startActivity(Intent.createChooser(shareIntent, "分享"));
 		// 系统默认标题
 		// startActivity(shareIntent);
 	}
+	
+	private void getOverflowMenu() {  
+		   
+	     try {  
+	        ViewConfiguration config = ViewConfiguration.get(this);  
+	        Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");  
+	        if(menuKeyField != null) {  
+	            menuKeyField.setAccessible(true);  
+	            menuKeyField.setBoolean(config, false);  
+	        }  
+	    } catch (Exception e) {  
+	        e.printStackTrace();  
+	    }  
+	}  
 
 }
