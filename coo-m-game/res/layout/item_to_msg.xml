@@ -40,7 +40,7 @@
             <ImageView
                 android:layout_width="49dp"
                 android:layout_height="49dp"
-                android:src="@drawable/robot_me" />
+                android:src="@drawable/ic_me" />
 
             <TextView
                 android:id="@+id/id_to_msg"

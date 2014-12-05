@@ -1,11 +1,19 @@
 package com.coo.m.game.robot;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -28,7 +36,6 @@ import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
 import com.coo.m.game.robot.ChatMessage.Type;
 import com.kingstar.ngbf.ms.util.Reference;
-import com.kingstar.ngbf.ms.util.android.GenericActivity;
 
 public class RobotActivity extends GplusActivity {
 	private ListView mMsg;
@@ -86,7 +93,7 @@ public class RobotActivity extends GplusActivity {
 
 	private void initDatas() {
 		mDatas = new ArrayList<ChatMessage>();
-		mDatas.add(new ChatMessage("亲爱的你好", Type.INCOMING, new Date()));
+		mDatas.add(new ChatMessage("亲爱的您好,我是智能机器人suzl,很高兴为您服务，您可以输入例如‘说个笑话’的句子来与我交流，愿您满意！", Type.INCOMING, new Date()));
 		mAdapter = new ChatMessageAdapter(this, mDatas);
 
 		mMsg.setAdapter(mAdapter);
