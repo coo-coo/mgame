@@ -4,12 +4,8 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.apache.log4j.lf5.util.Resource;
-
+import android.content.ComponentName;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -59,66 +55,60 @@ public class SysMainActivity extends GenericActivity {
 			startActivity(intent1);
 			break;
 		case R.id.item_main_share:
-			Resources res=getResources();
-//			Bitmap bt=BitmapFactory.decodeResource(res, R.drawable.gplus);
-//			File f=getFilesDir();
-//			FileOutputStream outStream;
-//			try {
-//				outStream = new FileOutputStream(f);
-//				bm.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-//				try {
-//					outStream.flush();
-//					outStream.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			} catch (FileNotFoundException e) {
-//				e.printStackTrace();
-//			}
-
-			Uri uri = Uri.fromFile(new File("android.resource://" + getPackageName()
-					+ "/drawable/" + "gplus.png"));
-//			Uri uri = Uri.fromFile(new File("android.resource://" + getPackageName()
-//					+ "/drawable/" + "gplus.png"));
-			share("http://gdown.baidu.com/data/wisegame/07995b1aad7046f4/xiaomo_1.apk", uri);
+			shareApp();
 			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void share(String content, Uri uri) {
-		Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//		if (uri != null) {
-			if (true) {
-			shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-			shareIntent.setType("image/*");
-			shareIntent.putExtra("sms_body", content);
-			shareIntent.putExtra(Intent.EXTRA_TEXT, content);
-			
-		} else {
-			shareIntent.setType("text/plain");
-			shareIntent.putExtra(Intent.EXTRA_SUBJECT, "分享");
-			shareIntent.putExtra(Intent.EXTRA_TEXT, content);
+	/**
+	 * APP分享连接
+	 */
+	private void shareApp() {
+		Intent intent = new Intent();
+		// 直接调用微信组件...
+		ComponentName componentName = new ComponentName(
+				"com.tencent.mm",
+				"com.tencent.mm.ui.tools.ShareImgUI");
+		intent.setComponent(componentName);
+		intent.setAction(Intent.ACTION_SEND);
+		// intent.setType("text/html");
+		intent.setType("image/*"); // 发送图片
+		intent.putExtra(Intent.EXTRA_TEXT, GplusManager.APP_DESC);
+		// intent.putExtra(Intent.EXTRA_SUBJECT, "标题");
+		// intent.putExtra(Intent.EXTRA_HTML_TEXT,
+		// GplusManager.URL_APP_DOWNLOAD);
+		// intent.putExtra(Intent.EXTRA_ORIGINATING_URI,
+		// GplusManager.URL_APP_DOWNLOAD1);
+		// intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, "SHORTCUT_ICON");
+		// intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "SHORTCUT_NAME");
+		// intent.putExtra(Intent.EXTRA_TITLE, "EXTRA_TITLE");
+		try {
+			File file = new File(GplusManager.APP_ICON_SDPATH);
+			Uri uri = Uri.fromFile(file);
+			intent.putExtra(Intent.EXTRA_STREAM, uri);
+		} catch (Exception e) {
+			toast("加载图片失败:" + e.getMessage());
 		}
-		shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		shareIntent.putExtra(Intent.EXTRA_TEXT, content);
-		startActivity(Intent.createChooser(shareIntent, "分享"));
-		// 系统默认标题
-		// startActivity(shareIntent);
+		
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		startActivity(intent);
+		// 分享很多..暂时不需要,只分享到微信...
+		// startActivity(Intent.createChooser(intent, "分享消磨"));
 	}
-	
-	private void getOverflowMenu() {  
-		   
-	     try {  
-	        ViewConfiguration config = ViewConfiguration.get(this);  
-	        Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");  
-	        if(menuKeyField != null) {  
-	            menuKeyField.setAccessible(true);  
-	            menuKeyField.setBoolean(config, false);  
-	        }  
-	    } catch (Exception e) {  
-	        e.printStackTrace();  
-	    }  
-	}  
+
+	private void getOverflowMenu() {
+		try {
+			ViewConfiguration config = ViewConfiguration.get(this);
+			Field menuKeyField = ViewConfiguration.class
+					.getDeclaredField("sHasPermanentMenuKey");
+			if (menuKeyField != null) {
+				menuKeyField.setAccessible(true);
+				menuKeyField.setBoolean(config, false);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

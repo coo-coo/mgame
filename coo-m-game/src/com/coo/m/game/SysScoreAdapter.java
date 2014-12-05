@@ -55,7 +55,7 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 	public void initHolderValue(CommonItemHolder ciHolder, GameScore item) {
 		holder = (GameScoreRowHolder) ciHolder;
 //		holder.tv_label.setText(item.getGameLabel());
-		String ts = GplusManager.getTsText(item.getGameTs());
+		String ts = GplusManager.getTsExpression(item.getGameTs());
 		holder.tv_ts.setText(ts);
 		holder.tv_score.setText(item.getScore() + "分");
 		holder.btn_share.setText("分享");

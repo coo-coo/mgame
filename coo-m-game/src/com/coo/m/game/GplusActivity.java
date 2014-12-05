@@ -111,7 +111,6 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	@Override
 	@Reference(override = IGame.class, note = "游戏结束")
 	public void onGameOver() {
-		toast("游戏结束...");
 		// 跳转到主界面
 		Intent intent = new Intent(this, SysMainActivity.class);
 		startActivity(intent);
@@ -166,6 +165,7 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	@Override
 	@Reference(override = IGame.class, note = "任务放弃")
 	public void onMissionGiveup() {
+		// toast("当前成绩=" + state.getScore());
 		if (state.getScore() > 0) {
 			storeScore();
 		}
@@ -231,39 +231,6 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	}
 
 }
-
-///**
-// * 征询事件Dialog，获得确认，发送指定消息
-// * 
-// * @author boqing.shen
-// * 
-// */
-//class ConfirmDialog implements DialogInterface.OnClickListener {
-//
-//	private GplusActivity gplus;
-//
-//	private int event;
-//
-//	public ConfirmDialog(GplusActivity gplus, String title, int event) {
-//		this.gplus = gplus;
-//		this.event = event;
-//		invokeComfirmDialog(title);
-//	}
-//
-//	private void invokeComfirmDialog(String title) {
-//		new AlertDialog.Builder(gplus).setCancelable(false)
-//				.setTitle(title).setPositiveButton("确定", this)
-//				.setIcon(R.drawable.gplus_32)
-//				.setNegativeButton("取消", this).show();
-//	}
-//
-//	@Override
-//	public void onClick(DialogInterface dialog, int which) {
-//		if (which == AlertDialog.BUTTON_POSITIVE) {
-//			gplus.notify(event);
-//		}
-//	}
-//}
 
 /**
  * 内置GameHandler，用于发送消息
