@@ -13,7 +13,7 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
-    
+
     <TextView
         android:id="@+id/tv_sysauthor_1"
         style="@style/tv_common"
@@ -24,19 +24,32 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
-    
-     <TextView
+
+    <TextView
         android:id="@+id/tv_sysauthor_2"
         style="@style/tv_common"
         android:layout_width="wrap_content"
+        android:layout_alignLeft="@id/tv_sysauthor_1"
         android:layout_below="@id/tv_sysauthor_1"
         android:layout_centerHorizontal="true"
-        android:layout_alignLeft="@id/tv_sysauthor_1"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
 
-
+    <TextView
+        android:id="@+id/tv_sysintro"
+        style="@style/tv_common"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_sysauthor_1"
+        android:layout_alignRight="@id/tv_sysauthor_1"
+        android:layout_below="@id/tv_sysauthor_2"
+        android:layout_centerHorizontal="true"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

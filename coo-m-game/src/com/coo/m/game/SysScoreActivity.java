@@ -13,7 +13,7 @@ public class SysScoreActivity extends CommonBizActivity {
 	public String getHeaderTitle() {
 		Intent intent = getIntent();
 		String label = intent.getStringExtra("GAME_LABEL");
-		return  label+"成绩单";
+		return  label+":成绩单";
 	}
 
 	@Override

@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,8 +25,6 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 		this.context=parent;
 	}
 
-
-
 	/**
 	 * 返回控件布局
 	 */
@@ -44,8 +41,8 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 				.findViewById(R.id.tv_sys_score_ts);
 		holder.tv_score = (TextView) convertView
 				.findViewById(R.id.tv_sys_score_score);
-		holder.btn_share = (Button) convertView
-				.findViewById(R.id.btn_sys_score_share);
+//		holder.btn_share = (Button) convertView
+//				.findViewById(R.id.btn_sys_score_share);
 		return holder;
 	}
 
@@ -58,9 +55,15 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 		String ts = GplusManager.getTsExpression(item.getGameTs());
 		holder.tv_ts.setText(ts);
 		holder.tv_score.setText(item.getScore() + "分");
-		holder.btn_share.setText("分享");
-		holder.btn_share.setOnClickListener(new lvButtonListener(item.getScore(),item.getGameLabel()));
+//		holder.btn_share.setText("分享");
+//		holder.btn_share.setOnClickListener(new lvButtonListener(item.getScore(),item.getGameLabel()));
 	}
+	
+	/**
+	 * TODO 分享分数...
+	 * @param content
+	 * @param uri
+	 */
 	private void share(String content, Uri uri) {
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		if (uri != null) {
@@ -92,10 +95,6 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 
 		@Override
 		public void onClick(View v) {
-//			int vid = v.getId();
-//			if (vid == holder.btn_share.getId()) {
-//
-//			}
 			String s="我在"+label+"游戏中"+"获得了"+score+"分";
 			share(s,null);
 		}
@@ -107,5 +106,5 @@ class GameScoreRowHolder extends CommonItemHolder {
 //	public TextView tv_label;
 	public TextView tv_ts;
 	public TextView tv_score;
-	public Button btn_share;
+//	public Button btn_share;
 }
