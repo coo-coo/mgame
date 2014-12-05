@@ -9,6 +9,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -17,12 +19,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.coo.m.game.ConfirmDialog;
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
 import com.coo.m.game.GplusManager;
+import com.coo.m.game.IGame;
 import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
 import com.coo.m.game.robot.ChatMessage.Type;
+import com.kingstar.ngbf.ms.util.Reference;
+import com.kingstar.ngbf.ms.util.android.GenericActivity;
 
 public class RobotActivity extends GplusActivity {
 	private ListView mMsg;
@@ -35,7 +41,7 @@ public class RobotActivity extends GplusActivity {
 	@SuppressLint("HandlerLeak")
 	private Handler mhandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			ChatMessage frommsg = (ChatMessage) msg.obj;
+			ChatMessage frommsg = (ChatMessage) msg.obj;	
 			mDatas.add(frommsg);
 			mAdapter.notifyDataSetChanged();
 		};
@@ -115,6 +121,25 @@ public class RobotActivity extends GplusActivity {
 		initView();
 		initDatas();
 		initListener();
+	}
+	@Override
+	@Reference(override = GplusActivity.class)
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.notgame, menu);
+		return true;
+	}
+
+	@Override
+	@Reference(override = GplusActivity.class)
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+
+		case R.id.item_notgame_over:
+			new ConfirmDialog(this, "确定离开游戏么?",
+					IGame.MISSION_GIVEUP);
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 }

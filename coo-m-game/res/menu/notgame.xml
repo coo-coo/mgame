@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <item
+        android:id="@+id/item_notgame_over"
+        android:icon="@drawable/ico_ban_circle"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom"
+        android:title="@string/item_game_over_text">
+    </item>
+
+
+</menu>
