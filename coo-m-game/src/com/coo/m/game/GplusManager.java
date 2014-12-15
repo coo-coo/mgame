@@ -54,11 +54,21 @@ public final class GplusManager {
 	
 	static {
 		// 增加支持的游戏
-		// GAMES.add(G_GUESS); // 暂时不上架....
+		// TODO 从配置文件获得...
+		
+		G_G2048.setHelp("亲,手指上下左右的滑动一下,相同的数字碰到一起就会翻倍哦~");
 		GAMES.add(G_G2048);
+		
+		G_COLOR.setHelp("亲,找出不一样的颜色方块吧~");
 		GAMES.add(G_COLOR);
+		
+		G_CIRCULAR.setHelp("亲,在橙色条消失之前点圆环4下吧,要4下哦~");
 		GAMES.add(G_CIRCULAR);
+		
+		G_ROBOT.setHelp("亲,和机器人无聊的对对话吧~");
 		GAMES.add(G_ROBOT);
+		
+		// GAMES.add(G_GUESS); // 暂时不上架....
 	}
 
 	/**

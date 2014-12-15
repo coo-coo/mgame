@@ -2,18 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/item_main_version"
+        android:id="@+id/item_more"
         android:orderInCategory="10"
-        android:icon="@drawable/ico_th_large"
-        android:showAsAction="withText"
-        android:title="@string/item_main_version_text">
-    </item>
-    <item
-        android:id="@+id/item_main_share"
-        android:icon="@drawable/ico_heart"
-        android:orderInCategory="10"
-        android:showAsAction="withText"
-        android:title="@string/item_main_share_text">
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/item_more_text">
+        <menu>
+            <item
+                android:id="@+id/item_main_version"
+                android:icon="@drawable/ico_th_large"
+                android:orderInCategory="10"
+                android:showAsAction="ifRoom|withText"
+                android:title="@string/item_main_version_text">
+            </item>
+            <item
+                android:id="@+id/item_main_share"
+                android:icon="@drawable/ico_heart"
+                android:orderInCategory="10"
+                android:showAsAction="ifRoom|withText"
+                android:title="@string/item_main_share_text">
+            </item>
+        </menu>
     </item>
 
 </menu>

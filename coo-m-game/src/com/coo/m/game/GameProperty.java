@@ -15,6 +15,7 @@ public final class GameProperty {
 		this.activityClass = activityClass;
 		this.label = label;
 		this.icon = icon;
+		this.help = this.label;
 	}
 
 	/**
@@ -29,7 +30,12 @@ public final class GameProperty {
 	 * 主类，用于SysMain上的适配器进行跳转
 	 */
 	private Class<?> activityClass;
-
+	
+	/**
+	 * 帮助信息
+	 */
+	private String help = "";
+	
 	public Class<?> getActivityClass() {
 		return activityClass;
 	}
@@ -75,5 +81,13 @@ public final class GameProperty {
 
 	public void setIcon(int icon) {
 		this.icon = icon;
+	}
+
+	public String getHelp() {
+		return help;
+	}
+
+	public void setHelp(String help) {
+		this.help = help;
 	}
 }

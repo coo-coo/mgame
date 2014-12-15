@@ -128,6 +128,24 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 	}
 
 	@Override
+	@Reference(override = IGame.class, note = "游戏帮助")
+	public void onGameHelp() {
+		String title = getGameProperty().getLabel() + " 不会玩?";
+		String msg = getGameProperty().getHelp();
+		helpDialog = new AlertDialog.Builder(this)
+				.setCancelable(false)
+				.setTitle(title)
+				.setIcon(R.drawable.gplus_32)
+				.setMessage(msg)
+				.setNegativeButton(
+						"知道了",
+						new SimpleDialogButtonListener(
+								this)).show();
+	}
+
+	public AlertDialog helpDialog = null;
+
+	@Override
 	@Reference(override = IGame.class, note = "任务过关:多关模式")
 	public void onMissionSuccess() {
 		// 不记录游戏成绩,总有onFail|onComplete
@@ -222,6 +240,9 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 		case R.id.item_game_score:
 			notify(IGame.GAME_SCORE);
 			break;
+		case R.id.item_game_help:
+			notify(IGame.GAME_HELP);
+			break;
 		case R.id.item_game_over:
 			new ConfirmDialog(this, "确定离开游戏么?",
 					IGame.MISSION_GIVEUP);
@@ -275,6 +296,31 @@ class GameHandler extends Handler {
 		case IGame.GAME_SCORE:
 			game.onGameScore();
 			break;
+		case IGame.GAME_HELP:
+			game.onGameHelp();
+			break;
+		}
+	}
+}
+
+/**
+ * 简单的Dialog按钮监听器..
+ * @author boqing.shen
+ *
+ */
+class SimpleDialogButtonListener implements DialogInterface.OnClickListener {
+
+	private AlertDialog dialog;
+
+	public SimpleDialogButtonListener(GplusActivity gplusActivity) {
+		this.dialog = gplusActivity.helpDialog;
+	}
+
+	@Override
+	public void onClick(DialogInterface dialog, int which) {
+		if (this.dialog != null) {
+			// 关闭,暂时用于帮助Dialog框...
+			this.dialog.cancel();
 		}
 	}
 }

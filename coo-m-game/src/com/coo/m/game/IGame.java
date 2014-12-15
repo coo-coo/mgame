@@ -13,6 +13,7 @@ public interface IGame {
 	int GAME_INIT = 0; // 游戏初始化
 	int GAME_OVER = 9; // 游戏结束
 	int GAME_SCORE = 100; // 游戏成绩
+	int GAME_HELP = 101; // 游戏成绩
 
 	/**
 	 * 游戏初始化
@@ -28,6 +29,11 @@ public interface IGame {
 	 * 游戏成绩
 	 */
 	public void onGameScore();
+	
+	/**
+	 * 游戏帮助
+	 */
+	public void onGameHelp();
 
 	/**
 	 * 任务过关:多关模式

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coo resource="update">
+    	<release version="1.2" code="3" release="TODO" store="TODO">
+		<items author="SBQ" update="2014-12-15">
+			<item desc="修复主界面菜单Bug" module="框架"/>
+			<item desc="增加游戏帮助功能" module="框架"/>
+			<item desc="增加维护说明文档,coo-m-game-update.xml" module="框架"/>
+		</items>
+	</release>
+	
+    	<release version="1.1" code="2" release="2014-12-05" store="百度|91|安卓|豌豆荚">
+		<items author="SBQ|WM" update="2014-10-01">
+			<item desc="增加对话机器人" module="对话机器人"/>
+			<item desc="Bug修复" module="点4下"/>
+			<item desc="增加帮助/分享微信功能" module="框架"/>
+		</items>
+	</release>
+	<release version="1.0" code="1" release="2014-11-13" store="百度">
+		<items author="SBQ|WM" update="2014-10-01">
+			<item desc="增加2048功能" module="2048"/>
+			<item desc="增加找颜色功能" module="找颜色"/>
+			<item desc="增加点4下功能" module="点4下"/>
+		</items>
+	</release>
+</coo>

@@ -15,8 +15,10 @@
     <string name="item_game_init_text">开始</string>
     <string name="item_game_over_text">结束</string>
     <string name="item_game_score_text">成绩</string>
+    <string name="item_game_help_text">帮助</string>
     <string name="item_main_version_text">关于消磨</string>
     <string name="item_main_author_text">作者</string>
+    <string name="item_more_text">更多&#8230;</string>
     <string name="item_main_illustrate_text">说明</string>
     <string name="item_main_share_text">分享微信</string>
     <string name="text_current_score">当前成绩为：</string>
