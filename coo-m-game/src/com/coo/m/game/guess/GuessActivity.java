@@ -78,7 +78,7 @@ public class GuessActivity extends GplusActivity {
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public int getResViewLayoutId() {
-		return R.layout.guess_activity;
+		return R.layout.g_guess_activity;
 	}
 
 	@Override

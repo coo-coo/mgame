@@ -23,7 +23,7 @@ public class ColorActivity extends GplusActivity {
 
 	@Override
 	public int getResViewLayoutId() {
-		return R.layout.color_activity;
+		return R.layout.g_color_activity;
 	}
 
 	@Override

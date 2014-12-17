@@ -39,7 +39,7 @@ public class G2048Activity extends GplusActivity {
 
 	@Override
 	public int getResViewLayoutId() {
-		return R.layout.g2048_activity;
+		return R.layout.g_2048_activity;
 	}
 
 	@Override
