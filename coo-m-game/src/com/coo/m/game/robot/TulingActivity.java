@@ -36,6 +36,7 @@ public class TulingActivity extends GplusActivity implements IShakeListener {
 				// tv_info.setText(charSequence);
 				// 暂时不支持Html.fromHtml();
 				tv_info.setText(result.toHtmlText(false));
+
 			} else {
 				tv_info.setText(TulingHelper.ERR_TEXT);
 			}
