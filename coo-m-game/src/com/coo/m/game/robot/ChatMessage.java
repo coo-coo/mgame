@@ -2,20 +2,26 @@ package com.coo.m.game.robot;
 
 import java.util.Date;
 
+/**
+ * 对话消息
+ * 
+ * @author boqing.shen
+ * 
+ */
 public class ChatMessage {
 
 	private String name;
 	private String msg;
 	private Type type;
 	private Date date;
-	
-	public enum Type{
-		INCOMING,OUTCONMING
+
+	public enum Type {
+		INCOMING, OUTCONMING
 	}
-	public ChatMessage(){
-		
+
+	public ChatMessage() {
+
 	}
-	
 
 	public ChatMessage(String msg, Type type, Date date) {
 		super();
@@ -24,6 +30,9 @@ public class ChatMessage {
 		this.date = date;
 	}
 
+	public ChatMessage(String msg, Type type) {
+		this(msg, type, new Date());
+	}
 
 	public String getName() {
 		return name;
@@ -56,6 +65,5 @@ public class ChatMessage {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	
+
 }

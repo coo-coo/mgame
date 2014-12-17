@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <coo resource="update">
     	<release version="1.2" code="3" release="TODO" store="TODO">
+    	    	<items author="SBQ" update="2014-12-17">
+			<item desc="修复机器人不联网跳出BUG" module="框架"/>
+			<item desc="修复机器人、晃晃看看菜单" module="框架"/>
+			<item desc="增加晃晃看看功能" module="晃晃看看"/>
+		</items>
 		<items author="SBQ" update="2014-12-15">
-			<item desc="修复主界面菜单Bug" module="框架"/>
+			<item desc="修复主界面菜单BUG" module="框架"/>
 			<item desc="增加游戏帮助功能" module="框架"/>
 			<item desc="增加维护说明文档,coo-m-game-update.xml" module="框架"/>
 		</items>
@@ -15,6 +20,7 @@
 			<item desc="增加帮助/分享微信功能" module="框架"/>
 		</items>
 	</release>
+	
 	<release version="1.0" code="1" release="2014-11-13" store="百度">
 		<items author="SBQ|WM" update="2014-10-01">
 			<item desc="增加2048功能" module="2048"/>

@@ -12,6 +12,7 @@
     <string name="app_submit">提交</string>
     <string name="app_blank"></string>
     <string name="app_blank2">  |  </string>
+    
     <string name="item_game_init_text">开始</string>
     <string name="item_game_over_text">结束</string>
     <string name="item_game_score_text">成绩</string>
@@ -21,8 +22,12 @@
     <string name="item_more_text">更多&#8230;</string>
     <string name="item_main_illustrate_text">说明</string>
     <string name="item_main_share_text">分享微信</string>
+    
     <string name="text_current_score">当前成绩为：</string>
     <string name="version_name">当前版本为：</string>
     <string name="can_not_find_version_name">不能找到版本号</string>
-
+	
+    <string name="g_robot_me">我</string>
+    <string name="g_robot_robot">suzl</string>
+    <string name="g_robot_send">发送</string>
 </resources>

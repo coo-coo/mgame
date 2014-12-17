@@ -1,13 +1,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-
     <item
-        android:id="@+id/item_notgame_over"
+        android:id="@+id/item_game_over"
         android:icon="@drawable/ico_ban_circle"
         android:orderInCategory="10"
         android:showAsAction="ifRoom"
         android:title="@string/item_game_over_text">
     </item>
-
-
+    <item
+        android:id="@+id/item_more"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/item_more_text">
+        <menu>
+            <item
+                android:id="@+id/item_game_help"
+                android:icon="@drawable/ico_question_sign"
+                android:orderInCategory="10"
+                android:showAsAction="ifRoom|withText"
+                android:title="@string/item_game_help_text">
+            </item>
+        </menu>
+    </item>
+    
 </menu>

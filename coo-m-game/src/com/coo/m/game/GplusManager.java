@@ -13,6 +13,7 @@ import com.coo.m.game.color.ColorActivity;
 import com.coo.m.game.g2048.G2048Activity;
 import com.coo.m.game.guess.GuessActivity;
 import com.coo.m.game.robot.RobotActivity;
+import com.coo.m.game.robot.TulingActivity;
 import com.kingstar.ngbf.ms.util.DateUtil;
 
 /**
@@ -35,7 +36,9 @@ public final class GplusManager {
 	public static GameProperty G_CIRCULAR = new GameProperty(
 			CircularActivity.class, "点4下", R.drawable.gcircle);
 	public static GameProperty G_ROBOT = new GameProperty(
-			RobotActivity.class, "对话机器人", R.drawable.robot);
+			RobotActivity.class, "对话机器人", R.drawable.grobot);
+	public static GameProperty G_TULING = new GameProperty(
+			TulingActivity.class, "晃晃看看", R.drawable.gtuling);
 
 	/**
 	 * BaiDu下载地址
@@ -47,27 +50,30 @@ public final class GplusManager {
 	public static String URL_APP_DOWNLOAD = "点击下载<a href=\"http://shouji.baidu.com/game/item?docid=7244427&from=as&f=search_app_%E6%B6%88%E7%A3%A8%40list_1_title%401%40header_all_input\">消磨</a>...";
 	public static String URL_APP_DOWNLOAD1 = "http://gdown.baidu.com/data/wisegame/07995b1aad7046f4/xiaomo_1.apk";
 
-	public static String SDPATH = Environment
-			.getExternalStorageDirectory().getPath();
+	public static String SDPATH = Environment.getExternalStorageDirectory()
+			.getPath();
 	public static String APP_ICON_SDPATH = SDPATH + "/Gplus_qr.png";
 	public static String APP_DESC = "[消磨]:一个小游戏集合，闲暇时光里消磨一下吧!(获取二维码图片,扫描之后即可下载)";
-	
+
 	static {
 		// 增加支持的游戏
 		// TODO 从配置文件获得...
-		
+
 		G_G2048.setHelp("亲,手指上下左右的滑动一下,相同的数字碰到一起就会翻倍哦~");
 		GAMES.add(G_G2048);
-		
+
 		G_COLOR.setHelp("亲,找出不一样的颜色方块吧~");
 		GAMES.add(G_COLOR);
-		
+
 		G_CIRCULAR.setHelp("亲,在橙色条消失之前点圆环4下吧,要4下哦~");
 		GAMES.add(G_CIRCULAR);
-		
-		G_ROBOT.setHelp("亲,和机器人无聊的对对话吧~");
+
+		G_ROBOT.setHelp("亲,向机器人无聊的发消息吧,看Ta怎么回答~");
 		GAMES.add(G_ROBOT);
-		
+
+		G_TULING.setHelp("亲,晃一晃,随便看看吧~");
+		GAMES.add(G_TULING);
+
 		// GAMES.add(G_GUESS); // 暂时不上架....
 	}
 
@@ -133,7 +139,7 @@ public final class GplusManager {
 	}
 
 	/**
-	 * 记录当前玩家的游戏记录
+	 * 记录当前玩家的游戏记录 TODO 成绩云存储(参看ms-baidu)
 	 */
 	public static void score(GameProperty gp, GameState state) {
 		GameScore gs = new GameScore(gp, state.getScore());

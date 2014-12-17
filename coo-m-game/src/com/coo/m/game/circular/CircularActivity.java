@@ -101,7 +101,7 @@ public class CircularActivity extends GplusActivity {
 	@Override
 	@Reference(override = CommonBizActivity.class)
 	public int getResViewLayoutId() {
-		return R.layout.circular_activity;
+		return R.layout.g_circular_activity;
 	}
 
 	@Override
