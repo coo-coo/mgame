@@ -13,6 +13,12 @@ import android.widget.TextView;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
+/**
+ * 主界面适配器
+ * @author boqing.shen
+ * @since 1.0
+ *
+ */
 public class SysMainAdapter extends CommonAdapter<GameProperty> {
 
 	/**

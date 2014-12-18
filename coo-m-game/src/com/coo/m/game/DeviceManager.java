@@ -16,7 +16,6 @@ import android.view.WindowManager;
 /**
  * get all manager from this class
  * 
- * @author liu
  * 
  */
 public class DeviceManager {

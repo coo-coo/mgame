@@ -4,7 +4,7 @@ package com.coo.m.game;
  * 当前游戏状态
  * 
  * @author boqing.shen
- * 
+ * @since 1.0
  */
 public final class GameState {
 	

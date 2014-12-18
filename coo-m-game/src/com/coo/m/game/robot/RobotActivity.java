@@ -18,17 +18,14 @@ import android.widget.ListView;
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
 import com.coo.m.game.GplusManager;
-import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
-import com.coo.m.game.SimpleGamePolicy;
 import com.coo.m.game.robot.ChatMessage.Type;
 import com.kingstar.ngbf.ms.util.Reference;
 
 /**
- * 机器人Activity
- * 
- * @author boqing.shen
- * 
+ * [GAME]对话机器人
+ * @author ming.wang
+ * @since 1.1
  */
 public class RobotActivity extends GplusActivity {
 	private ListView lvMsg;
@@ -44,7 +41,8 @@ public class RobotActivity extends GplusActivity {
 			TulingResult result = (TulingResult) msg.obj;
 			ChatMessage chatMessage = null;
 			if (result != null) {
-				chatMessage = new ChatMessage(result.toHtmlText(false),
+				chatMessage = new ChatMessage(
+						result.toHtmlText(false),
 						Type.INCOMING);
 			} else {
 				chatMessage = new ChatMessage(
@@ -77,7 +75,7 @@ public class RobotActivity extends GplusActivity {
 		ChatMessage toMsg = new ChatMessage(tomsg, Type.OUTCONMING);
 		mDatas.add(toMsg);
 		mAdapter.notifyDataSetChanged();
-		
+
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 
@@ -100,10 +98,10 @@ public class RobotActivity extends GplusActivity {
 				Type.INCOMING));
 		mAdapter = new ChatMessageAdapter(this, mDatas);
 		lvMsg.setAdapter(mAdapter);
-		
-//		TextView textView = new TextView(this); 
-//		textView.setText("对话消息..."); 
-//		lvMsg.addHeaderView(textView);
+
+		// TextView textView = new TextView(this);
+		// textView.setText("对话消息...");
+		// lvMsg.addHeaderView(textView);
 	}
 
 	@Override
@@ -112,18 +110,7 @@ public class RobotActivity extends GplusActivity {
 		return GplusManager.G_ROBOT;
 	}
 
-	@Override
-	@Reference(override = GplusActivity.class)
-	public IGamePolicy getGamePolicy() {
-		return new SimpleGamePolicy();
-	}
-
-	@Override
-	@Reference(override = GplusActivity.class)
-	public int getResViewLayoutId() {
-		return R.layout.g_robot_activity;
-	}
-
+	
 	@Override
 	@Reference(override = GplusActivity.class)
 	public boolean onCreateOptionsMenu(Menu menu) {

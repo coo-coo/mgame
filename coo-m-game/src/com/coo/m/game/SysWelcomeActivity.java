@@ -15,10 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * 欢迎界面
+ * [框架]欢迎界面
  * 
- * @since 0.1.0.0
  * @author ming.wang
+ * @since 1.0
+ * 
  */
 public class SysWelcomeActivity extends Activity implements AnimationListener {
 	/**

@@ -13,20 +13,21 @@ import android.widget.GridView;
 import com.kingstar.ngbf.ms.util.android.GenericActivity;
 
 /**
- * 主界面...
- *
+ * [框架]主界面
+ * @author boqing.shen
+ * @since 1.0
  */
 public class SysMainActivity extends GenericActivity {
-	
+
 	@SuppressWarnings("unused")
 	private SysMainAdapter adapter;
-	
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		loadContent();
 	}
-	
+
 	@Override
 	public void loadContent() {
 		setContentView(R.layout.sys_main_activity);
@@ -34,9 +35,9 @@ public class SysMainActivity extends GenericActivity {
 		GridView composite = (GridView) findViewById(R.id.gv_game);
 		adapter = new SysMainAdapter(this, list, composite);
 	}
-	
+
 	@Override
-	protected int getResMenuId() {
+	public int getResMenuId() {
 		return R.menu.main;
 	}
 
@@ -45,7 +46,7 @@ public class SysMainActivity extends GenericActivity {
 		switch (item.getItemId()) {
 		case R.id.item_main_version:
 			Intent intent1 = new Intent(SysMainActivity.this,
-					SysVersionActivity.class);
+					SysAboutActivity.class);
 			startActivity(intent1);
 			break;
 		case R.id.item_main_share:

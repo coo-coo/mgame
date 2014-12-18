@@ -17,8 +17,9 @@ import com.coo.m.game.robot.TulingActivity;
 import com.kingstar.ngbf.ms.util.DateUtil;
 
 /**
- * 游戏管理器
- * 
+ * [框架]游戏管理器
+ * @author boqing.shen
+ * @since 1.0
  */
 public final class GplusManager {
 
@@ -27,26 +28,40 @@ public final class GplusManager {
 	// public static Class<?> MAIN_CLASS = CircularActivity.class;
 	public static Class<?> MAIN_CLASS = SysMainActivity.class;
 
+	public static String QING_ABOUT_URL = "http://lightapp.baidu.com/?appid=1568236";
+
 	public static GameProperty G_GUESS = new GameProperty(
 			GuessActivity.class, "猜猜看", R.drawable.gguess);
-	public static GameProperty G_G2048 = new GameProperty(
-			G2048Activity.class, "2048", R.drawable.g2048);
-	public static GameProperty G_COLOR = new GameProperty(
-			ColorActivity.class, "找颜色", R.drawable.gcolor);
-	public static GameProperty G_CIRCULAR = new GameProperty(
-			CircularActivity.class, "点4下", R.drawable.gcircle);
-	public static GameProperty G_ROBOT = new GameProperty(
-			RobotActivity.class, "对话机器人", R.drawable.grobot);
-	public static GameProperty G_TULING = new GameProperty(
-			TulingActivity.class, "晃晃看看", R.drawable.gtuling);
+
+	public static GameProperty G_G2048 = GameProperty.blank()
+			.activityClass(G2048Activity.class).label("2048")
+			.icon(R.drawable.g2048)
+			.layout(R.layout.g_2048_activity)
+			.help("亲,手指上下左右的滑动一下,相同的数字碰到一起就会翻倍哦~");
+	public static GameProperty G_COLOR = GameProperty.blank()
+			.activityClass(ColorActivity.class).label("找颜色")
+			.icon(R.drawable.gcolor)
+			.layout(R.layout.g_color_activity)
+			.help("亲,找出不一样的颜色方块吧~");
+	public static GameProperty G_CIRCULAR = GameProperty.blank()
+			.activityClass(CircularActivity.class).label("点4下")
+			.icon(R.drawable.gcircle)
+			.layout(R.layout.g_circular_activity)
+			.help("亲,在橙色条消失之前点圆环4下吧,要4下哦~");
+	public static GameProperty G_ROBOT = GameProperty.blank()
+			.activityClass(RobotActivity.class).label("对话机器人")
+			.icon(R.drawable.grobot)
+			.layout(R.layout.g_robot_activity)
+			.help("亲,向机器人无聊的发消息吧,看Ta怎么回答~");
+	public static GameProperty G_TULING = GameProperty.blank()
+			.activityClass(TulingActivity.class).label("晃晃看看")
+			.icon(R.drawable.gtuling)
+			.layout(R.layout.g_tuling_activity)
+			.help("亲,晃一晃,随便看看吧~");
 
 	/**
 	 * BaiDu下载地址
 	 */
-	// public static String URL_APP_DOWNLOAD =
-	// "点击<a href=\"http://gdown.baidu.com/data/wisegame/07995b1aad7046f4/xiaomo_1.apk\">消磨</a>下载...";
-	// public static String URL_APP_DOWNLOAD =
-	// "点击下载<a href=\"http://shouji.baidu.com/game/item?docid=7244427&from=as&f=search_app_%E6%B6%88%E7%A3%A8%40list_1_title%401%40header_all_input\">消磨</a>...";
 	public static String URL_APP_DOWNLOAD = "点击下载<a href=\"http://shouji.baidu.com/game/item?docid=7244427&from=as&f=search_app_%E6%B6%88%E7%A3%A8%40list_1_title%401%40header_all_input\">消磨</a>...";
 	public static String URL_APP_DOWNLOAD1 = "http://gdown.baidu.com/data/wisegame/07995b1aad7046f4/xiaomo_1.apk";
 
@@ -59,19 +74,10 @@ public final class GplusManager {
 		// 增加支持的游戏
 		// TODO 从配置文件获得...
 
-		G_G2048.setHelp("亲,手指上下左右的滑动一下,相同的数字碰到一起就会翻倍哦~");
 		GAMES.add(G_G2048);
-
-		G_COLOR.setHelp("亲,找出不一样的颜色方块吧~");
 		GAMES.add(G_COLOR);
-
-		G_CIRCULAR.setHelp("亲,在橙色条消失之前点圆环4下吧,要4下哦~");
 		GAMES.add(G_CIRCULAR);
-
-		G_ROBOT.setHelp("亲,向机器人无聊的发消息吧,看Ta怎么回答~");
 		GAMES.add(G_ROBOT);
-
-		G_TULING.setHelp("亲,晃一晃,随便看看吧~");
 		GAMES.add(G_TULING);
 
 		// GAMES.add(G_GUESS); // 暂时不上架....

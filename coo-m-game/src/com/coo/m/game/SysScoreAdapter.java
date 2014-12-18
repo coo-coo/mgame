@@ -14,6 +14,12 @@ import android.widget.TextView;
 import com.kingstar.ngbf.ms.util.android.CommonAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
+/**
+ * 游戏成绩适配器
+ * @author boqing.shen
+ * @since 1.0
+ *
+ */
 public class SysScoreAdapter extends CommonAdapter<GameScore> {
 
 	GameScoreRowHolder holder = new GameScoreRowHolder();

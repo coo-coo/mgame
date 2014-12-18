@@ -13,9 +13,10 @@ import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.android.GenericActivity;
 
 /**
- * 基本GameActivity，交由子类继承实现
+ * [框架]基本GameActivity，交由子类继承实现
  * 
  * @author boqing.shen
+ * @since 1.0
  * 
  */
 public abstract class GplusActivity extends CommonBizActivity implements IGame,
@@ -28,8 +29,11 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 
 	/**
 	 * 返回Game的计分规则,用于Game的计分,输入参数设置等,交由子类继承实现
+	 * 返回简单策略,使用与所有,尤其是非游戏类..
 	 */
-	public abstract IGamePolicy getGamePolicy();
+	public IGamePolicy getGamePolicy(){
+		return new SimpleGamePolicy();
+	}
 
 	/**
 	 * 交由子类实现,主要是根据关卡重画UI等必要行为
@@ -220,6 +224,12 @@ public abstract class GplusActivity extends CommonBizActivity implements IGame,
 		return getGameProperty().getLabel();
 	}
 
+	@Override
+	@Reference(override = CommonBizActivity.class)
+	public int getResViewLayoutId() {
+		return getGameProperty().getLayout();
+	}
+
 	/**
 	 * 初始化菜单,分登陆账号的角色，初始化不同的菜单
 	 */
@@ -305,8 +315,9 @@ class GameHandler extends Handler {
 
 /**
  * 简单的Dialog按钮监听器..
+ * 
  * @author boqing.shen
- *
+ * 
  */
 class SimpleDialogButtonListener implements DialogInterface.OnClickListener {
 

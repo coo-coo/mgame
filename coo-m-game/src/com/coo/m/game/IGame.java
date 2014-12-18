@@ -1,5 +1,11 @@
 package com.coo.m.game;
 
+/**
+ * 游戏接口
+ * @author boqing.shen
+ * @since 1.0
+ *
+ */
 public interface IGame {
 
 	int MISSION_SUCCESS = 10; // 任务过关

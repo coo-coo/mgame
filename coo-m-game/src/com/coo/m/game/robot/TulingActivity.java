@@ -11,17 +11,14 @@ import android.widget.TextView;
 import com.coo.m.game.GameProperty;
 import com.coo.m.game.GplusActivity;
 import com.coo.m.game.GplusManager;
-import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
-import com.coo.m.game.SimpleGamePolicy;
 import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.component.IShakeListener;
 
 /**
- * 随便看看
- * 
+ * [GAME]晃晃看看
  * @author boqing.shen
- * 
+ * @since 1.2
  */
 public class TulingActivity extends GplusActivity implements IShakeListener {
 
@@ -60,16 +57,6 @@ public class TulingActivity extends GplusActivity implements IShakeListener {
 	@Override
 	public GameProperty getGameProperty() {
 		return GplusManager.G_TULING;
-	}
-
-	@Override
-	public IGamePolicy getGamePolicy() {
-		return new SimpleGamePolicy();
-	}
-
-	@Override
-	public int getResViewLayoutId() {
-		return R.layout.g_tuling_activity;
 	}
 
 	@Override

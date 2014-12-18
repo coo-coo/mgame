@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <coo resource="update">
+    	<release version="1.3" code="4" release="TODO" store="TODO">
+    	    	<items author="shenboqing@163.com" update="2014-12-18">
+			<item desc="关于功能采用Baidu请应用形式进行实现" module="框架"/>
+			<item desc="增加代码注释" module="框架"/>
+		</items>
+	</release>
+	
     	<release version="1.2" code="3" release="TODO" store="TODO">
-    	    	<items author="SBQ" update="2014-12-17">
+    	    	<items author="shenboqing@163.com" update="2014-12-17">
+    	    	    	<item desc="各Store申请上线" module="框架"/>
 			<item desc="修复机器人不联网跳出BUG" module="框架"/>
 			<item desc="修复机器人、晃晃看看菜单" module="框架"/>
 			<item desc="增加晃晃看看功能" module="晃晃看看"/>
 		</items>
-		<items author="SBQ" update="2014-12-15">
+		<items author="shenboqing@163.com" update="2014-12-15">
 			<item desc="修复主界面菜单BUG" module="框架"/>
 			<item desc="增加游戏帮助功能" module="框架"/>
 			<item desc="增加维护说明文档,coo-m-game-update.xml" module="框架"/>
@@ -14,15 +22,15 @@
 	</release>
 	
     	<release version="1.1" code="2" release="2014-12-05" store="百度|91|安卓|豌豆荚">
-		<items author="SBQ|WM" update="2014-10-01">
+		<items author="shenboqing@163.com|lightby2@163.com" update="2014-10-01">
 			<item desc="增加对话机器人" module="对话机器人"/>
-			<item desc="Bug修复" module="点4下"/>
+			<item desc="BUG修复" module="点4下"/>
 			<item desc="增加帮助/分享微信功能" module="框架"/>
 		</items>
 	</release>
 	
 	<release version="1.0" code="1" release="2014-11-13" store="百度">
-		<items author="SBQ|WM" update="2014-10-01">
+		<items author="shenboqing@163.com|lightby2@163.com" update="2014-10-01">
 			<item desc="增加2048功能" module="2048"/>
 			<item desc="增加找颜色功能" module="找颜色"/>
 			<item desc="增加点4下功能" module="点4下"/>

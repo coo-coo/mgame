@@ -11,6 +11,12 @@ import android.util.Log;
 import com.kingstar.ngbf.ms.util.FileUtil;
 import com.kingstar.ngbf.ms.util.android.CommonConfig;
 
+/**
+ * [框架]应用，APP入口
+ * @author boqing.shen
+ * @since 1.0
+ *
+ */
 public class GplusApplication extends LitePalApplication {
 
 	private static final String TAG = GplusApplication.class

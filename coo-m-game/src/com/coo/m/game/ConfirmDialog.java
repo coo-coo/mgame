@@ -4,10 +4,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 
 /**
- * 征询事件Dialog，获得确认，发送指定消息
+ * [框架]征询事件Dialog，获得确认，发送指定消息
  * 
  * @author boqing.shen
- * 
+ * @since 1.0
  */
 public class ConfirmDialog implements DialogInterface.OnClickListener {
 

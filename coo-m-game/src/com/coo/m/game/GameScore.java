@@ -2,6 +2,12 @@ package com.coo.m.game;
 
 import org.litepal.crud.DataSupport;
 
+/**
+ * 游戏成绩
+ * @author boqing.shen
+ * @since 1.0
+ *
+ */
 public class GameScore extends DataSupport {
 
 	private long id = 0l;

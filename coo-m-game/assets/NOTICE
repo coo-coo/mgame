@@ -1,0 +1,38 @@
+COO, a Java/Android Framework, is developed and maintained by boqing.shen
+It is NOT open-sourced. All rights are reserved by shenboqing@163.com.
+
+However, several open source projects are dynamically linked in this project. 
+See more detailed copyright&license info of these open source projects below:
+
+>> Spring Framework http://projects.spring.io/
+License: Apache License, Version 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Source code: https://github.com/spring-projects/spring-framework
+
+>> Hibernate http://www.hibernate.org/
+License: http://www.hibernate.org/license
+Source code: https://github.com/hibernate
+
+>> c3p0 http://sourceforge.net/projects/c3p0/
+License: Eclipse Public License: http://www.eclipse.org/legal/epl-v10.html
+		 LGPLv2: http://www.gnu.org/licenses/lgpl-2.0.html
+Source code: http://sourceforge.net/projects/c3p0/
+
+>> Mojarra https://javaserverfaces.java.net/
+License: CDDL+GPL https://glassfish.java.net/public/CDDL+GPL.html
+Source code: https://javaserverfaces.java.net/checkout.html
+
+>> Dom4j http://www.dom4j.org/
+License: http://dom4j.sourceforge.net/dom4j-1.6.1/license.html
+Source code: http://dom4j.sourceforge.net/dom4j-1.6.1/xref/index.html
+
+>> Log4j http://logging.apache.org/log4j/2.x/
+License: http://logging.apache.org/log4j/2.x/license.html
+Source code: http://logging.apache.org/log4j/2.x/source-repository.html
+
+>> Quartz http://www.quartz-scheduler.org/
+License: Apache License, Version 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Source code: http://quartz-scheduler.org/community/source-code
+
+>> Xmemcached https://code.google.com/p/xmemcached/
+License: Apache License, Version 2.0 http://www.apache.org/licenses/LICENSE-2.0
+Source code: https://code.google.com/p/xmemcached/wiki/Source?tm=4

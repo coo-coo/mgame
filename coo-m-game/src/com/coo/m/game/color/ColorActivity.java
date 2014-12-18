@@ -11,6 +11,11 @@ import com.coo.m.game.IGamePolicy;
 import com.coo.m.game.R;
 import com.kingstar.ngbf.ms.util.Reference;
 
+/**
+ * [GAME]找颜色
+ * @author ming.wang
+ * @since 1.0
+ */
 public class ColorActivity extends GplusActivity {
 
 	private RelativeLayout container;
@@ -20,12 +25,7 @@ public class ColorActivity extends GplusActivity {
 	public GameProperty getGameProperty() {
 		return GplusManager.G_COLOR;
 	}
-
-	@Override
-	public int getResViewLayoutId() {
-		return R.layout.g_color_activity;
-	}
-
+	
 	@Override
 	@Reference(override = GplusActivity.class)
 	public IGamePolicy getGamePolicy() {
@@ -35,7 +35,6 @@ public class ColorActivity extends GplusActivity {
 	@Override
 	public void loadContent() {
 		container = (RelativeLayout) findViewById(R.id.rl_color_container);
-
 		// 加载即启动游戏
 		notify(IGame.GAME_INIT);
 	}

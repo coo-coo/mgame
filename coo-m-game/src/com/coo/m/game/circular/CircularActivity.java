@@ -16,7 +16,9 @@ import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
 /**
- * 点几下...
+ * [GAME]点4下
+ * @author ming.wang
+ * @since 1.0
  */
 public class CircularActivity extends GplusActivity {
 
@@ -99,12 +101,6 @@ public class CircularActivity extends GplusActivity {
 	}
 
 	@Override
-	@Reference(override = CommonBizActivity.class)
-	public int getResViewLayoutId() {
-		return R.layout.g_circular_activity;
-	}
-
-	@Override
 	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
 		return GplusManager.G_CIRCULAR;
@@ -128,14 +124,6 @@ public class CircularActivity extends GplusActivity {
 		progressAnimator.removeListener(listener);
 		super.onPause();
 	}
-	
-//	@Override
-//	protected void onResume() {
-//		if (listener != null) {
-//			progressAnimator.addListener(listener);
-//		}
-//		super.onPause();
-//	}
 }
 
 /**

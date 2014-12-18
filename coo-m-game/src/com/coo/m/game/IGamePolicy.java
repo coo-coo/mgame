@@ -1,5 +1,11 @@
 package com.coo.m.game;
 
+/**
+ * 游戏策略接口
+ * @author boqing.shen
+ * @since 1.0
+ *
+ */
 public interface IGamePolicy {
 
 	/**

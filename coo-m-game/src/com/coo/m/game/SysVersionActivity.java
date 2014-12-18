@@ -6,6 +6,12 @@ import android.widget.TextView;
 
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
+/**
+ * [框架]应用版本
+ * @author ming.wang
+ * @since 1.0
+ * @deprecated @since 1.3 boqing.shen 参见SysAboutActivity
+ */
 public class SysVersionActivity extends CommonBizActivity {
 
 	private TextView versionTV = null;

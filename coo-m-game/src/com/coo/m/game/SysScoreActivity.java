@@ -7,6 +7,12 @@ import android.widget.ListView;
 
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
+/**
+ * [框架]游戏成绩界面
+ * @author boqing.shen
+ * @since 1.0
+ *
+ */
 public class SysScoreActivity extends CommonBizActivity {
 
 	@Override
