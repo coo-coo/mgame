@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/listview_adapter_common" >
+
+    <ImageView
+        android:id="@+id/iv_tuling_news_icon"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_blank"
+        android:gravity="left|center_vertical" />
+
+    <TextView
+        android:id="@+id/tv_tuling_news_title"
+        style="@style/tv_command_row"
+        android:layout_width="0dip"
+        android:layout_weight="5"
+        android:layout_marginLeft="5dp"
+        android:gravity="left|center_vertical" />
+
+    <TextView
+        android:id="@+id/tv_tuling_news_source"
+        style="@style/tv_common_small"
+        android:layout_width="0dip"
+        android:layout_weight="3"
+        android:gravity="right|center_vertical" />
+
+</LinearLayout>

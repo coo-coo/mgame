@@ -47,7 +47,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">45dp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -59,9 +59,19 @@
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
-    
-    <style name="tv_common_title" parent="@android:style/TextAppearance">
+
+    <!-- 用于单行的DialogCommand -->
+    <style name="tv_command_row" parent="@android:style/TextAppearance">
         <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_common_title" parent="@android:style/TextAppearance">
+        <item name="android:layout_height">40dp</item>
         <item name="android:textColor">@color/blue</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>

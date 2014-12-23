@@ -10,12 +10,15 @@ import android.util.Log;
 
 import com.kingstar.ngbf.ms.util.FileUtil;
 import com.kingstar.ngbf.ms.util.android.CommonConfig;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * [框架]应用，APP入口
+ * 
  * @author boqing.shen
  * @since 1.0
- *
+ * 
  */
 public class GplusApplication extends LitePalApplication {
 
@@ -29,6 +32,11 @@ public class GplusApplication extends LitePalApplication {
 
 		// 初始化Model
 		initCommonModel();
+
+		// 初始化ImageLoader
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+				this).build();
+		ImageLoader.getInstance().init(config);
 
 		saveAppQrIconToSD();
 		// GplusManager.score(GplusManager.G_CIRCULAR,220);

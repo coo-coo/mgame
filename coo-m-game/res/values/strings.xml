@@ -30,4 +30,9 @@
     <string name="g_robot_me">我</string>
     <string name="g_robot_robot">suzl</string>
     <string name="g_robot_send">发送</string>
+    
+    <string name="g_tuling_xiaohua">笑话</string>
+    <string name="g_tuling_miyu">谜语</string>
+    <string name="g_tuling_naojin">脑筋急转弯</string>
+    <string name="g_tuling_gushi">故事</string>
 </resources>

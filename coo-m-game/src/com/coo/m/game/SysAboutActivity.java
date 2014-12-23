@@ -2,8 +2,8 @@ package com.coo.m.game;
 
 import android.annotation.SuppressLint;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
+import com.coo.m.game.util.InnerWebViewClient;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 
 /**
@@ -33,15 +33,8 @@ public class SysAboutActivity extends CommonBizActivity {
 		// 触摸焦点起作用
 		webview.requestFocus();
 		webview.loadUrl(GplusManager.QING_ABOUT_URL);
-
 		// 页面中链接，如果希望点击链接继续在当前browser中响应
-		webview.setWebViewClient(new WebViewClient() {
-			public boolean shouldOverrideUrlLoading(WebView view,
-					String url) {
-				view.loadUrl(url);
-				return true;
-			}
-		});
+		webview.setWebViewClient(new InnerWebViewClient());
 		// 取消滚动条
 		// webview.setScrollBarStyle(SCROLLBARS_OUTSIDE_OVERLAY);
 	}

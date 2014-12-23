@@ -36,28 +36,45 @@ public class TulingHelper {
 	public static final String ERR_TEXT = "很抱歉," + ROBOT + "很忙,暂未获得Ta的应答";
 	public static final String WELCOME_TEXT = "亲爱的您好,我是智能机器人" + ROBOT
 			+ ",很高兴为您服务，您可以输入例如‘说个笑话’的句子来与我交流，愿您满意！";
-	
+
 	/**
 	 * TODO 网络获取
 	 */
 	public static String[] TOPICS = new String[] { "讲个笑话", "冷笑话", "白羊座",
 			"射手座", "双子座", "天蝎座", "双鱼座", "金牛座", "处女座", "巨蟹座", "A型血",
 			"B型血", "O型血", "AB型血", "双11", "双12", "消磨", "南京大屠杀",
-			"说个脑筋急转弯", "说个谜语", "新闻", "体育新闻", "科技新闻", "八卦新闻",
-			"马云的介绍", "李连杰的介绍", "马化腾的介绍", "李彦宏的介绍", "周鸿伟的介绍",
-			"雷军的介绍" };
+			"说个脑筋急转弯", "说个谜语", "马云的介绍", "李连杰的介绍", "马化腾的介绍",
+			"李彦宏的介绍", "周鸿伟的介绍", "雷军的介绍" };
 
-	public static String[] TOPICS_1 = new String[] { "新闻", "体育新闻", "科技新闻",
-			"八卦新闻" };
+	public static String[] TOPICS_NEWS = new String[] { "新闻", "体育新闻",
+			"科技新闻", "八卦新闻" };
 
 	/**
 	 * 随便选一个话题发送吧 TODO 热门话题...
 	 * 
 	 * @param handler
 	 */
-	public static void randomPick(Handler handler) {
+	public static void pickTopic(Handler handler) {
 		int index = new Random().nextInt(TOPICS.length);
 		sendMessage(TOPICS[index], handler);
+	}
+	
+	public static void pickTopic(Handler handler,String topic) {
+		sendMessage(topic, handler);
+	}
+
+	private static int R_NEWS_COUNT = 0;
+
+	/**
+	 * 获得新闻话题
+	 * 
+	 * @since 1.3
+	 * @param handler
+	 */
+	public static void pickNews(Handler handler) {
+		int index = R_NEWS_COUNT % TOPICS_NEWS.length;
+		sendMessage(TOPICS_NEWS[index], handler);
+		R_NEWS_COUNT++;
 	}
 
 	/**

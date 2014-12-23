@@ -1,6 +1,11 @@
 package com.coo.m.game.robot;
 
-public class TulingItem {
+public class TulingItem implements java.io.Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -802828532049472915L;
 
 	public TulingItem() {
 		// TODO Auto-generated constructor stub

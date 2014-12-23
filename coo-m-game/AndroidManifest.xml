@@ -44,9 +44,13 @@
         </activity>
         <activity android:name="com.coo.m.game.circular.CircularActivity" >
         </activity>
-        <activity android:name="com.coo.m.game.robot.RobotActivity" >
+        <activity android:name="com.coo.m.game.robot.TulingRobotActivity" >
         </activity>
         <activity android:name="com.coo.m.game.robot.TulingActivity" >
+        </activity>
+        <activity android:name="com.coo.m.game.robot.TulingNewsActivity" >
+        </activity>
+        <activity android:name="com.coo.m.game.robot.TulingNewsInfoActivity" >
         </activity>
     </application>
 

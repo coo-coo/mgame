@@ -24,10 +24,11 @@ import com.kingstar.ngbf.ms.util.Reference;
 
 /**
  * [GAME]对话机器人
+ * 
  * @author ming.wang
  * @since 1.1
  */
-public class RobotActivity extends GplusActivity {
+public class TulingRobotActivity extends GplusActivity {
 	private ListView lvMsg;
 	private ChatMessageAdapter mAdapter;
 	private List<ChatMessage> mDatas;
@@ -107,10 +108,9 @@ public class RobotActivity extends GplusActivity {
 	@Override
 	@Reference(override = GplusActivity.class)
 	public GameProperty getGameProperty() {
-		return GplusManager.G_ROBOT;
+		return GplusManager.G_TULING_ROBOT;
 	}
 
-	
 	@Override
 	@Reference(override = GplusActivity.class)
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -6,18 +6,22 @@ import java.util.List;
 
 import org.litepal.crud.DataSupport;
 
+import android.graphics.Bitmap;
 import android.os.Environment;
 
 import com.coo.m.game.circular.CircularActivity;
 import com.coo.m.game.color.ColorActivity;
 import com.coo.m.game.g2048.G2048Activity;
 import com.coo.m.game.guess.GuessActivity;
-import com.coo.m.game.robot.RobotActivity;
 import com.coo.m.game.robot.TulingActivity;
+import com.coo.m.game.robot.TulingNewsActivity;
+import com.coo.m.game.robot.TulingRobotActivity;
 import com.kingstar.ngbf.ms.util.DateUtil;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
  * [框架]游戏管理器
+ * 
  * @author boqing.shen
  * @since 1.0
  */
@@ -25,8 +29,8 @@ public final class GplusManager {
 
 	private static List<GameProperty> GAMES = new ArrayList<GameProperty>();
 
-	// public static Class<?> MAIN_CLASS = CircularActivity.class;
-	public static Class<?> MAIN_CLASS = SysMainActivity.class;
+	public static Class<?> MAIN_CLASS = TulingActivity.class;
+	// public static Class<?> MAIN_CLASS = SysMainActivity.class;
 
 	public static String QING_ABOUT_URL = "http://lightapp.baidu.com/?appid=1568236";
 
@@ -48,16 +52,21 @@ public final class GplusManager {
 			.icon(R.drawable.gcircle)
 			.layout(R.layout.g_circular_activity)
 			.help("亲,在橙色条消失之前点圆环4下吧,要4下哦~");
-	public static GameProperty G_ROBOT = GameProperty.blank()
-			.activityClass(RobotActivity.class).label("对话机器人")
-			.icon(R.drawable.grobot)
-			.layout(R.layout.g_robot_activity)
+	public static GameProperty G_TULING_ROBOT = GameProperty.blank()
+			.activityClass(TulingRobotActivity.class)
+			.label("对话机器人").icon(R.drawable.grobot)
+			.layout(R.layout.g_tuling_robot_activity)
 			.help("亲,向机器人无聊的发消息吧,看Ta怎么回答~");
 	public static GameProperty G_TULING = GameProperty.blank()
 			.activityClass(TulingActivity.class).label("晃晃看看")
 			.icon(R.drawable.gtuling)
 			.layout(R.layout.g_tuling_activity)
 			.help("亲,晃一晃,随便看看吧~");
+	public static GameProperty G_TULING_NEWS = GameProperty.blank()
+			.activityClass(TulingNewsActivity.class).label("晃晃新闻")
+			.icon(R.drawable.gtuling)
+			.layout(R.layout.g_tuling_news_activity)
+			.help("亲,晃一晃,看看新闻吧~");
 
 	/**
 	 * BaiDu下载地址
@@ -70,6 +79,14 @@ public final class GplusManager {
 	public static String APP_ICON_SDPATH = SDPATH + "/Gplus_qr.png";
 	public static String APP_DESC = "[消磨]:一个小游戏集合，闲暇时光里消磨一下吧!(获取二维码图片,扫描之后即可下载)";
 
+	public static DisplayImageOptions IMG_OPTIONS = new DisplayImageOptions.Builder()
+			.showImageOnLoading(R.drawable.ic_stub)
+			.showImageForEmptyUri(R.drawable.ic_empty)
+			.showImageOnFail(R.drawable.ic_stub)
+			.cacheInMemory(true).cacheOnDisk(true)
+			.considerExifParams(true)
+			.bitmapConfig(Bitmap.Config.RGB_565).build();
+
 	static {
 		// 增加支持的游戏
 		// TODO 从配置文件获得...
@@ -77,8 +94,9 @@ public final class GplusManager {
 		GAMES.add(G_G2048);
 		GAMES.add(G_COLOR);
 		GAMES.add(G_CIRCULAR);
-		GAMES.add(G_ROBOT);
+		GAMES.add(G_TULING_ROBOT);
 		GAMES.add(G_TULING);
+		GAMES.add(G_TULING_NEWS);
 
 		// GAMES.add(G_GUESS); // 暂时不上架....
 	}
