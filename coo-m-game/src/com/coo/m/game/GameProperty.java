@@ -75,15 +75,71 @@ public final class GameProperty {
 	private int layout = 0;
 
 	/**
+	 * 版本开始于
+	 * 
+	 * @since 1.3
+	 */
+	private String start = "1.0";
+
+	/**
+	 * 版本结束于
+	 * 
+	 * @since 1.3
+	 */
+	private String end = "";
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
+	}
+
+	/**
 	 * 返回所在包名,作为应用的Key
 	 * 
 	 * @return
 	 */
 	public String getKey() {
-		// 返回所在包名,作为应用的Key
-		return activityClass.getPackage().getName();
+		if(key==null){
+			// 如果未指定,则用包名作为Key
+			return activityClass.getPackage().getName();
+		}
+		return key;
 	}
-
+	
+	private String key = null;
+	
+	/**
+	 * 链式API
+	 * 
+	 * @since 1.3
+	 */
+	public GameProperty key(String key) {
+		this.key = key;
+		return this;
+	}
+	
+	/**
+	 * 链式API
+	 * 
+	 * @since 1.3
+	 */
+	public GameProperty key() {
+		// 缺省用类名作为Key
+		this.key = activityClass.getName();
+		return this;
+	}
+	
 	public String getLabel() {
 		return label;
 	}
@@ -201,6 +257,26 @@ public final class GameProperty {
 	 */
 	public GameProperty layout(int layout) {
 		this.layout = layout;
+		return this;
+	}
+
+	/**
+	 * 链式API
+	 * 
+	 * @since 1.3
+	 */
+	public GameProperty start(String start) {
+		this.start = start;
+		return this;
+	}
+
+	/**
+	 * 链式API
+	 * 
+	 * @since 1.3
+	 */
+	public GameProperty end(String end) {
+		this.end = end;
 		return this;
 	}
 }
