@@ -32,7 +32,7 @@ public class SysAboutActivity extends CommonBizActivity {
 		webview.getSettings().setJavaScriptEnabled(true);
 		// 触摸焦点起作用
 		webview.requestFocus();
-		webview.loadUrl(GplusManager.QING_ABOUT_URL);
+		webview.loadUrl(GplusManager.APP_URL);
 		// 页面中链接，如果希望点击链接继续在当前browser中响应
 		webview.setWebViewClient(new InnerWebViewClient());
 		// 取消滚动条

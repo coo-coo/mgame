@@ -1,55 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/activity_common" >
+	
+    <ListView
+        android:id="@+id/lv_sys_version"
+        style="@style/listview_common" />
 
-    <TextView
-        android:id="@+id/tv_sysversion_content"
-        style="@style/tv_common"
-        android:layout_width="200dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+    <!-- Button
+        android:id="@+id/btn_sys_version_update"
+        style="@style/btn_common"
+        android:layout_width="match_parent"
+        android:text="@string/app_update" / -->
 
-    <TextView
-        android:id="@+id/tv_sysauthor_1"
-        style="@style/tv_common"
-        android:layout_width="wrap_content"
-        android:layout_below="@id/tv_sysversion_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_sysauthor_2"
-        style="@style/tv_common"
-        android:layout_width="wrap_content"
-        android:layout_alignLeft="@id/tv_sysauthor_1"
-        android:layout_below="@id/tv_sysauthor_1"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tv_sysintro"
-        style="@style/tv_common"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/tv_sysauthor_1"
-        android:layout_alignRight="@id/tv_sysauthor_1"
-        android:layout_below="@id/tv_sysauthor_2"
-        android:layout_centerHorizontal="true"
-        android:lineSpacingMultiplier="1.2"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-</RelativeLayout>
+</LinearLayout>

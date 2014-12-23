@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <coo resource="update">
     	<release version="1.3" code="4" release="TODO" store="TODO">
+    	    	<items author="shenboqing@163.com" update="2014-12-25">
+    	    	    	<item desc="改进分享微信功能" module="分享微信"/>
+    	    	    	<item desc="改进版本信息功能" module="版本信息"/>
+    	    	    	<item desc="增加分数炫耀分享微信功能" module="成绩单"/>
+			<item desc="引入微信SDK" module="框架"/>
+		</items>
     	    	<items author="shenboqing@163.com" update="2014-12-23">
+    	    	    	<item desc="增加点方块功能,继承找颜色" module="点方块"/>
 			<item desc="增加晃晃新闻功能,和晃晃看看区别" module="晃晃新闻"/>
 			<item desc="改进晃晃看看,确定内容" module="晃晃看看"/>
 		</items>

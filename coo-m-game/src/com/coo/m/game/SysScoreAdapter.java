@@ -41,14 +41,10 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 	@Override
 	public CommonItemHolder initHolder(View convertView) {
 		holder = new GameScoreRowHolder();
-//		holder.tv_label = (TextView) convertView
-//				.findViewById(R.id.tv_sys_score_label);
 		holder.tv_ts = (TextView) convertView
 				.findViewById(R.id.tv_sys_score_ts);
 		holder.tv_score = (TextView) convertView
 				.findViewById(R.id.tv_sys_score_score);
-//		holder.btn_share = (Button) convertView
-//				.findViewById(R.id.btn_sys_score_share);
 		return holder;
 	}
 
@@ -57,12 +53,9 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 	@Override
 	public void initHolderValue(CommonItemHolder ciHolder, GameScore item) {
 		holder = (GameScoreRowHolder) ciHolder;
-//		holder.tv_label.setText(item.getGameLabel());
 		String ts = GplusManager.getTsExpression(item.getGameTs());
 		holder.tv_ts.setText(ts);
 		holder.tv_score.setText(item.getScore() + "分");
-//		holder.btn_share.setText("分享");
-//		holder.btn_share.setOnClickListener(new lvButtonListener(item.getScore(),item.getGameLabel()));
 	}
 	
 	/**
@@ -112,5 +105,4 @@ class GameScoreRowHolder extends CommonItemHolder {
 //	public TextView tv_label;
 	public TextView tv_ts;
 	public TextView tv_score;
-//	public Button btn_share;
 }

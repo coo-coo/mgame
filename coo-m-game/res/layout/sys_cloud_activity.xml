@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView style="@style/view_space" />
+
+    <Button
+        android:id="@+id/btn_wx_share_text"
+        style="@style/btn_common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wx-Share-Text" />
+
+    <TextView style="@style/view_space" />
+
+    <Button
+        android:id="@+id/btn_wx_share_link"
+        style="@style/btn_common"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wx-Share-Link" />
+
+</LinearLayout>

@@ -10,6 +10,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
         android:name="com.coo.m.game.GplusApplication"
@@ -28,19 +29,21 @@
         </activity>
         <activity android:name="com.coo.m.game.SysMainActivity" >
         </activity>
+        <activity android:name="com.coo.m.game.WxTestActivity" >
+        </activity>
         <activity android:name="com.coo.m.game.SysScoreActivity" >
         </activity>
         <activity android:name="com.coo.m.game.SysVersionActivity" >
         </activity>
         <activity android:name="com.coo.m.game.SysAboutActivity" >
         </activity>
-        <activity android:name="com.coo.m.game.SysAuthorActivity" >
-        </activity>
         <activity android:name="com.coo.m.game.guess.GuessActivity" >
         </activity>
         <activity android:name="com.coo.m.game.g2048.G2048Activity" >
         </activity>
         <activity android:name="com.coo.m.game.color.ColorActivity" >
+        </activity>
+        <activity android:name="com.coo.m.game.color.BlockActivity" >
         </activity>
         <activity android:name="com.coo.m.game.circular.CircularActivity" >
         </activity>
@@ -52,6 +55,14 @@
         </activity>
         <activity android:name="com.coo.m.game.robot.TulingNewsInfoActivity" >
         </activity>
+
+        <!-- receiver
+            android:name="com.coo.m.game.AppRegister"
+            android:permission="com.tencent.mm.plugin.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver -->
     </application>
 
 </manifest>

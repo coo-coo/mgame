@@ -10,10 +10,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.GridView;
 
+import com.coo.ms.cloud.model.NetLink;
+import com.coo.ms.cloud.weixin.WeixinApi;
 import com.kingstar.ngbf.ms.util.android.GenericActivity;
 
 /**
  * [框架]主界面
+ * 
  * @author boqing.shen
  * @since 1.0
  */
@@ -44,22 +47,41 @@ public class SysMainActivity extends GenericActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.item_main_version:
+		case R.id.item_main_about:
 			Intent intent1 = new Intent(SysMainActivity.this,
 					SysAboutActivity.class);
 			startActivity(intent1);
 			break;
 		case R.id.item_main_share:
-			shareApp();
+			shareToWeixin();
+			break;
+		case R.id.item_main_version:
+			Intent intent2 = new Intent(SysMainActivity.this,
+					SysVersionActivity.class);
+			startActivity(intent2);
 			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
 	/**
-	 * APP分享连接
+	 * 发送Link地址到微信
+	 * 
+	 * @since 1.3
 	 */
-	private void shareApp() {
+	private void shareToWeixin() {
+		NetLink nl = GplusManager
+				.createNetLink("百度,安智,安卓,91等市场都有的下哦~(暂时只支持安卓手机..)");
+		WeixinApi.share(this, nl);
+	}
+
+	/**
+	 * APP分享连接
+	 * 
+	 * @deprecated @since 1.3
+	 */
+	@SuppressWarnings("unused")
+	private void shareApp_1() {
 		try {
 			Intent intent = new Intent();
 			// 直接调用微信组件...

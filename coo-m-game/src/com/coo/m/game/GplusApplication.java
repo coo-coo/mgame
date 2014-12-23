@@ -8,8 +8,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.coo.ms.cloud.weixin.WeixinApi;
 import com.kingstar.ngbf.ms.util.FileUtil;
 import com.kingstar.ngbf.ms.util.android.CommonConfig;
+import com.kingstar.ngbf.ms.util.android.res.ResourceFactory;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -38,13 +40,20 @@ public class GplusApplication extends LitePalApplication {
 				this).build();
 		ImageLoader.getInstance().init(config);
 
-		saveAppQrIconToSD();
-		// GplusManager.score(GplusManager.G_CIRCULAR,220);
+		// 初始化资源Factory
+		ResourceFactory.init(this);
+
+		// 初始化微信SDK
+		WeixinApi.register(getApplicationContext());
+
+		// 初始化百度SDK
+		// BaiduFactory.initSDK(getApplicationContext());
 	}
 
 	/**
 	 * 保存App二维码到SD,分享用
 	 */
+	@SuppressWarnings({ "unused", "deprecation" })
 	private void saveAppQrIconToSD() {
 		try {
 			File file = new File(GplusManager.APP_ICON_SDPATH);
@@ -64,11 +73,11 @@ public class GplusApplication extends LitePalApplication {
 		CommonConfig.clearParams();
 		CommonConfig.initParam(CommonConfig.KEY_CLASS_HOME_ACTIVITY,
 				SysMainActivity.class);
-		// CommonItemConfig.initParam(
-		// CommonItemConfig.KEY_INT_DIALOG_VIEW_ID,
-		// R.layout.common_dialog);
-		// CommonItemConfig.initParam(
-		// CommonItemConfig.KEY_INT_DIALOG_LAYOUT_ID,
-		// R.id.layout_dialog_common);
+		CommonConfig.initParam(
+				CommonConfig.KEY_INT_DIALOG_VIEW_ID,
+				R.layout.sys_command_dialog);
+		CommonConfig.initParam(
+				CommonConfig.KEY_INT_DIALOG_LAYOUT_ID,
+				R.id.ll_command_dialog);
 	}
 }

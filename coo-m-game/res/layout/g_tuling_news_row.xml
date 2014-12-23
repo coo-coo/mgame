@@ -4,8 +4,8 @@
 
     <ImageView
         android:id="@+id/iv_tuling_news_icon"
+        style="@style/tv_command_row"
         android:layout_width="0dip"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:contentDescription="@string/app_blank"
         android:gravity="left|center_vertical" />
@@ -14,8 +14,8 @@
         android:id="@+id/tv_tuling_news_title"
         style="@style/tv_command_row"
         android:layout_width="0dip"
-        android:layout_weight="5"
         android:layout_marginLeft="5dp"
+        android:layout_weight="5"
         android:gravity="left|center_vertical" />
 
     <TextView

@@ -2,9 +2,9 @@ package com.coo.m.game.color;
 
 import android.graphics.Color;
 
-import com.coo.m.game.IGamePolicy;
+import com.coo.m.game.SimpleGamePolicy;
 
-public class ColorPolicy implements IGamePolicy {
+public class ColorPolicy extends SimpleGamePolicy {
 
 	/**
 	 * 数组说明:p[0]:块数;p[1]:时间(秒):颜色
@@ -17,12 +17,7 @@ public class ColorPolicy implements IGamePolicy {
 		return new int[] { num, time, color };
 	}
 
-	@Override
-	public int score(int pass) {
-		// 任意关卡得分都为100分
-		return 100;
-	}
-
+	
 	private int getColor(int pass) {
 		int k = pass % COLORS.length;
 		return Color.parseColor(COLORS[k]);

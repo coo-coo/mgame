@@ -8,18 +8,25 @@
         android:title="@string/item_more_text">
         <menu>
             <item
-                android:id="@+id/item_main_version"
-                android:icon="@drawable/ico_th_large"
-                android:orderInCategory="10"
-                android:showAsAction="ifRoom|withText"
-                android:title="@string/item_main_version_text">
-            </item>
-            <item
-                android:id="@+id/item_main_share"
+                android:id="@+id/item_main_about"
                 android:icon="@drawable/ico_heart"
                 android:orderInCategory="10"
                 android:showAsAction="ifRoom|withText"
+                android:title="@string/item_main_about_text">
+            </item>
+            <item
+                android:id="@+id/item_main_share"
+                android:icon="@drawable/ico_thumbs_up"
+                android:orderInCategory="10"
+                android:showAsAction="ifRoom|withText"
                 android:title="@string/item_main_share_text">
+            </item>
+            <item
+                android:id="@+id/item_main_version"
+                android:icon="@drawable/ico_question_sign"
+                android:orderInCategory="10"
+                android:showAsAction="ifRoom|withText"
+                android:title="@string/item_main_version_text">
             </item>
         </menu>
     </item>

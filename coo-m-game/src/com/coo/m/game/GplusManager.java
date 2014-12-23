@@ -8,15 +8,19 @@ import org.litepal.crud.DataSupport;
 
 import android.graphics.Bitmap;
 import android.os.Environment;
+import android.os.Message;
 
 import com.coo.m.game.circular.CircularActivity;
+import com.coo.m.game.color.BlockActivity;
 import com.coo.m.game.color.ColorActivity;
 import com.coo.m.game.g2048.G2048Activity;
 import com.coo.m.game.guess.GuessActivity;
 import com.coo.m.game.robot.TulingActivity;
 import com.coo.m.game.robot.TulingNewsActivity;
 import com.coo.m.game.robot.TulingRobotActivity;
+import com.coo.ms.cloud.model.NetLink;
 import com.kingstar.ngbf.ms.util.DateUtil;
+import com.kingstar.ngbf.ms.util.android.res.ResourceFactory;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
@@ -29,13 +33,21 @@ public final class GplusManager {
 
 	private static List<GameProperty> GAMES = new ArrayList<GameProperty>();
 
-	public static Class<?> MAIN_CLASS = TulingActivity.class;
-	// public static Class<?> MAIN_CLASS = SysMainActivity.class;
+	// public static Class<?> MAIN_CLASS = SysVersionActivity.class;
+	public static Class<?> MAIN_CLASS = SysMainActivity.class;
 
-	public static String QING_ABOUT_URL = "http://lightapp.baidu.com/?appid=1568236";
-
-	public static GameProperty G_GUESS = new GameProperty(
-			GuessActivity.class, "猜猜看", R.drawable.gguess);
+	/**
+	 * APP网站宣传地址,Baidu轻应用
+	 */
+	public static String APP_URL = "http://lightapp.baidu.com/?appid=1568236";
+	/**
+	 * APP最新版本
+	 */
+	public static String APP_VLATEST = "1.3";
+	/**
+	 * APP名称
+	 */
+	public static String APP_NAME = "消磨";
 
 	public static GameProperty G_G2048 = GameProperty.blank()
 			.activityClass(G2048Activity.class).label("2048")
@@ -47,6 +59,10 @@ public final class GplusManager {
 			.icon(R.drawable.gcolor)
 			.layout(R.layout.g_color_activity)
 			.help("亲,找出不一样的颜色方块吧~");
+	public static GameProperty G_BLOCK = GameProperty.blank()
+			.activityClass(BlockActivity.class).key().label("点方块")
+			.icon(R.drawable.gblock)
+			.layout(R.layout.g_color_activity).help("亲,看你能点到多小~");
 	public static GameProperty G_CIRCULAR = GameProperty.blank()
 			.activityClass(CircularActivity.class).label("点4下")
 			.icon(R.drawable.gcircle)
@@ -58,27 +74,34 @@ public final class GplusManager {
 			.layout(R.layout.g_tuling_robot_activity)
 			.help("亲,向机器人无聊的发消息吧,看Ta怎么回答~");
 	public static GameProperty G_TULING = GameProperty.blank()
-			.activityClass(TulingActivity.class).label("晃晃看看")
-			.icon(R.drawable.gtuling)
+			.activityClass(TulingActivity.class).key()
+			.label("晃晃看看").icon(R.drawable.gtuling)
 			.layout(R.layout.g_tuling_activity)
 			.help("亲,晃一晃,随便看看吧~");
 	public static GameProperty G_TULING_NEWS = GameProperty.blank()
-			.activityClass(TulingNewsActivity.class).label("晃晃新闻")
-			.icon(R.drawable.gtuling)
+			.activityClass(TulingNewsActivity.class).key()
+			.label("晃晃新闻").icon(R.drawable.gtuling)
 			.layout(R.layout.g_tuling_news_activity)
 			.help("亲,晃一晃,看看新闻吧~");
-
-	/**
-	 * BaiDu下载地址
-	 */
-	public static String URL_APP_DOWNLOAD = "点击下载<a href=\"http://shouji.baidu.com/game/item?docid=7244427&from=as&f=search_app_%E6%B6%88%E7%A3%A8%40list_1_title%401%40header_all_input\">消磨</a>...";
-	public static String URL_APP_DOWNLOAD1 = "http://gdown.baidu.com/data/wisegame/07995b1aad7046f4/xiaomo_1.apk";
+	public static GameProperty G_GUESS = new GameProperty(
+			GuessActivity.class, "猜猜看", R.drawable.gguess);
 
 	public static String SDPATH = Environment.getExternalStorageDirectory()
 			.getPath();
+	/**
+	 * @deprecated @since 1.3
+	 */
 	public static String APP_ICON_SDPATH = SDPATH + "/Gplus_qr.png";
+	/**
+	 * @deprecated @since 1.3
+	 */
 	public static String APP_DESC = "[消磨]:一个小游戏集合，闲暇时光里消磨一下吧!(获取二维码图片,扫描之后即可下载)";
 
+	/**
+	 * 图片加载参数,参见ImageLoader组件
+	 * 
+	 * @since 1.3
+	 */
 	public static DisplayImageOptions IMG_OPTIONS = new DisplayImageOptions.Builder()
 			.showImageOnLoading(R.drawable.ic_stub)
 			.showImageForEmptyUri(R.drawable.ic_empty)
@@ -91,12 +114,15 @@ public final class GplusManager {
 		// 增加支持的游戏
 		// TODO 从配置文件获得...
 
-		GAMES.add(G_G2048);
-		GAMES.add(G_COLOR);
-		GAMES.add(G_CIRCULAR);
-		GAMES.add(G_TULING_ROBOT);
-		GAMES.add(G_TULING);
-		GAMES.add(G_TULING_NEWS);
+		GAMES.add(G_G2048.start("1.0"));
+		GAMES.add(G_COLOR.start("1.0"));
+		GAMES.add(G_CIRCULAR.start("1.0"));
+		GAMES.add(G_TULING_ROBOT.start("1.1"));
+		GAMES.add(G_TULING.start("1.2"));
+		GAMES.add(G_TULING_NEWS.start("1.3"));
+		GAMES.add(G_BLOCK.start("1.3"));
+
+		// 设置APP链接资源
 
 		// GAMES.add(G_GUESS); // 暂时不上架....
 	}
@@ -111,8 +137,18 @@ public final class GplusManager {
 		return "13X12345678";
 	}
 
+	/**
+	 * 返回TS的时间表达式
+	 */
 	public static String getTsDateText(long ts) {
 		return DateUtil.format(new Date(ts), "yyyy-MM-dd");
+	}
+
+	/**
+	 * 返回TS的时间表达式
+	 */
+	public static String getTsMinText(long ts) {
+		return DateUtil.format(new Date(ts), "yyyy-MM-dd HH:mm");
 	}
 
 	/**
@@ -170,6 +206,27 @@ public final class GplusManager {
 		gs.setPlayer(GplusManager.getCurrentPlayer());
 		gs.setPass(state.getPass());
 		gs.save();
+	}
+
+	/**
+	 * 创建简单的消息
+	 */
+	public static Message createMessage(int what, Object obj) {
+		Message msg = new Message();
+		msg.what = what;
+		msg.obj = obj;
+		return msg;
+	}
+
+	/**
+	 * 创建分享链接
+	 */
+	public static NetLink createNetLink(String description) {
+		// 指定标题等基础信息
+		Bitmap thumb = ResourceFactory.getBitmap(R.drawable.gplus_32);
+		NetLink nl = new NetLink("一起来玩\"消磨\"吧", APP_URL, thumb);
+		nl.setDescription(description);
+		return nl;
 	}
 
 	/**
