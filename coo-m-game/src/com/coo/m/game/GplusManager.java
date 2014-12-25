@@ -36,6 +36,8 @@ public final class GplusManager {
 	// public static Class<?> MAIN_CLASS = SysVersionActivity.class;
 	public static Class<?> MAIN_CLASS = SysMainActivity.class;
 
+	// public static Class<?> MAIN_CLASS = BlockActivity.class;
+
 	/**
 	 * APP网站宣传地址,Baidu轻应用
 	 */
@@ -74,13 +76,23 @@ public final class GplusManager {
 			.layout(R.layout.g_tuling_robot_activity)
 			.help("亲,向机器人无聊的发消息吧,看Ta怎么回答~");
 	public static GameProperty G_TULING = GameProperty.blank()
+
+	.activityClass(TulingActivity.class).key().label("晃晃看看")
+			.icon(R.drawable.gtuling)
+
 			.activityClass(TulingActivity.class).key()
 			.label("晃晃看看").icon(R.drawable.gtuling)
+
 			.layout(R.layout.g_tuling_activity)
 			.help("亲,晃一晃,随便看看吧~");
 	public static GameProperty G_TULING_NEWS = GameProperty.blank()
+
+	.activityClass(TulingNewsActivity.class).key().label("晃晃新闻")
+			.icon(R.drawable.gtuling)
+
 			.activityClass(TulingNewsActivity.class).key()
 			.label("晃晃新闻").icon(R.drawable.gtuling)
+
 			.layout(R.layout.g_tuling_news_activity)
 			.help("亲,晃一晃,看看新闻吧~");
 	public static GameProperty G_GUESS = new GameProperty(
@@ -101,6 +113,9 @@ public final class GplusManager {
 	 * 图片加载参数,参见ImageLoader组件
 	 * 
 	 * @since 1.3
+	 * 
+	 * 
+	 *        /** 图片加载参数,参见ImageLoader组件
 	 */
 	public static DisplayImageOptions IMG_OPTIONS = new DisplayImageOptions.Builder()
 			.showImageOnLoading(R.drawable.ic_stub)
@@ -121,8 +136,6 @@ public final class GplusManager {
 		GAMES.add(G_TULING.start("1.2"));
 		GAMES.add(G_TULING_NEWS.start("1.3"));
 		GAMES.add(G_BLOCK.start("1.3"));
-
-		// 设置APP链接资源
 
 		// GAMES.add(G_GUESS); // 暂时不上架....
 	}

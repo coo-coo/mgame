@@ -45,6 +45,8 @@
         </activity>
         <activity android:name="com.coo.m.game.color.BlockActivity" >
         </activity>
+        <activity android:name="com.coo.m.game.color.BlockActivity" >
+        </activity>
         <activity android:name="com.coo.m.game.circular.CircularActivity" >
         </activity>
         <activity android:name="com.coo.m.game.robot.TulingRobotActivity" >
