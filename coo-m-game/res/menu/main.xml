@@ -5,18 +5,19 @@
         android:id="@+id/item_more"
         android:orderInCategory="10"
         android:showAsAction="ifRoom|withText"
+        android:textSize="16sp"
         android:title="@string/item_more_text">
         <menu>
             <item
                 android:id="@+id/item_main_about"
-                android:icon="@drawable/ico_heart"
+                android:icon="@drawable/gplus_32"
                 android:orderInCategory="10"
                 android:showAsAction="ifRoom|withText"
                 android:title="@string/item_main_about_text">
             </item>
             <item
                 android:id="@+id/item_main_share"
-                android:icon="@drawable/ico_thumbs_up"
+                android:icon="@drawable/ico_cloud_upload"
                 android:orderInCategory="10"
                 android:showAsAction="ifRoom|withText"
                 android:title="@string/item_main_share_text">

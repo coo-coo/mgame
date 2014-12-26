@@ -5,8 +5,10 @@ import java.util.List;
 
 import android.widget.ListView;
 
-import com.coo.m.game.util.CommonItemAdapter;
+import com.coo.m.game.util.ItemAdapter;
+import com.kingstar.ngbf.ms.util.Reference;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
+import com.kingstar.ngbf.ms.util.android.CommonBizOptions;
 import com.kingstar.ngbf.ms.util.android.res.ServiceProvider;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
@@ -19,26 +21,26 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
 public class SysVersionActivity extends CommonBizActivity {
 
 	@Override
-	public String getHeaderTitle() {
-		return "版本信息";
+	@Reference(override = CommonBizActivity.class)
+	public CommonBizOptions getOptions() {
+		return CommonBizOptions.blank().headerTitle("版本信息")
+				.resViewLayoutId(R.layout.sys_blank_activity);
 	}
 
 	@Override
-	public int getResViewLayoutId() {
-		return R.layout.sys_version_activity;
-	}
-
-	// @Override
+	@Reference(override = CommonBizActivity.class)
 	public void loadContent() {
-		ListView listView = (ListView) findViewById(R.id.lv_sys_version);
+		// 代码构建ListView,不进行Find,需指定attr,参见styes.xml
+		ListView listView = new ListView(this, null,
+				R.attr.ref_common_lv);
+		this.setContentView(listView);
+
 		// 定义适配器
-		adapter = new CommonItemAdapter(this, getItems(), listView);
+		adapter = new ItemAdapter(this, getItems(), listView);
 	}
 
 	/**
-	 * 产生属性条目对象,用于集中展现
-	 * 
-	 * @return
+	 * 属性条目对象
 	 */
 	private List<CommonItem> getItems() {
 		String vcurrent = ServiceProvider.getAppVersionName(this);
@@ -46,11 +48,10 @@ public class SysVersionActivity extends CommonBizActivity {
 		items.add(new CommonItem("version.app", "应用名称",
 				GplusManager.APP_NAME));
 		items.add(new CommonItem("version.current", "当前版本", vcurrent));
-		items.add(new CommonItem("version.author", "联系作者",
+		items.add(new CommonItem("version.author1", "开发作者1",
 				"shenboqing@163.com"));
-
-		// items.add(new CommonItem("version.latest", "最新版本",
-		// GplusManager.APP_VLATEST));
+		items.add(new CommonItem("version.author2", "开发作者2",
+				"lightby2@163.com"));
 		return items;
 	}
 

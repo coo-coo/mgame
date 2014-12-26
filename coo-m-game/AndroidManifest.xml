@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.coo.m.game"
-    android:versionCode="4"
-    android:versionName="1.3" >
+    android:versionCode="5"
+    android:versionName="1.4" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -17,7 +17,7 @@
         android:allowBackup="true"
         android:icon="@drawable/gplus"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme2" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name="com.coo.m.game.SysWelcomeActivity"
             android:label="@string/app_name" >
@@ -56,13 +56,15 @@
         <activity android:name="com.coo.m.game.robot.TulingNewsInfoActivity" >
         </activity>
 
-        <!-- receiver
+        <!--
+        receiver
             android:name="com.coo.m.game.AppRegister"
             android:permission="com.tencent.mm.plugin.permission.SEND" >
             <intent-filter>
                 <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
             </intent-filter>
-        </receiver -->
+        </receiver
+        -->
     </application>
 
 </manifest>
