@@ -46,7 +46,7 @@ public class G2048Activity extends GplusActivity {
 		score = (TextView) findViewById(R.id.tv_2048_game_score);
 		gameView = new G2048View(this);
 
-		score.setText(getString(R.string.text_current_score) + "0");
+		score.setText(getString(R.string.g_2048_current_score) + "0");
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.WRAP_CONTENT,
 				LayoutParams.WRAP_CONTENT);
@@ -69,7 +69,7 @@ public class G2048Activity extends GplusActivity {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case 100:
-				score.setText(getString(R.string.text_current_score)
+				score.setText(getString(R.string.g_2048_current_score)
 						+ msg.obj.toString());
 				break;
 			}

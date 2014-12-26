@@ -16,19 +16,20 @@ import com.kingstar.ngbf.ms.util.android.CommonItemHolder;
 
 /**
  * 游戏成绩适配器
+ * 
  * @author boqing.shen
  * @since 1.0
- *
+ * 
  */
 public class SysScoreAdapter extends CommonAdapter<GameScore> {
 
 	GameScoreRowHolder holder = new GameScoreRowHolder();
-	Context context =null;
+	Context context = null;
 
 	public SysScoreAdapter(Activity parent, List<GameScore> items,
 			ListView composite) {
 		super(parent, items, composite);
-		this.context=parent;
+		this.context = parent;
 	}
 
 	/**
@@ -48,8 +49,6 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 		return holder;
 	}
 
-
-
 	@Override
 	public void initHolderValue(CommonItemHolder ciHolder, GameScore item) {
 		holder = (GameScoreRowHolder) ciHolder;
@@ -57,9 +56,10 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 		holder.tv_ts.setText(ts);
 		holder.tv_score.setText(item.getScore() + "分");
 	}
-	
+
 	/**
 	 * TODO 分享分数...
+	 * 
 	 * @param content
 	 * @param uri
 	 */
@@ -70,7 +70,7 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 			shareIntent.setType("image/*");
 			shareIntent.putExtra("sms_body", content);
 			shareIntent.putExtra(Intent.EXTRA_TEXT, content);
-			
+
 		} else {
 			shareIntent.setType("text/plain");
 			shareIntent.putExtra(Intent.EXTRA_SUBJECT, "分享");
@@ -87,22 +87,22 @@ public class SysScoreAdapter extends CommonAdapter<GameScore> {
 		private int score;
 		private String label;
 
-		lvButtonListener(int score,String label) {
+		lvButtonListener(int score, String label) {
 			this.score = score;
-			this.label=label;
+			this.label = label;
 		}
 
 		@Override
 		public void onClick(View v) {
-			String s="我在"+label+"游戏中"+"获得了"+score+"分";
-			share(s,null);
+			String s = "我在" + label + "游戏中" + "获得了" + score + "分";
+			share(s, null);
 		}
 	}
 
 }
 
 class GameScoreRowHolder extends CommonItemHolder {
-//	public TextView tv_label;
+	// public TextView tv_label;
 	public TextView tv_ts;
 	public TextView tv_score;
 }

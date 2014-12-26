@@ -6,7 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.widget.ListView;
 
-import com.coo.ms.cloud.weixin.WeixinApi;
+import com.coo.ms.cloud.weixin.WeixinHandler;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
@@ -28,19 +28,29 @@ public class SysScoreActivity extends CommonBizActivity {
 
 	@Override
 	public int getResViewLayoutId() {
-		return R.layout.sys_score_activity;
+		return R.layout.sys_blank_activity;
 	}
 
-	// SysCoreAdapter adapter
+	/**
+	 * WeixinHandler
+	 */
+	private WeixinHandler wxHandler = null;
+
 	@Override
 	public void loadContent() {
 		// 获得传递过来的信息,参见GplusActivity.onGameScore()
 		Intent intent = getIntent();
 		String gameKey = intent.getStringExtra("GAME_KEY");
-		ListView composite = (ListView) findViewById(R.id.lv_sys_core);
-
+		
+		// 创建对象,添加对象,适用于简单列表
+		ListView composite = new ListView(this, null,
+				R.attr.ref_common_lv);
+		this.setContentView(composite);
+		
 		List<GameScore> list = GplusManager.getScores(gameKey);
 		adapter = new SysScoreAdapter(this, list, composite);
+		
+		wxHandler = new WeixinHandler(this);
 	}
 
 	/**
@@ -93,7 +103,7 @@ public class SysScoreActivity extends CommonBizActivity {
 			String desc = "我\"" + score.getGameLabel() + "\"得了"
 					+ score.getScore() + "分,厉害吧~(" + ts
 					+ ")";
-			WeixinApi.share(this, GplusManager.createNetLink(desc));
+			wxHandler.share(GplusManager.createNetLink(desc));
 		} else {
 			toast("分享失败,项目没选中!");
 		}

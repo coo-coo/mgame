@@ -15,18 +15,26 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
 /**
  * 一般命令对话框，要么跳转,要么执行命令之后，关闭，需要更新adapter等
  * 
- * @since 0.6.0.0
+ * @since 1.3
  * @author boqing.shen
  * 
  */
-public class CommonCommandAdapter extends CommonAdapter<CommonItem> {
+public class CommandAdapter extends CommonAdapter<CommonItem> {
 
 	/**
 	 * 构造函数
 	 */
-	public CommonCommandAdapter(Activity parent,
+	public CommandAdapter(Activity parent,
 			List<CommonItem> commands, ListView composite) {
 		super(parent, commands, composite);
+	}
+	
+	/**
+	 * 构造函数
+	 */
+	public CommandAdapter(Activity parent,
+			List<CommonItem> commands) {
+		super(parent, commands);
 	}
 
 	@Override

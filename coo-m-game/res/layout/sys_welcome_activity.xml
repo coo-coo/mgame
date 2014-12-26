@@ -16,7 +16,7 @@
         android:layout_marginLeft="0dip"
         android:layout_marginRight="0dip"
         android:layout_marginTop="0dip"
-        android:contentDescription="@string/app_name"
+        android:contentDescription="@string/app_blank"
         android:src="@drawable/ic_welcome" />
 
 </LinearLayout>

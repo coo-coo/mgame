@@ -36,21 +36,15 @@ public final class GplusManager {
 	// public static Class<?> MAIN_CLASS = SysVersionActivity.class;
 	public static Class<?> MAIN_CLASS = SysMainActivity.class;
 
-	// public static Class<?> MAIN_CLASS = BlockActivity.class;
-
 	/**
 	 * APP网站宣传地址,Baidu轻应用
 	 */
 	public static String APP_URL = "http://lightapp.baidu.com/?appid=1568236";
 	/**
-	 * APP最新版本
-	 */
-	public static String APP_VLATEST = "1.3";
-	/**
 	 * APP名称
 	 */
 	public static String APP_NAME = "消磨";
-
+	
 	public static GameProperty G_G2048 = GameProperty.blank()
 			.activityClass(G2048Activity.class).label("2048")
 			.icon(R.drawable.g2048)
@@ -113,9 +107,6 @@ public final class GplusManager {
 	 * 图片加载参数,参见ImageLoader组件
 	 * 
 	 * @since 1.3
-	 * 
-	 * 
-	 *        /** 图片加载参数,参见ImageLoader组件
 	 */
 	public static DisplayImageOptions IMG_OPTIONS = new DisplayImageOptions.Builder()
 			.showImageOnLoading(R.drawable.ic_stub)

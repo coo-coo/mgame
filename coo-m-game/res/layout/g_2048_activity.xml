@@ -17,7 +17,7 @@
             android:id="@+id/tv_2048_game_score"
             android:layout_width="match_parent"
             android:layout_height="22dp"
-            android:text="@string/text_current_score"
+            android:text="@string/g_2048_current_score"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"

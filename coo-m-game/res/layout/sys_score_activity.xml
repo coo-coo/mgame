@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/activity_common" >
 
+    <!-- @deprecates @since 1.4 reference to sys_blank_activity.xml -->
     <ListView
         android:id="@+id/lv_sys_core"
         style="@style/listview_common" />

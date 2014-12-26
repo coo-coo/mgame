@@ -1,30 +1,20 @@
 package com.coo.m.game;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 
 import com.coo.ms.cloud.model.NetLink;
 import com.coo.ms.cloud.model.NetText;
-import com.coo.ms.cloud.weixin.WeixinApi;
+import com.coo.ms.cloud.weixin.WeixinHandler;
 import com.kingstar.ngbf.ms.util.android.CommonBizActivity;
 import com.kingstar.ngbf.ms.util.android.res.ResourceFactory;
 
 public class WxTestActivity extends CommonBizActivity {
 
-	// @SuppressLint("HandlerLeak")
-	// private Handler handler = new Handler() {
-	//
-	// };
-
 	private void doWxShareText() {
-		NetText nt = new NetText("测试4..." + System.currentTimeMillis());
-		// WeixinApi.share(this, nt);
-		Message msg = GplusManager.createMessage(1000, nt);
-		wxHandler.sendMessage(msg);
+		NetText nt = new NetText("测试42..." + System.currentTimeMillis());
+		wxHandler.share(nt);
 	}
 
 	private void doWxShareLink() {
@@ -32,12 +22,13 @@ public class WxTestActivity extends CommonBizActivity {
 		Bitmap thumb = ResourceFactory.getBitmap(R.drawable.gplus_32);
 		NetLink nl = new NetLink("来玩消磨吧", url, thumb);
 		nl.setDescription("我玩点四下得分1001分呢");
-		// WeixinApi.share(this, nl);
-		Message msg = GplusManager.createMessage(1000, nl);
-		wxHandler.sendMessage(msg);
+		wxHandler.share(nl);
 	}
 
-	private WxHandler wxHandler = null;
+	/**
+	 * 采用WeixinHandler次线程发送
+	 */
+	private WeixinHandler wxHandler = null;
 
 	@Override
 	public String getHeaderTitle() {
@@ -55,8 +46,8 @@ public class WxTestActivity extends CommonBizActivity {
 		btnWxText.setOnClickListener(this);
 		Button btnWxLink = (Button) findViewById(R.id.btn_wx_share_link);
 		btnWxLink.setOnClickListener(this);
-
-		wxHandler = new WxHandler(this);
+		// 构造....
+		wxHandler = new WeixinHandler(this);
 	}
 
 	@Override
@@ -70,25 +61,4 @@ public class WxTestActivity extends CommonBizActivity {
 			break;
 		}
 	}
-}
-
-class WxHandler extends Handler {
-	private Context context;
-
-	public WxHandler(Context context) {
-		this.context = context;
-	}
-
-	@Override
-	public void handleMessage(Message msg) {
-		if (msg.obj instanceof NetText) {
-			NetText nt = (NetText) msg.obj;
-			WeixinApi.share(context, nt);
-		} else if (msg.obj instanceof NetLink) {
-			NetLink nl = (NetLink) msg.obj;
-			WeixinApi.share(context, nl);
-		} else {
-
-		}
-	};
 }

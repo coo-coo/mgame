@@ -7,14 +7,14 @@ import android.app.Activity;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.coo.m.game.util.CommonCommandAdapter;
+import com.coo.m.game.util.CommandAdapter;
 import com.kingstar.ngbf.ms.util.android.CommonItemDialog;
 import com.kingstar.ngbf.ms.util.model.CommonItem;
 
 /**
  * Topic 命令对话框
  * 
- * @since 0.6.0.0
+ * @since 1.3
  * @author boqing.shen
  * 
  */
@@ -27,18 +27,19 @@ public class SysScoreCommandDialog extends CommonItemDialog<GameScore> {
 	@Override
 	public void initControls(LinearLayout layout) {
 		// 定义控件，控件New产生,没有从Context中寻找
-		ListView lv = new ListView(parent);
+		ListView composite = new ListView(parent);
 		// 定义适配器
-		@SuppressWarnings("unused")
-		CommonCommandAdapter adapter = new CommonCommandAdapter(parent,
-				getCommands(), lv);
+		CommandAdapter adapter = new CommandAdapter(parent,
+				getCommands());
+		// 绑定组件
+		adapter.bind(composite);
 		// 添加控件
-		layout.addView(lv);
+		layout.addView(composite);
 	}
 
 	@Override
 	protected String getTitle() {
-		return item.getGameLabel() + ":" + item.getScore();
+		return item.getGameLabel() + ":" + item.getScore() + "分";
 	}
 
 	@Override
@@ -46,10 +47,14 @@ public class SysScoreCommandDialog extends CommonItemDialog<GameScore> {
 		return BTN_GROUP_NONE;
 	}
 
+	@Override
+	public int getResIconId() {
+		// 指定Icon
+		return R.drawable.gplus_32;
+	}
+
 	/**
-	 * 模拟产生Profile的属性条目对象,用于集中展现
-	 * 
-	 * @return
+	 * 产生命令条目对象集合
 	 */
 	private List<CommonItem> getCommands() {
 		List<CommonItem> items = new ArrayList<CommonItem>();

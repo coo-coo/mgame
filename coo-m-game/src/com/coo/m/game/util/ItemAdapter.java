@@ -15,18 +15,17 @@ import com.kingstar.ngbf.ms.util.model.CommonItem;
 /**
  * CommonItem对象的普通适配器
  * 
- * @since 0.4.7.0
+ * @since 1.3
  * @author boqing.shen
- * 
- * @param <T>
  */
-public class CommonItemAdapter extends CommonAdapter<CommonItem> {
+public class ItemAdapter extends CommonAdapter<CommonItem> {
 
 	/**
 	 * 构造函数
 	 */
-	public CommonItemAdapter(Activity parent, List<CommonItem> items, ListView composite) {
-		super(parent,items, composite);
+	public ItemAdapter(Activity parent, List<CommonItem> items,
+			ListView composite) {
+		super(parent, items, composite);
 	}
 
 	@Override

@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">消磨</string>
+    <string name="app_url">http://lightapp.baidu.com/?appid=1568236</string>
     <string name="app_copyright">2014</string>
     <string name="app_back">返回</string>
     <string name="app_exit">退出</string>
@@ -12,7 +13,8 @@
     <string name="app_submit">提交</string>
     <string name="app_blank"></string>
     <string name="app_blank2">  |  </string>
-    
+
+    <!-- Game Properties -->
     <string name="item_game_init_text">开始</string>
     <string name="item_game_over_text">结束</string>
     <string name="item_game_score_text">成绩</string>
@@ -22,17 +24,15 @@
     <string name="item_more_text">更多&#8230;</string>
     <string name="item_main_illustrate_text">说明</string>
     <string name="item_main_share_text">分享微信</string>
-    
-    <string name="text_current_score">当前成绩为：</string>
-    <string name="version_name">当前版本为：</string>
-    <string name="can_not_find_version_name">不能找到版本号</string>
-	
+
+    <!-- Game Properties -->
+    <string name="g_2048_current_score">当前成绩:</string>
     <string name="g_robot_me">我</string>
     <string name="g_robot_robot">suzl</string>
     <string name="g_robot_send">发送</string>
-    
     <string name="g_tuling_xiaohua">笑话</string>
     <string name="g_tuling_miyu">谜语</string>
     <string name="g_tuling_naojin">脑筋急转弯</string>
     <string name="g_tuling_gushi">故事</string>
+
 </resources>

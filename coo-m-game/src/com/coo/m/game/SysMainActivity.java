@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.GridView;
 
 import com.coo.ms.cloud.model.NetLink;
-import com.coo.ms.cloud.weixin.WeixinApi;
+import com.coo.ms.cloud.weixin.WeixinHandler;
 import com.kingstar.ngbf.ms.util.android.GenericActivity;
 
 /**
@@ -24,6 +24,11 @@ public class SysMainActivity extends GenericActivity {
 
 	@SuppressWarnings("unused")
 	private SysMainAdapter adapter;
+	
+	/**
+	 * WeixinHandler
+	 */
+	private WeixinHandler wxHandler = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class SysMainActivity extends GenericActivity {
 		List<GameProperty> list = GplusManager.getGames();
 		GridView composite = (GridView) findViewById(R.id.gv_game);
 		adapter = new SysMainAdapter(this, list, composite);
+		wxHandler = new WeixinHandler(this);
 	}
 
 	@Override
@@ -72,7 +78,7 @@ public class SysMainActivity extends GenericActivity {
 	private void shareToWeixin() {
 		NetLink nl = GplusManager
 				.createNetLink("百度,安智,安卓,91等市场都有的下哦~(暂时只支持安卓手机..)");
-		WeixinApi.share(this, nl);
+		wxHandler.share(nl);
 	}
 
 	/**
