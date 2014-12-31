@@ -13,7 +13,7 @@
 	<packaging>apk</packaging>
 
 	<properties>
-		<app.version.name>0.2.0.0</app.version.name>
+		<app.version.name>1.0.0.0</app.version.name>
 		<ngbf-ms-util.version>2.4.9.0</ngbf-ms-util.version>
 		<ngbf-s-ntp.version>2.4.1.0</ngbf-s-ntp.version>
 	</properties>
